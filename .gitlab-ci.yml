@@ -14,10 +14,10 @@ test:php7.3:
     # Check if syntax errors was fixed with php-cs-fixer
     - vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
     # Analyse code with PHPStan
-    - vendor/bin/phpstan analyse
+    # - vendor/bin/phpstan analyse
     # PHPMD
-    - vendor/bin/phpmd src/ text phpmd.xml
-    - vendor/bin/phpmd tests/ text phpmd.xml
+    # - vendor/bin/phpmd src/ text phpmd.xml
+    # - vendor/bin/phpmd tests/ text phpmd.xml
     # Run PHPUnit
     - vendor/bin/phpunit --colors=never
     # ApiGen
