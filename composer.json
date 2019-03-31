@@ -14,7 +14,8 @@
 		}
 	],
 	"require": {
-		"php": ">=7.3"
+		"php": ">=7.3",
+		"natanfelles/array-simple": "^0.1"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
