@@ -11,7 +11,7 @@ class ValidationTest extends TestCase
 
 	public function setup()
 	{
-		$this->validation = new ValidationMock([]);
+		$this->validation = new ValidationMock();
 	}
 
 	public function testParseRule()

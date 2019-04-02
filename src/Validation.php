@@ -8,7 +8,7 @@ class Validation
 	protected $errors = [];
 	protected $validators = [];
 
-	public function __construct(array $validators)
+	public function __construct(array $validators = [Validator::class])
 	{
 		$this->validators = \array_reverse($validators);
 	}
