@@ -226,7 +226,7 @@ class Validator
 	public static function required(string $field, array $data) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \trim($data[$field]) !== '';
+		return $data === null ? false : \trim($data) !== '';
 	}
 
 	public static function isset(string $field, array $data) : bool
