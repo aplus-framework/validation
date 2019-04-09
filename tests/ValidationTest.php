@@ -340,4 +340,34 @@ class ValidationTest extends TestCase
 		);
 		$this->validation->run();
 	}
+
+	public function testRunOnly()
+	{
+		$this->assertTrue($this->validation->runOnly());
+		$this->assertEquals([], $this->validation->getErrors());
+		$this->validation->setRules([
+			'name' => 'minLength:5',
+			'email' => 'email',
+		]);
+		$this->assertTrue($this->validation->runOnly());
+		$this->assertEquals([], $this->validation->getErrors());
+		$this->validation->setData([
+			'name' => 'foo',
+			'email' => 'email',
+		]);
+		$this->assertFalse($this->validation->runOnly());
+		$this->assertEquals(
+			[
+				'name' => [
+					'rule' => 'minLength',
+					'params' => ['5'],
+				],
+				'email' => [
+					'rule' => 'email',
+					'params' => [],
+				],
+			],
+			$this->validation->getErrors()
+		);
+	}
 }

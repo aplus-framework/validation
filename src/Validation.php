@@ -162,6 +162,22 @@ class Validation
 		return $result;
 	}
 
+	public function runOnly() : bool
+	{
+		$field_rules = \array_intersect_key(
+			$this->getRules(),
+			\ArraySimple::convert($this->getData())
+		);
+		$result = true;
+		foreach ($field_rules as $field => $rules) {
+			$status = $this->validateField($field, $rules);
+			if ( ! $status) {
+				$result = false;
+			}
+		}
+		return $result;
+	}
+
 	public function getErrorMessage(string $field) : ?string
 	{
 		$error = $this->getError($field);
