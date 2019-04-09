@@ -383,6 +383,10 @@ class ValidationTest extends TestCase
 			'The email field is invalid.',
 			$this->validation->getErrorMessage('email')
 		);
+		$this->assertEquals(
+			['email' => 'The email field is invalid.'],
+			$this->validation->getErrorMessages()
+		);
 		$this->assertNull(
 			$this->validation->getErrorMessage('unknown')
 		);
@@ -395,10 +399,18 @@ class ValidationTest extends TestCase
 			'The email field requires a valid email address.',
 			$this->validation->getErrorMessage('email')
 		);
+		$this->assertEquals(
+			['email' => 'The email field requires a valid email address.'],
+			$this->validation->getErrorMessages()
+		);
 		$this->validation->setLabel('email', 'E-mail');
 		$this->assertEquals(
 			'The E-mail field requires a valid email address.',
 			$this->validation->getErrorMessage('email')
+		);
+		$this->assertEquals(
+			['email' => 'The E-mail field requires a valid email address.'],
+			$this->validation->getErrorMessages()
 		);
 		$this->assertNull(
 			$this->validation->getErrorMessage('unknown')

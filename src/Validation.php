@@ -203,4 +203,13 @@ class Validation
 		}
 		return "The {$label} field is invalid.";
 	}
+
+	public function getErrorMessages() : array
+	{
+		$messages = [];
+		foreach ($this->getErrors() as $field => $error) {
+			$messages[$field] = $this->getErrorMessage($field);
+		}
+		return $messages;
+	}
 }
