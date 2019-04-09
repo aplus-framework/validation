@@ -1,5 +1,7 @@
 <?php namespace Framework\Validation;
 
+use Framework\Language\Language;
+
 class Validation
 {
 	protected $labels = [];
@@ -7,10 +9,20 @@ class Validation
 	protected $data = [];
 	protected $errors = [];
 	protected $validators = [];
+	/**
+	 * @var Language|null
+	 */
+	protected $language;
 
-	public function __construct(array $validators = [Validator::class])
+	public function __construct(array $validators = [Validator::class], Language $language = null)
 	{
 		$this->validators = \array_reverse($validators);
+		if ($language) {
+			$language->setDirectories(\array_merge([
+				__DIR__ . '/Languages',
+			], $language->getDirectories()));
+			$this->language = $language;
+		}
 	}
 
 	public function reset()
@@ -185,6 +197,10 @@ class Validation
 			return null;
 		}
 		$label = $this->getLabel($field) ?? $field;
+		if ($this->language) {
+			$error['params']['field'] = $label;
+			return $this->language->render('validation', $error['rule'], $error['params']);
+		}
 		return "The {$label} field is invalid.";
 	}
 }

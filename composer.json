@@ -15,6 +15,7 @@
 	],
 	"require": {
 		"php": ">=7.3",
+		"framework/language": "dev-master",
 		"natanfelles/array-simple": "^0.1"
 	},
 	"require-dev": {
@@ -36,6 +37,12 @@
 			"Tests\\Validation\\": "tests/"
 		}
 	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://the-framework.gitlab.io/satis/"
+		}
+	],
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"scripts": {

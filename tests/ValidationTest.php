@@ -1,5 +1,7 @@
 <?php namespace Tests\Validation;
 
+use Framework\Language\Language;
+use Framework\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
 class ValidationTest extends TestCase
@@ -368,6 +370,38 @@ class ValidationTest extends TestCase
 				],
 			],
 			$this->validation->getErrors()
+		);
+	}
+
+	public function testErrorMessage()
+	{
+		$this->validation->setRules([
+			'email' => 'email',
+		]);
+		$this->assertFalse($this->validation->run());
+		$this->assertEquals(
+			'The email field is invalid.',
+			$this->validation->getErrorMessage('email')
+		);
+		$this->assertNull(
+			$this->validation->getErrorMessage('unknown')
+		);
+		$this->validation = new ValidationMock([Validator::class], new Language('en'));
+		$this->validation->setRules([
+			'email' => 'email',
+		]);
+		$this->assertFalse($this->validation->run());
+		$this->assertEquals(
+			'The email field requires a valid email address.',
+			$this->validation->getErrorMessage('email')
+		);
+		$this->validation->setLabel('email', 'E-mail');
+		$this->assertEquals(
+			'The E-mail field requires a valid email address.',
+			$this->validation->getErrorMessage('email')
+		);
+		$this->assertNull(
+			$this->validation->getErrorMessage('unknown')
 		);
 	}
 }
