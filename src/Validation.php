@@ -14,9 +14,11 @@ class Validation
 	 */
 	protected $language;
 
-	public function __construct(array $validators = [Validator::class], Language $language = null)
+	public function __construct(array $validators = null, Language $language = null)
 	{
-		$this->validators = \array_reverse($validators);
+		$this->validators = $validators === null
+			? [Validator::class]
+			: \array_reverse($validators);
 		if ($language === null) {
 			$language = new Language('en');
 		}
