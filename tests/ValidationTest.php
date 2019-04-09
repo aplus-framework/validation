@@ -276,4 +276,68 @@ class ValidationTest extends TestCase
 			],
 		], $this->validation->getRules());
 	}
+
+	public function testLabel()
+	{
+		$this->assertEquals([], $this->validation->getLabels());
+		$this->assertNull($this->validation->getLabel('foo'));
+		$this->validation->setLabel('foo', 'Foo');
+		$this->assertEquals('Foo', $this->validation->getLabel('foo'));
+		$this->validation->setLabels(['foo' => 'Foo ', 'bar' => 'Bar']);
+		$this->assertEquals(['foo' => 'Foo ', 'bar' => 'Bar'], $this->validation->getLabels());
+		$this->validation->reset();
+		$this->assertEquals([], $this->validation->getLabels());
+	}
+
+	public function testData()
+	{
+		$this->assertEquals([], $this->validation->getData());
+		$this->validation->setData(['foo' => 'Foo']);
+		$this->assertEquals(['foo' => 'Foo'], $this->validation->getData());
+	}
+
+	public function testError()
+	{
+		$this->assertEquals([], $this->validation->getErrors());
+		$this->assertNull($this->validation->getError('foo'));
+		$this->validation->setError('foo', 'test', ['a', 'b']);
+		$this->assertEquals(
+			['rule' => 'test', 'params' => ['a', 'b']],
+			$this->validation->getError('foo')
+		);
+	}
+
+	public function testRun()
+	{
+		$this->assertTrue($this->validation->run());
+		$this->assertEquals([], $this->validation->getErrors());
+		$this->validation->setRules([
+			'name' => 'minLength:5',
+			'email' => 'email',
+		]);
+		$this->assertFalse($this->validation->run());
+		$this->assertEquals(
+			[
+				'name' => [
+					'rule' => 'minLength',
+					'params' => ['5'],
+				],
+				'email' => [
+					'rule' => 'email',
+					'params' => [],
+				],
+			],
+			$this->validation->getErrors()
+		);
+	}
+
+	public function testRunUnknownRule()
+	{
+		$this->validation->setRule('name', 'foo');
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage(
+			"Validation rule 'foo' not found on field 'name'"
+		);
+		$this->validation->run();
+	}
 }
