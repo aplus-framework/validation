@@ -298,13 +298,13 @@ class ValidationTest extends TestCase
 		$this->assertEquals(['foo' => 'Foo'], $this->validation->getData());
 	}
 
-	public function testError()
+	public function testSetError()
 	{
 		$this->assertEquals([], $this->validation->getErrors());
 		$this->assertNull($this->validation->getError('foo'));
 		$this->validation->setError('foo', 'test', ['a', 'b']);
 		$this->assertEquals(
-			['rule' => 'test', 'params' => ['a', 'b']],
+			'validation.test',
 			$this->validation->getError('foo')
 		);
 	}
@@ -320,14 +320,8 @@ class ValidationTest extends TestCase
 		$this->assertFalse($this->validation->run());
 		$this->assertEquals(
 			[
-				'name' => [
-					'rule' => 'minLength',
-					'params' => ['5'],
-				],
-				'email' => [
-					'rule' => 'email',
-					'params' => [],
-				],
+				'name' => 'The name field requires more than 5 characters in length.',
+				'email' => 'The email field requires a valid email address.',
 			],
 			$this->validation->getErrors()
 		);
@@ -360,35 +354,27 @@ class ValidationTest extends TestCase
 		$this->assertFalse($this->validation->runOnly());
 		$this->assertEquals(
 			[
-				'name' => [
-					'rule' => 'minLength',
-					'params' => ['5'],
-				],
-				'email' => [
-					'rule' => 'email',
-					'params' => [],
-				],
+				'name' => 'The name field requires more than 5 characters in length.',
+				'email' => 'The email field requires a valid email address.',
 			],
 			$this->validation->getErrors()
 		);
 	}
 
-	public function testErrorMessage()
+	public function testError()
 	{
 		$this->validation->setRules([
 			'email' => 'email',
 		]);
 		$this->assertFalse($this->validation->run());
 		$this->assertEquals(
-			'The email field is invalid.',
-			$this->validation->getErrorMessage('email')
-		);
-		$this->assertEquals(
-			['email' => 'The email field is invalid.'],
-			$this->validation->getErrorMessages()
+			[
+				'email' => 'The email field requires a valid email address.',
+			],
+			$this->validation->getErrors()
 		);
 		$this->assertNull(
-			$this->validation->getErrorMessage('unknown')
+			$this->validation->getError('unknown')
 		);
 		$this->validation = new ValidationMock([Validator::class], new Language('en'));
 		$this->validation->setRules([
@@ -397,23 +383,23 @@ class ValidationTest extends TestCase
 		$this->assertFalse($this->validation->run());
 		$this->assertEquals(
 			'The email field requires a valid email address.',
-			$this->validation->getErrorMessage('email')
+			$this->validation->getError('email')
 		);
 		$this->assertEquals(
 			['email' => 'The email field requires a valid email address.'],
-			$this->validation->getErrorMessages()
+			$this->validation->getErrors()
 		);
 		$this->validation->setLabel('email', 'E-mail');
 		$this->assertEquals(
 			'The E-mail field requires a valid email address.',
-			$this->validation->getErrorMessage('email')
+			$this->validation->getError('email')
 		);
 		$this->assertEquals(
 			['email' => 'The E-mail field requires a valid email address.'],
-			$this->validation->getErrorMessages()
+			$this->validation->getErrors()
 		);
 		$this->assertNull(
-			$this->validation->getErrorMessage('unknown')
+			$this->validation->getError('unknown')
 		);
 	}
 }

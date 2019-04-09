@@ -17,12 +17,13 @@ class Validation
 	public function __construct(array $validators = [Validator::class], Language $language = null)
 	{
 		$this->validators = \array_reverse($validators);
-		if ($language) {
-			$language->setDirectories(\array_merge([
-				__DIR__ . '/Languages',
-			], $language->getDirectories()));
-			$this->language = $language;
+		if ($language === null) {
+			$language = new Language('en');
 		}
+		$language->setDirectories(\array_merge([
+			__DIR__ . '/Languages',
+		], $language->getDirectories()));
+		$this->language = $language;
 	}
 
 	public function reset()
@@ -118,14 +119,23 @@ class Validation
 		return $this;
 	}
 
-	public function getErrors() : array
+	public function getError(string $field) : ?string
 	{
-		return $this->errors;
+		$error = $this->errors[$field] ?? null;
+		if ($error === null) {
+			return null;
+		}
+		$error['params']['field'] = $this->getLabel($field) ?? $field;
+		return $this->language->render('validation', $error['rule'], $error['params']);
 	}
 
-	public function getError(string $field) : ?array
+	public function getErrors() : array
 	{
-		return $this->errors[$field] ?? null;
+		$messages = [];
+		foreach (\array_keys($this->errors) as $field) {
+			$messages[$field] = $this->getError($field);
+		}
+		return $messages;
 	}
 
 	protected function setError(string $field, string $rule, array $params)
@@ -188,28 +198,5 @@ class Validation
 			}
 		}
 		return $result;
-	}
-
-	public function getErrorMessage(string $field) : ?string
-	{
-		$error = $this->getError($field);
-		if ($error === null) {
-			return null;
-		}
-		$label = $this->getLabel($field) ?? $field;
-		if ($this->language) {
-			$error['params']['field'] = $label;
-			return $this->language->render('validation', $error['rule'], $error['params']);
-		}
-		return "The {$label} field is invalid.";
-	}
-
-	public function getErrorMessages() : array
-	{
-		$messages = [];
-		foreach ($this->getErrors() as $field => $error) {
-			$messages[$field] = $this->getErrorMessage($field);
-		}
-		return $messages;
 	}
 }
