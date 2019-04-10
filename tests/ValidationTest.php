@@ -291,13 +291,6 @@ class ValidationTest extends TestCase
 		$this->assertEquals([], $this->validation->getLabels());
 	}
 
-	public function testData()
-	{
-		$this->assertEquals([], $this->validation->getData());
-		$this->validation->setData(['foo' => 'Foo']);
-		$this->assertEquals(['foo' => 'Foo'], $this->validation->getData());
-	}
-
 	public function testSetError()
 	{
 		$this->assertEquals([], $this->validation->getErrors());
@@ -309,15 +302,15 @@ class ValidationTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testValidate()
 	{
-		$this->assertTrue($this->validation->run());
+		$this->assertTrue($this->validation->validate([]));
 		$this->assertEquals([], $this->validation->getErrors());
 		$this->validation->setRules([
 			'name' => 'minLength:5',
 			'email' => 'email',
 		]);
-		$this->assertFalse($this->validation->run());
+		$this->assertFalse($this->validation->validate([]));
 		$this->assertEquals(
 			[
 				'name' => 'The name field requires more than 5 characters in length.',
@@ -327,31 +320,30 @@ class ValidationTest extends TestCase
 		);
 	}
 
-	public function testRunUnknownRule()
+	public function testValidateUnknownRule()
 	{
 		$this->validation->setRule('name', 'foo');
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage(
 			"Validation rule 'foo' not found on field 'name'"
 		);
-		$this->validation->run();
+		$this->validation->validate([]);
 	}
 
-	public function testRunOnly()
+	public function testValidateOnly()
 	{
-		$this->assertTrue($this->validation->runOnly());
+		$this->assertTrue($this->validation->validateOnly([]));
 		$this->assertEquals([], $this->validation->getErrors());
 		$this->validation->setRules([
 			'name' => 'minLength:5',
 			'email' => 'email',
 		]);
-		$this->assertTrue($this->validation->runOnly());
+		$this->assertTrue($this->validation->validateOnly([]));
 		$this->assertEquals([], $this->validation->getErrors());
-		$this->validation->setData([
+		$this->assertFalse($this->validation->validateOnly([
 			'name' => 'foo',
 			'email' => 'email',
-		]);
-		$this->assertFalse($this->validation->runOnly());
+		]));
 		$this->assertEquals(
 			[
 				'name' => 'The name field requires more than 5 characters in length.',
@@ -366,7 +358,7 @@ class ValidationTest extends TestCase
 		$this->validation->setRules([
 			'email' => 'email',
 		]);
-		$this->assertFalse($this->validation->run());
+		$this->assertFalse($this->validation->validate([]));
 		$this->assertEquals(
 			[
 				'email' => 'The email field requires a valid email address.',
@@ -380,7 +372,7 @@ class ValidationTest extends TestCase
 		$this->validation->setRules([
 			'email' => 'email',
 		]);
-		$this->assertFalse($this->validation->run());
+		$this->assertFalse($this->validation->validate([]));
 		$this->assertEquals(
 			'The email field requires a valid email address.',
 			$this->validation->getError('email')

@@ -6,11 +6,10 @@ class Validation
 {
 	protected $labels = [];
 	protected $rules = [];
-	protected $data = [];
 	protected $errors = [];
 	protected $validators = [];
 	/**
-	 * @var Language|null
+	 * @var Language
 	 */
 	protected $language;
 
@@ -32,7 +31,6 @@ class Validation
 	{
 		$this->labels = [];
 		$this->rules = [];
-		$this->data = [];
 		$this->errors = [];
 		return $this;
 	}
@@ -110,17 +108,6 @@ class Validation
 		return $this;
 	}
 
-	public function getData() : array
-	{
-		return $this->data;
-	}
-
-	public function setData(array $data)
-	{
-		$this->data = $data;
-		return $this;
-	}
-
 	public function getError(string $field) : ?string
 	{
 		$error = $this->errors[$field] ?? null;
@@ -149,11 +136,11 @@ class Validation
 		return $this;
 	}
 
-	protected function validateRule(string $rule, string $field, array $params) : bool
+	protected function validateRule(string $rule, string $field, array $params, array $data) : bool
 	{
 		foreach ($this->validators as $validator) {
 			if (\is_callable([$validator, $rule])) {
-				return $validator::$rule($field, $this->getData(), ...$params);
+				return $validator::$rule($field, $data, ...$params);
 			}
 		}
 		throw new \InvalidArgumentException(
@@ -161,11 +148,11 @@ class Validation
 		);
 	}
 
-	protected function validateField(string $field, array $rules) : bool
+	protected function validateField(string $field, array $rules, array $data) : bool
 	{
 		$status = true;
 		foreach ($rules as $rule) {
-			$status = $this->validateRule($rule['rule'], $field, $rule['params']);
+			$status = $this->validateRule($rule['rule'], $field, $rule['params'], $data);
 			if ($status !== true) {
 				$this->setError($field, $rule['rule'], $rule['params']);
 				break;
@@ -174,11 +161,11 @@ class Validation
 		return $status;
 	}
 
-	public function run() : bool
+	protected function run(array $field_rules, array $data) : bool
 	{
 		$result = true;
-		foreach ($this->getRules() as $field => $rules) {
-			$status = $this->validateField($field, $rules);
+		foreach ($field_rules as $field => $rules) {
+			$status = $this->validateField($field, $rules, $data);
 			if ( ! $status) {
 				$result = false;
 			}
@@ -186,19 +173,17 @@ class Validation
 		return $result;
 	}
 
-	public function runOnly() : bool
+	public function validate(array $data) : bool
+	{
+		return $this->run($this->getRules(), $data);
+	}
+
+	public function validateOnly(array $data) : bool
 	{
 		$field_rules = \array_intersect_key(
 			$this->getRules(),
-			\ArraySimple::convert($this->getData())
+			\ArraySimple::convert($data)
 		);
-		$result = true;
-		foreach ($field_rules as $field => $rules) {
-			$status = $this->validateField($field, $rules);
-			if ( ! $status) {
-				$result = false;
-			}
-		}
-		return $result;
+		return $this->run($field_rules, $data);
 	}
 }
