@@ -163,6 +163,7 @@ class Validation
 
 	protected function run(array $field_rules, array $data) : bool
 	{
+		$this->errors = [];
 		$result = true;
 		foreach ($field_rules as $field => $rules) {
 			$status = $this->validateField($field, $rules, $data);
