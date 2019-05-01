@@ -1,45 +1,31 @@
 <?php namespace Tests\Validation;
 
+use Framework\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
 class LanguagesTest extends TestCase
 {
-	protected $codes = [
-		'en',
-		'es',
-		'pt-br',
-	];
+	protected $langDir = __DIR__ . '/../src/Languages/';
+
+	protected function getCodes()
+	{
+		$codes = \array_filter(\glob($this->langDir . '*'), 'is_dir');
+		$length = \strlen($this->langDir);
+		foreach ($codes as &$dir) {
+			$dir = \substr($dir, $length);
+		}
+		return $codes;
+	}
 
 	public function testKeys()
 	{
-		foreach ($this->codes as $code) {
-			$lines = require __DIR__ . '/../src/Languages/' . $code . '/validation.php';
-			$this->assertEquals([
-				'alpha',
-				'alphaNumber',
-				'number',
-				'uuid',
-				'timezone',
-				'base64',
-				'json',
-				'regex',
-				'email',
-				'in',
-				'notIn',
-				'ip',
-				'url',
-				'datetime',
-				'between',
-				'notBetween',
-				'equals',
-				'notEquals',
-				'maxLength',
-				'minLength',
-				'length',
-				'required',
-				'isset',
-				'latin',
-			], \array_keys($lines));
+		$rules = \get_class_methods(Validator::class);
+		\sort($rules);
+		foreach ($this->getCodes() as $code) {
+			$lines = require $this->langDir . $code . '/validation.php';
+			$lines = \array_keys($lines);
+			\sort($lines);
+			$this->assertEquals($rules, $lines, 'Language: ' . $code);
 		}
 	}
 }

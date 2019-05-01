@@ -8,6 +8,7 @@ return [
 	'base64' => 'The {field} field requires a valid base64 string.',
 	'json' => 'The {field} field requires a valid JSON string.',
 	'regex' => 'The {field} field does not matches the required pattern.',
+	'notRegex' => 'The {field} field matches a invalid pattern.',
 	'email' => 'The {field} field requires a valid email address.',
 	'in' => 'The {field} field is not an allowed value.',
 	'notIn' => 'The {field} field is a not allowed value.',
