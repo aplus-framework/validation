@@ -10,7 +10,7 @@ class ValidatorTest extends TestCase
 	 */
 	protected $array;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->array = [
 			'alpha' => 'abc',
