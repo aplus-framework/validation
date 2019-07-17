@@ -1,11 +1,11 @@
 {
 	"name": "framework/validation",
 	"type": "library",
-	"description": "The Validation package",
+	"description": "The Framework Validation Library",
 	"keywords": [
 		"validation"
 	],
-	"homepage": "https://gitlab.com/the-framework/validation",
+	"homepage": "https://the-framework.gitlab.io/libraries/validation.html",
 	"license": "proprietary",
 	"authors": [
 		{
@@ -54,9 +54,9 @@
 	},
 	"support": {
 		"email": "natanfelles@gmail.com",
-		"issues": "https://gitlab.com/the-framework/validation/issues",
-		"wiki": "https://gitlab.com/the-framework/packages/validation",
-		"source": "https://gitlab.com/the-framework/validation",
-		"docs": "https://the-framework.gitlab.io/the-framework/packages/validation/docs"
+		"issues": "https://gitlab.com/the-framework/libraries/validation/issues",
+		"wiki": "https://gitlab.com/the-framework/libraries/validation/wikis/home",
+		"source": "https://gitlab.com/the-framework/libraries/validation",
+		"docs": "https://the-framework.gitlab.io/libraries/validation/docs/"
 	}
 }
