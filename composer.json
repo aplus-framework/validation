@@ -6,7 +6,7 @@
 		"validation"
 	],
 	"homepage": "https://the-framework.gitlab.io/libraries/validation.html",
-	"license": "proprietary",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Natan Felles",
