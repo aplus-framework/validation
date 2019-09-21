@@ -2,17 +2,29 @@
 
 use Framework\Language\Language;
 
+/**
+ * Class Validation.
+ */
 class Validation
 {
 	protected $labels = [];
 	protected $rules = [];
 	protected $errors = [];
+	/**
+	 * @var array|Validator[]
+	 */
 	protected $validators = [];
 	/**
 	 * @var Language
 	 */
 	protected $language;
 
+	/**
+	 * Validation constructor.
+	 *
+	 * @param array|Validator[]|null $validators
+	 * @param Language|null          $language
+	 */
 	public function __construct(array $validators = null, Language $language = null)
 	{
 		$this->validators = $validators === null
@@ -27,6 +39,11 @@ class Validation
 		$this->language = $language;
 	}
 
+	/**
+	 * Reset the validation.
+	 *
+	 * @return $this
+	 */
 	public function reset()
 	{
 		$this->labels = [];
@@ -35,22 +52,49 @@ class Validation
 		return $this;
 	}
 
+	/**
+	 * Set label for a field.
+	 *
+	 * @param string $field
+	 * @param string $label
+	 *
+	 * @return $this
+	 */
 	public function setLabel(string $field, string $label)
 	{
 		$this->labels[$field] = $label;
 		return $this;
 	}
 
+	/**
+	 * Get the label for a given field.
+	 *
+	 * @param string $field
+	 *
+	 * @return string|null
+	 */
 	public function getLabel(string $field) : ?string
 	{
 		return $this->labels[$field] ?? null;
 	}
 
+	/**
+	 * Get a list of all labels.
+	 *
+	 * @return array
+	 */
 	public function getLabels() : array
 	{
 		return $this->labels;
 	}
 
+	/**
+	 * Set fields labels.
+	 *
+	 * @param array $labels An associative array with fields as keys and label as values
+	 *
+	 * @return $this
+	 */
 	public function setLabels(array $labels)
 	{
 		foreach ($labels as $field => $label) {
@@ -81,11 +125,24 @@ class Validation
 		return $rules;
 	}
 
+	/**
+	 * Get a list of current rules.
+	 *
+	 * @return array
+	 */
 	public function getRules() : array
 	{
 		return $this->rules;
 	}
 
+	/**
+	 * Set rules for a given field.
+	 *
+	 * @param string       $field
+	 * @param array|string $rules
+	 *
+	 * @return $this
+	 */
 	public function setRule(string $field, $rules)
 	{
 		if (\is_array($rules)) {
@@ -100,6 +157,13 @@ class Validation
 		return $this;
 	}
 
+	/**
+	 * Set field rules.
+	 *
+	 * @param array $rules an associative array with field as keys and values as rules
+	 *
+	 * @return $this
+	 */
 	public function setRules(array $rules)
 	{
 		foreach ($rules as $field => $rule) {
@@ -108,6 +172,13 @@ class Validation
 		return $this;
 	}
 
+	/**
+	 * Get latest error for a given field.
+	 *
+	 * @param string $field
+	 *
+	 * @return string|null
+	 */
 	public function getError(string $field) : ?string
 	{
 		$error = $this->errors[$field] ?? null;
@@ -118,6 +189,11 @@ class Validation
 		return $this->language->render('validation', $error['rule'], $error['params']);
 	}
 
+	/**
+	 * Get latest errors.
+	 *
+	 * @return array
+	 */
 	public function getErrors() : array
 	{
 		$messages = [];
@@ -174,11 +250,25 @@ class Validation
 		return $result;
 	}
 
+	/**
+	 * Validate data with all rules.
+	 *
+	 * @param array $data
+	 *
+	 * @return bool
+	 */
 	public function validate(array $data) : bool
 	{
 		return $this->run($this->getRules(), $data);
 	}
 
+	/**
+	 * Validate only fields set on data.
+	 *
+	 * @param array $data
+	 *
+	 * @return bool
+	 */
 	public function validateOnly(array $data) : bool
 	{
 		$field_rules = \array_intersect_key(
