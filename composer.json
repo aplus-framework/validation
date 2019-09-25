@@ -1,5 +1,5 @@
 {
-	"name": "framework/validation",
+	"name": "natanfelles/validation",
 	"type": "library",
 	"description": "The Framework Validation Library",
 	"keywords": [
@@ -15,13 +15,13 @@
 	],
 	"require": {
 		"php": ">=7.3",
-		"framework/language": "^1.0",
-		"natanfelles/array-simple": "^0.1"
+		"natanfelles/array-simple": "^0.1",
+		"natanfelles/language": "^1.0"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
-		"framework/coding-standard": "^1.0",
 		"localheinz/composer-normalize": "^1.3",
+		"natanfelles/coding-standard": "^1.0",
 		"phpmd/phpmd": "^2.7",
 		"phpstan/phpstan": "^0.11",
 		"phpunit/phpunit": "^8.3"
