@@ -226,6 +226,17 @@ class Validation
 
 	protected function validateField(string $field, array $rules, array $data) : bool
 	{
+		foreach ($rules as $key => $rule) {
+			if ($rule['rule'] === 'optional') {
+				$ruleKey = $key;
+				if (empty($data[$field])) {
+					return true;
+				}
+			}
+		}
+		if (isset($ruleKey)) {
+			unset($rules[$ruleKey]);
+		}
 		$status = true;
 		foreach ($rules as $rule) {
 			$status = $this->validateRule($rule['rule'], $field, $rule['params'], $data);

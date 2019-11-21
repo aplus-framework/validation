@@ -394,4 +394,34 @@ class ValidationTest extends TestCase
 			$this->validation->getError('unknown')
 		);
 	}
+
+	public function testOptional()
+	{
+		$this->validation->setRule('email', 'email');
+		$this->validation->setRule('other', 'email');
+		$this->validation->setRule('name', 'optional|minLength:5');
+		$status = $this->validation->validate([
+			'email' => 'user@domain.tld',
+			'other' => 'other@domain.tld',
+		]);
+		$this->assertTrue($status);
+		$this->assertNull($this->validation->getError('email'));
+		$this->assertNull($this->validation->getError('other'));
+		$this->assertNull($this->validation->getError('name'));
+	}
+
+	public function testOptionalAsLastRule()
+	{
+		$this->validation->setRule('email', 'email|optional');
+		$this->validation->setRule('name', 'minLength:5|optional');
+		$status = $this->validation->validate([
+			'name' => 'Jon',
+		]);
+		$this->assertFalse($status);
+		$this->assertNull($this->validation->getError('email'));
+		$this->assertStringContainsString(
+			'The name field requires more than 5 characters in length.',
+			$this->validation->getError('name')
+		);
+	}
 }
