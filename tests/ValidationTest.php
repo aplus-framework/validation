@@ -313,7 +313,7 @@ class ValidationTest extends TestCase
 		$this->assertFalse($this->validation->validate([]));
 		$this->assertEquals(
 			[
-				'name' => 'The name field requires more than 5 characters in length.',
+				'name' => 'The name field requires 5 or more characters in length.',
 				'email' => 'The email field requires a valid email address.',
 			],
 			$this->validation->getErrors()
@@ -346,7 +346,7 @@ class ValidationTest extends TestCase
 		]));
 		$this->assertEquals(
 			[
-				'name' => 'The name field requires more than 5 characters in length.',
+				'name' => 'The name field requires 5 or more characters in length.',
 				'email' => 'The email field requires a valid email address.',
 			],
 			$this->validation->getErrors()
@@ -420,7 +420,7 @@ class ValidationTest extends TestCase
 		$this->assertFalse($status);
 		$this->assertNull($this->validation->getError('email'));
 		$this->assertStringContainsString(
-			'The name field requires more than 5 characters in length.',
+			'The name field requires 5 or more characters in length.',
 			$this->validation->getError('name')
 		);
 	}
