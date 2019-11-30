@@ -17,11 +17,17 @@ if ($validated) {
 }
 ```
 
+## Setting rules
+
 ```php
 $validation->setRule('email', 'required|email');
 $validation->setRule('firstname', ['required', 'minLength:2']);
-$validation->setRule('lastname', 'required|minLength:2|maxLength:32');
+$validation->setRules([
+    'lastname' => 'required|minLength:2|maxLength:32'
+]);
 ```
+
+## Setting labels
 
 ```php
 $validation->setLabel('email', 'E-mail');
@@ -33,13 +39,21 @@ $validation->setLabels([
 ]);
 ```
 
-```php
-$validation->getError('email');
-$validation->getErrors();
-```
+## Getting errors
 
 ```php
+// Email field error message, or null
+$error = $validation->getError('email');
+// All errors
+$errors = $validation->getErrors();
+```
+
+## Validating
+
+```php
+// Validates all fields
 $validated = $validation->validate($_POST);
+// Validates only received fields
 $validated = $validation->validateOnly($_POST);
 ```
 
