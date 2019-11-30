@@ -1,5 +1,6 @@
 # Validation Library *documentation*
 
+Validation logic typically occurs as follows:
 
 ```php
 $validation = new \Framework\Validation\Validation();
@@ -17,7 +18,15 @@ if ($validated) {
 }
 ```
 
+First load the Validation class. Then the rules are drafted and finally validated.
+Then an answer is shown if the validation was valid or not.
+
 ## Setting rules
+
+Rules can be set individually by the `setRule` method or several at once by 
+`setRules`. The first argument is the name of the field and the second is the
+rules, which can be defined by string separating them with a pipe or by having
+an array of rules as values.
 
 ```php
 $validation->setRule('email', 'required|email');
@@ -28,6 +37,11 @@ $validation->setRules([
 ```
 
 ## Setting labels
+
+Error messages show field name as default. And often you need to show a custom
+label like *First Name* instead of *firstname*.
+
+Labels can be defined individually or by an array.:
 
 ```php
 $validation->setLabel('email', 'E-mail');
@@ -41,6 +55,8 @@ $validation->setLabels([
 
 ## Getting errors
 
+Errors can be obtained individually or all at once, as per the example below:
+
 ```php
 // Email field error message, or null
 $error = $validation->getError('email');
@@ -50,6 +66,12 @@ $errors = $validation->getErrors();
 
 ## Validating
 
+After defining the rules and labels, the validation of the received data occurs
+through the `validate` method.
+
+If you only need to validate the received fields, you can use the `validateOnly`
+method. Useful for updating only a few fields in the database.
+
 ```php
 // Validates all fields
 $validated = $validation->validate($_POST);
@@ -58,6 +80,8 @@ $validated = $validation->validateOnly($_POST);
 ```
 
 ## Available Rules
+
+The rules available in Validator are:
 
 | Rule | Has Parameters | Description |
 | --- | --- | --- |
