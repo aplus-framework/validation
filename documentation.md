@@ -53,6 +53,8 @@ $validated = $validation->validateOnly($_POST);
 | uuid | no | Validates a UUID |
 | timezone | no | Validates a timezone |
 | base64 | no | Validates a base64 string |
+| md5 | no | Validates a md5 hash |
+| hex | no | Validates a hexadecimal string |
 | json | no | Validates a JSON string |
 | regex | yes | Validates a Regex pattern |
 | notRegex | yes | Validates a Regex no matching pattern |

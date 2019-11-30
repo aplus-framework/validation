@@ -19,6 +19,8 @@ class ValidatorTest extends TestCase
 			'alphaNumber' => 'abc123',
 			'timezone' => 'America/Sao_Paulo',
 			'base64' => 'YQ==', // a
+			'md5' => '0cc175b9c0f1b6a831c399e269772661', // a
+			'hex' => '61', // a
 			'json' => '{"a":1}',
 			'empty' => '',
 			'email' => 'a@b.c',
@@ -71,6 +73,20 @@ class ValidatorTest extends TestCase
 		$this->assertTrue(Validator::base64('base64', $this->array));
 		$this->assertFalse(Validator::base64('alpha', $this->array));
 		$this->assertFalse(Validator::base64('unknown', $this->array));
+	}
+
+	public function testMD5()
+	{
+		$this->assertTrue(Validator::md5('md5', $this->array));
+		$this->assertFalse(Validator::md5('alpha', $this->array));
+		$this->assertFalse(Validator::md5('unknown', $this->array));
+	}
+
+	public function testHex()
+	{
+		$this->assertTrue(Validator::hex('hex', $this->array));
+		$this->assertTrue(Validator::hex('alpha', $this->array));
+		$this->assertFalse(Validator::hex('unknown', $this->array));
 	}
 
 	public function testJson()

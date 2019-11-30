@@ -6,6 +6,8 @@ return [
 	'uuid' => 'O campo {field} requer um UUID válido.',
 	'timezone' => 'O campo {field} requer uma timezone válida.',
 	'base64' => 'O campo {field} requer uma string base64 válida.',
+	'md5' => 'O campo {field} requer um hash MD5 válido.',
+	'hex' => 'O campo {field} requer uma string hexadecimal válida.',
 	'json' => 'O campo {field} requer uma string JSON válida.',
 	'regex' => 'O campo {field} não corresponde ao padrão requerido.',
 	'notRegex' => 'O campo {field} corresponde a um padrão inválido.',

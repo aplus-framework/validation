@@ -110,6 +110,40 @@ class Validator
 	}
 
 	/**
+	 * Validates a md5 hash.
+	 *
+	 * @param string $field
+	 * @param array  $data
+	 *
+	 * @return bool
+	 */
+	public static function md5(string $field, array $data) : bool
+	{
+		$data = static::getData($field, $data);
+		if ($data === null) {
+			return false;
+		}
+		return \preg_match('/^[a-f0-9]{32}$/', $data);
+	}
+
+	/**
+	 * Validates a hexadecimal string.
+	 *
+	 * @param string $field
+	 * @param array  $data
+	 *
+	 * @return bool
+	 */
+	public static function hex(string $field, array $data) : bool
+	{
+		$data = static::getData($field, $data);
+		if ($data === null) {
+			return false;
+		}
+		return \ctype_xdigit($data);
+	}
+
+	/**
 	 * Validates a JSON string.
 	 *
 	 * @param string $field
