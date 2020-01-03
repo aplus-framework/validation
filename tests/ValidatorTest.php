@@ -205,8 +205,6 @@ class ValidatorTest extends TestCase
 	{
 		$this->assertTrue(Validator::latin('alpha', $this->array));
 		$this->assertTrue(Validator::latin('latin', $this->array));
-		$this->assertTrue(Validator::latin('phrase', $this->array, true));
-		$this->assertTrue(Validator::latin('phrase', $this->array, 'true'));
 		$this->assertFalse(Validator::latin('phrase', $this->array));
 		$this->assertFalse(Validator::latin('number', $this->array));
 		$this->assertFalse(Validator::latin('unknown', $this->array));

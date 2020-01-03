@@ -392,21 +392,16 @@ class Validator
 	 *
 	 * @param string $field
 	 * @param array  $data
-	 * @param bool   $allow_whitespaces
 	 *
 	 * @return bool
 	 */
-	public static function latin(string $field, array $data, $allow_whitespaces = false) : bool
+	public static function latin(string $field, array $data) : bool
 	{
 		$data = static::getData($field, $data);
 		if ($data === null) {
 			return false;
 		}
-		if ( ! \is_bool($allow_whitespaces)) {
-			$allow_whitespaces = \strtolower($allow_whitespaces) === 'true';
-		}
-		$pattern = $allow_whitespaces ? '/^[\p{Latin}\s]+$/u' : '/^[\p{Latin}]+$/u';
-		return \preg_match($pattern, $data);
+		return \preg_match('/^[\p{Latin}]+$/u', $data);
 	}
 
 	/**

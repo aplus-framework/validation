@@ -106,7 +106,7 @@ The rules available in Validator are:
 | url | no | Validates an URL |
 | datetime | yes | Validates a datetime format |
 | email | no | Validates a email |
-| latin | yes | Validates a latin text |
+| latin | no | Validates a latin text |
 | maxLength | yes | Validates max length |
 | minLength | yes | Validates min length |
 | length | yes |  Validates exact length |
