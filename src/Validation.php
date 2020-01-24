@@ -241,11 +241,20 @@ class Validation
 		foreach ($rules as $rule) {
 			$status = $this->validateRule($rule['rule'], $field, $rule['params'], $data);
 			if ($status !== true) {
+				$rule = $this->setEqualsField($rule);
 				$this->setError($field, $rule['rule'], $rule['params']);
 				break;
 			}
 		}
 		return $status;
+	}
+
+	protected function setEqualsField(array $rule) : array
+	{
+		if ($rule['rule'] === 'equals' || $rule['rule'] === 'notEquals') {
+			$rule['params'][0] = $this->getLabel($rule['params'][0]);
+		}
+		return $rule;
 	}
 
 	protected function run(array $field_rules, array $data) : bool
