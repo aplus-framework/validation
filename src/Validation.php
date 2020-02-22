@@ -7,17 +7,14 @@ use Framework\Language\Language;
  */
 class Validation
 {
-	protected $labels = [];
-	protected $rules = [];
-	protected $errors = [];
+	protected array $labels = [];
+	protected array $rules = [];
+	protected array $errors = [];
 	/**
 	 * @var array|Validator[]
 	 */
-	protected $validators = [];
-	/**
-	 * @var Language
-	 */
-	protected $language;
+	protected array $validators = [];
+	protected Language $language;
 
 	/**
 	 * Validation constructor.

@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class LanguagesTest extends TestCase
 {
-	protected $langDir = __DIR__ . '/../src/Languages/';
+	protected string $langDir = __DIR__ . '/../src/Languages/';
 
 	protected function getCodes()
 	{

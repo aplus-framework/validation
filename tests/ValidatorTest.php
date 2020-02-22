@@ -5,10 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class ValidatorTest extends TestCase
 {
-	/**
-	 * @var array
-	 */
-	protected $array;
+	protected array $array;
 
 	protected function setUp() : void
 	{

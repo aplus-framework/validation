@@ -6,10 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class ValidationTest extends TestCase
 {
-	/**
-	 * @var ValidationMock
-	 */
-	protected $validation;
+	protected ValidationMock $validation;
 
 	public function setup() : void
 	{

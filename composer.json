@@ -14,7 +14,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.3",
+		"php": ">=7.4",
 		"natanfelles/array-simple": "^0.1",
 		"natanfelles/language": "^1.0"
 	},
@@ -24,7 +24,7 @@
 		"natanfelles/coding-standard": "^1.0",
 		"phpmd/phpmd": "^2.7",
 		"phpstan/phpstan": "^0.11",
-		"phpunit/phpunit": "^8.3"
+		"phpunit/phpunit": "^8.5"
 	},
 	"autoload": {
 		"psr-4": {
