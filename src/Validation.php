@@ -1,14 +1,24 @@
 <?php namespace Framework\Validation;
 
 use Framework\Language\Language;
+use InvalidArgumentException;
 
 /**
  * Class Validation.
  */
 class Validation
 {
+	/**
+	 * @var array|string[]
+	 */
 	protected array $labels = [];
+	/**
+	 * @var array|array[]
+	 */
 	protected array $rules = [];
+	/**
+	 * @var array|string[]
+	 */
 	protected array $errors = [];
 	/**
 	 * @var array|Validator[]
@@ -117,7 +127,8 @@ class Validation
 	{
 		$rules = (array) \preg_split('#(?<!\\\)\|#', $rules);
 		foreach ($rules as &$rule) {
-			$rule = $this->parseRule(\strtr($rule, ['\|' => '|']));
+			$rule = \strtr($rule, ['\|' => '|']);
+			$rule = $this->parseRule($rule);
 		}
 		return $rules;
 	}
@@ -216,7 +227,7 @@ class Validation
 				return $validator::$rule($field, $data, ...$params);
 			}
 		}
-		throw new \InvalidArgumentException(
+		throw new InvalidArgumentException(
 			"Validation rule '{$rule}' not found on field '{$field}'"
 		);
 	}

@@ -1,14 +1,24 @@
 <?php namespace Framework\Validation;
 
+use InvalidArgumentException;
+
 /**
  * Class Validator.
  */
 class Validator
 {
+	/**
+	 * Get field value from data.
+	 *
+	 * @param string $field
+	 * @param array  $data
+	 *
+	 * @return string|null
+	 */
 	protected static function getData(string $field, array $data) : ?string
 	{
 		$data = \ArraySimple::value($field, $data);
-		return $data === null || ! \is_scalar($data) ? null : $data;
+		return ($data === null || ! \is_scalar($data)) ? null : $data;
 	}
 
 	/**
@@ -173,7 +183,7 @@ class Validator
 	public static function regex(string $field, array $data, string $pattern) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \preg_match($pattern, $data) === 1;
+		return $data === null ? false : (\preg_match($pattern, $data) === 1);
 	}
 
 	/**
@@ -310,7 +320,7 @@ class Validator
 					$version = \FILTER_FLAG_IPV6;
 					break;
 				default:
-					throw new \InvalidArgumentException(
+					throw new InvalidArgumentException(
 						"Invalid IP Version: {$version}"
 					);
 			}
