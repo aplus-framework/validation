@@ -151,7 +151,7 @@ class Validation
 	 *
 	 * @return $this
 	 */
-	public function setRule(string $field, $rules)
+	public function setRule(string $field, array | string $rules)
 	{
 		if (\is_array($rules)) {
 			foreach ($rules as &$rule) {

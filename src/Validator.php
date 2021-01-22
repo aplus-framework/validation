@@ -22,7 +22,7 @@ class Validator
 	}
 
 	/**
-	 * Validates alphabetic caracters.
+	 * Validates alphabetic characters.
 	 *
 	 * @param string $field
 	 * @param array  $data
@@ -246,8 +246,12 @@ class Validator
 	 *
 	 * @return bool
 	 */
-	public static function between(string $field, array $data, $min, $max) : bool
-	{
+	public static function between(
+		string $field,
+		array $data,
+		int | string $min,
+		int | string $max
+	) : bool {
 		$data = static::getData($field, $data);
 		return $data === null ? false : $data >= $min && $data <= $max;
 	}
@@ -262,8 +266,12 @@ class Validator
 	 *
 	 * @return bool
 	 */
-	public static function notBetween(string $field, array $data, $min, $max) : bool
-	{
+	public static function notBetween(
+		string $field,
+		array $data,
+		int | string $min,
+		int | string $max
+	) : bool {
 		return ! static::between($field, $data, $min, $max);
 	}
 
@@ -272,7 +280,7 @@ class Validator
 	 *
 	 * @param string $field
 	 * @param array  $data
-	 * @param        $in
+	 * @param mixed  $in
 	 *
 	 * @return bool
 	 */
@@ -287,7 +295,7 @@ class Validator
 	 *
 	 * @param string $field
 	 * @param array  $data
-	 * @param        $not_in
+	 * @param mixed  $not_in
 	 *
 	 * @return bool
 	 */
