@@ -14,7 +14,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.4",
+		"php": ">=8.0",
 		"ext-intl": "*",
 		"ext-json": "*",
 		"natanfelles/array-simple": "^0.1",
