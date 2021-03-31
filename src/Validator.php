@@ -32,7 +32,7 @@ class Validator
 	public static function alpha(string $field, array $data) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \ctype_alpha($data);
+		return ! ($data === null) && \ctype_alpha($data);
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Validator
 	public static function number(string $field, array $data) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \is_numeric($data);
+		return ! ($data === null) && \is_numeric($data);
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Validator
 	public static function alphaNumber(string $field, array $data) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \ctype_alnum($data);
+		return ! ($data === null) && \ctype_alnum($data);
 	}
 
 	/**
@@ -114,9 +114,7 @@ class Validator
 			return false;
 		}
 		$decoded = \base64_decode($data);
-		return $decoded ?
-			\base64_encode($decoded) === $data
-			: false;
+		return $decoded && \base64_encode($decoded) === $data;
 	}
 
 	/**
@@ -183,7 +181,7 @@ class Validator
 	public static function regex(string $field, array $data, string $pattern) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : (\preg_match($pattern, $data) === 1);
+		return ! ($data === null) && \preg_match($pattern, $data) === 1;
 	}
 
 	/**
@@ -253,7 +251,7 @@ class Validator
 		int | string $max
 	) : bool {
 		$data = static::getData($field, $data);
-		return $data === null ? false : $data >= $min && $data <= $max;
+		return ! ($data === null) && $data >= $min && $data <= $max;
 	}
 
 	/**
@@ -320,18 +318,13 @@ class Validator
 			return false;
 		}
 		if ($version) {
-			switch ($version) {
-				case 4:
-					$version = \FILTER_FLAG_IPV4;
-					break;
-				case 6:
-					$version = \FILTER_FLAG_IPV6;
-					break;
-				default:
-					throw new InvalidArgumentException(
-						"Invalid IP Version: {$version}"
-					);
-			}
+			$version = match ($version) {
+				4 => \FILTER_FLAG_IPV4,
+				6 => \FILTER_FLAG_IPV6,
+				default => throw new InvalidArgumentException(
+					"Invalid IP Version: {$version}"
+				),
+			};
 		}
 		return \filter_var($data, \FILTER_VALIDATE_IP, $version) !== false;
 	}
@@ -434,7 +427,7 @@ class Validator
 	public static function maxLength(string $field, array $data, int $max_length) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \mb_strlen($data) <= $max_length;
+		return ! ($data === null) && \mb_strlen($data) <= $max_length;
 	}
 
 	/**
@@ -449,7 +442,7 @@ class Validator
 	public static function minLength(string $field, array $data, int $min_length) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \mb_strlen($data) >= $min_length;
+		return ! ($data === null) && \mb_strlen($data) >= $min_length;
 	}
 
 	/**
@@ -463,7 +456,7 @@ class Validator
 	public static function length(string $field, array $data, int $length) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \mb_strlen($data) === $length;
+		return ! ($data === null) && \mb_strlen($data) === $length;
 	}
 
 	/**
@@ -477,7 +470,7 @@ class Validator
 	public static function required(string $field, array $data) : bool
 	{
 		$data = static::getData($field, $data);
-		return $data === null ? false : \trim($data) !== '';
+		return ! ($data === null) && \trim($data) !== '';
 	}
 
 	/**
