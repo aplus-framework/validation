@@ -113,7 +113,7 @@ class Validation
 	protected function parseRule(string $rule) : array
 	{
 		$params = [];
-		if (\strpos($rule, ':') !== false) {
+		if (\str_contains($rule, ':')) {
 			[$rule, $params] = \explode(':', $rule, 2);
 			$params = (array) \preg_split('#(?<!\\\)\,#', $params);
 			foreach ($params as &$param) {
