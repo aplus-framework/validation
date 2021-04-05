@@ -79,6 +79,23 @@ $validated = $validation->validate($_POST);
 $validated = $validation->validateOnly($_POST);
 ```
 
+## Working with arrays
+
+Validator uses the [ArraySimple](https://github.com/natanfelles/array-simple) class to extract fields and get the correct data
+value.
+
+```php
+use Framework\Validation\Validation;
+
+$validation = new Validation();
+$validation->setLabel('user[pass]', 'Password')
+           ->setRule('user[pass]', 'required');
+
+$validated = $validation->validate([
+    'user' => ['pass' => 'secret']
+]); // true
+```
+
 ## Available Rules
 
 The rules available in Validator are:
