@@ -17,7 +17,7 @@
 		"php": ">=8.0",
 		"ext-intl": "*",
 		"ext-json": "*",
-		"natanfelles/array-simple": "^0.1",
+		"natanfelles/array-simple": "^1.0",
 		"natanfelles/language": "^1.0"
 	},
 	"require-dev": {
