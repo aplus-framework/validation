@@ -34,15 +34,13 @@ class Validation
 	 */
 	public function __construct(array $validators = null, Language $language = null)
 	{
-		$this->validators = $validators === null
+		$this->validators = empty($validators)
 			? [Validator::class]
 			: \array_reverse($validators);
 		if ($language === null) {
 			$language = new Language('en');
 		}
-		$language->setDirectories(\array_merge([
-			__DIR__ . '/Languages',
-		], $language->getDirectories()));
+		$language->addDirectory(__DIR__ . '/Languages');
 		$this->language = $language;
 	}
 
