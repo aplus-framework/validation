@@ -79,6 +79,14 @@ $validated = $validation->validate($_POST);
 $validated = $validation->validateOnly($_POST);
 ```
 
+### Validator check
+
+To validate only one field is possible to use only the Validator:
+
+```php
+$validated = Validator::alpha('name', $_POST);
+```
+
 ## Working with arrays
 
 Validator uses the [ArraySimple](https://github.com/natanfelles/array-simple) class to extract fields and get the correct data
@@ -94,6 +102,51 @@ $validation->setLabel('user[pass]', 'Password')
 $validated = $validation->validate([
     'user' => ['pass' => 'secret']
 ]); // true
+```
+
+## Custom Validator
+
+It is possible to create a validator with your custom rules.
+
+```php
+use Framework\Validation\Validator;
+
+class CustomValidator extends Validator
+{
+    public static function phone(string $field, array $data): bool
+    {
+        $data = static::getData($field, $data);
+        if ($data === null) {
+            return false;
+        }
+        return \preg_match('/^\d{4}-\d{4}$/', $data);        
+    }
+}
+```
+
+Do not forget to create the validation language file with your rules.
+
+File `Languages/en/validation.php`:
+
+```php
+return [
+    'phone' => 'The {field} field requires a valid phone number.'
+];
+```
+
+So, let the Validation know about your customizations:
+
+```php
+use Framework\Language\Language;
+use Framework\Validation\Validation;
+use CustomValidator;
+
+$lang = new Language('en');
+$lang->addDirectory(__DIR__ . '/Languages');
+$validation = new Validation([CustomValidator::class], $lang);
+$validation->setRule('telephone', 'required|phone');
+$validated = $validation->validate($_POST);
+$errors = $validation->getErrors();
 ```
 
 ## Available Rules
