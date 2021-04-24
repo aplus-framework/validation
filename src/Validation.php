@@ -258,7 +258,7 @@ class Validation
 	protected function setEqualsField(array $rule) : array
 	{
 		if ($rule['rule'] === 'equals' || $rule['rule'] === 'notEquals') {
-			$rule['params'][0] = $this->getLabel($rule['params'][0]);
+			$rule['params'][0] = $this->getLabel($rule['params'][0]) ?? $rule['params'][0];
 		}
 		return $rule;
 	}

@@ -440,4 +440,19 @@ class ValidationTest extends TestCase
 			$this->validation->getError('confirmPassword')
 		);
 	}
+
+	public function testEqualsFieldWithoutLabels()
+	{
+		$this->validation->setRule('password', 'minLength:5');
+		$this->validation->setRule('confirmPassword', 'equals:password');
+		$validated = $this->validation->validate([
+			'password' => '123',
+			'confirmPassword' => '',
+		]);
+		$this->assertFalse($validated);
+		$this->assertEquals(
+			'The confirmPassword field must be equals the password field.',
+			$this->validation->getError('confirmPassword')
+		);
+	}
 }
