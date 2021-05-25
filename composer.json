@@ -15,6 +15,7 @@
 	],
 	"require": {
 		"php": ">=8.0",
+		"ext-fileinfo": "*",
 		"ext-intl": "*",
 		"ext-json": "*",
 		"natanfelles/array-simple": "^1.0",

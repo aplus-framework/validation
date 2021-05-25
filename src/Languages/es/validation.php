@@ -27,4 +27,8 @@ return [
 	'required' => 'Se requiere el campo {field}.',
 	'isset' => 'El campo {field} debe enviarse.',
 	'latin' => 'El campo {field} sólo requiere caracteres latinos.',
+	'uploaded' => 'El archivo en el campo {field} no se ha cargado.',
+	'maxSize' => 'El tamaño del archivo en el campo {field} ha excedido el máximo permitido.',
+	'extensions' => 'El archivo en el campo {field} no tiene una extensión aceptada.',
+	'mimeTypes' => 'El archivo en el campo {field} no tiene un tipo MIME aceptado.',
 ];

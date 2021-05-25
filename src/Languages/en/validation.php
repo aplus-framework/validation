@@ -27,4 +27,8 @@ return [
 	'required' => 'The {field} field is required.',
 	'isset' => 'The {field} field must be sent.',
 	'latin' => 'The {field} field requires only latin characters.',
+	'uploaded' => 'The file in field {field} has not been uploaded.',
+	'maxSize' => 'The file size of field {field} exceeded the maximum allowed.',
+	'extensions' => 'The file in field {field} does not have an accepted extension.',
+	'mimeTypes' => 'The file in field {field} does not have an accepted MIME type.',
 ];

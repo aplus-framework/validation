@@ -1,5 +1,6 @@
 <?php namespace Tests\Validation;
 
+use Framework\Validation\FilesValidator;
 use Framework\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +20,9 @@ class LanguagesTest extends TestCase
 
 	public function testKeys()
 	{
-		$rules = \get_class_methods(Validator::class);
+		$validator_rules = \get_class_methods(Validator::class);
+		$files_validator_rules = \get_class_methods(FilesValidator::class);
+		$rules = \array_merge($validator_rules, $files_validator_rules);
 		\sort($rules);
 		foreach ($this->getCodes() as $code) {
 			$lines = require $this->langDir . $code . '/validation.php';

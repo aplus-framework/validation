@@ -34,8 +34,12 @@ class Validation
 	 */
 	public function __construct(array $validators = null, Language $language = null)
 	{
+		$default_validators = [
+			Validator::class,
+			FilesValidator::class,
+		];
 		$this->validators = empty($validators)
-			? [Validator::class]
+			? $default_validators
 			: \array_reverse($validators);
 		if ($language === null) {
 			$language = new Language('en');
