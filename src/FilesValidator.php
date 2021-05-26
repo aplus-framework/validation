@@ -151,10 +151,7 @@ class FilesValidator
 		}
 		$file = static::getFile($field);
 		$mime = \mime_content_type($file['tmp_name']);
-		if (\str_starts_with('image/', $mime)) {
-			return true;
-		}
-		return false;
+		return \str_starts_with($mime, 'image/');
 	}
 
 	/**
