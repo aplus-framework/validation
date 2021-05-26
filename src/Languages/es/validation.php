@@ -31,4 +31,6 @@ return [
 	'maxSize' => 'El tamaño del archivo en el campo {field} ha excedido el máximo permitido.',
 	'extensions' => 'El archivo en el campo {field} no tiene una extensión aceptada.',
 	'mimeTypes' => 'El archivo en el campo {field} no tiene un tipo MIME aceptado.',
+	'image' => 'El archivo en el campo {field} debe ser una imagen.',
+	'maxDimensions' => 'La imagen en el campo {field} excede las dimensiones máximas.',
 ];

@@ -66,10 +66,7 @@ class FilesValidator
 		if ($file === null) {
 			return false;
 		}
-		if ($file['error'] === \UPLOAD_ERR_OK && \is_uploaded_file($file['tmp_name'])) {
-			return true;
-		}
-		return false;
+		return $file['error'] === \UPLOAD_ERR_OK && \is_uploaded_file($file['tmp_name']);
 	}
 
 	/**
@@ -77,18 +74,18 @@ class FilesValidator
 	 *
 	 * @param string $field
 	 * @param array  $data
-	 * @param int    $bytes
+	 * @param int    $kilobytes
 	 *
 	 * @return bool
 	 */
-	public static function maxSize(string $field, array $data, int $bytes) : bool
+	public static function maxSize(string $field, array $data, int $kilobytes) : bool
 	{
 		$uploaded = static::uploaded($field);
 		if ( ! $uploaded) {
 			return false;
 		}
 		$file = static::getFile($field);
-		return $file['size'] <= $bytes;
+		return $file['size'] <= ($kilobytes * 1024);
 	}
 
 	/**
@@ -108,10 +105,7 @@ class FilesValidator
 		}
 		$file = static::getFile($field);
 		$mime_type = \mime_content_type($file['tmp_name']);
-		if (\in_array($mime_type, $allowed_types, true)) {
-			return true;
-		}
-		return false;
+		return \in_array($mime_type, $allowed_types, true);
 	}
 
 	/**
@@ -123,8 +117,11 @@ class FilesValidator
 	 *
 	 * @return bool
 	 */
-	public static function extensions(string $field, array $data, string ...$allowed_extensions) : bool
-	{
+	public static function extensions(
+		string $field,
+		array $data,
+		string ...$allowed_extensions
+	) : bool {
 		$uploaded = static::uploaded($field);
 		if ( ! $uploaded) {
 			return false;
@@ -136,5 +133,48 @@ class FilesValidator
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Validates file is an image.
+	 *
+	 * @param string $field
+	 * @param array  $data
+	 *
+	 * @return bool
+	 */
+	public static function image(string $field, array $data = [])
+	{
+		$uploaded = static::uploaded($field);
+		if ( ! $uploaded) {
+			return false;
+		}
+		$file = static::getFile($field);
+		$mime = \mime_content_type($file['tmp_name']);
+		if (\str_starts_with('image/', $mime)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Validates image max dimensions.
+	 *
+	 * @param string $field
+	 * @param array  $data
+	 * @param int    $width
+	 * @param int    $height
+	 *
+	 * @return bool
+	 */
+	public static function maxDimensions(string $field, array $data, int $width, int $height)
+	{
+		$is_image = static::image($field);
+		if ( ! $is_image) {
+			return false;
+		}
+		$file = static::getFile($field);
+		$sizes = \getimagesize($file['tmp_name']);
+		return ! ($sizes === false || $sizes[0] > $width || $sizes[1] > $height);
 	}
 }
