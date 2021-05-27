@@ -111,6 +111,8 @@ class FilesValidator
 	/**
 	 * Validates file accepted extensions.
 	 *
+	 * NOTE: For greater security use the {@see FilesValidator::mimes} method to filter the file type.
+	 *
 	 * @param string $field
 	 * @param array  $data
 	 * @param string ...$allowed_extensions
