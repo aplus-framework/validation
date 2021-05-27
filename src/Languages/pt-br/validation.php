@@ -29,8 +29,8 @@ return [
 	'latin' => 'O campo {field} requer apenas caracteres latinos.',
 	'uploaded' => 'O arquivo no campo {field} não foi carregado.',
 	'maxSize' => 'O tamanho do arquivo no campo {field} excedeu o máximo permitido.',
-	'extensions' => 'O arquivo no campo {field} não possui uma extensão aceita.',
-	'mimeTypes' => 'O arquivo no campo {field} não possui um tipo MIME aceito.',
+	'ext' => 'O arquivo no campo {field} não possui uma extensão aceita.',
+	'mimes' => 'O arquivo no campo {field} não possui um tipo MIME aceito.',
 	'image' => 'O arquivo no campo {field} deve ser uma imagem.',
-	'maxDimensions' => 'A imagem no campo {field} excede as dimensões máximas.',
+	'maxDim' => 'A imagem no campo {field} excede as dimensões máximas.',
 ];

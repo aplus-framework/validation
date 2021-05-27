@@ -101,20 +101,20 @@ class FilesValidatorTest extends TestCase
 
 	public function testMimeTypes()
 	{
-		$this->assertFalse(FilesValidatorMock::mimeTypes('foo[a]', [], 'application/json'));
+		$this->assertFalse(FilesValidatorMock::mimes('foo[a]', [], 'application/json'));
 		$this->assertTrue(
-			FilesValidatorMock::mimeTypes('foo[a]', [], 'application/json', 'image/png')
+			FilesValidatorMock::mimes('foo[a]', [], 'application/json', 'image/png')
 		);
 		$this->assertFalse(
-			FilesValidator::mimeTypes('foo[a]', [], 'application/json', 'image/png')
+			FilesValidator::mimes('foo[a]', [], 'application/json', 'image/png')
 		);
 	}
 
 	public function testExtensions()
 	{
-		$this->assertFalse(FilesValidatorMock::extensions('foo[a]', [], 'pdf', 'svg'));
-		$this->assertTrue(FilesValidatorMock::extensions('foo[a]', [], 'pdf', 'png'));
-		$this->assertFalse(FilesValidator::extensions('foo[a]', [], 'pdf', 'png'));
+		$this->assertFalse(FilesValidatorMock::ext('foo[a]', [], 'pdf', 'svg'));
+		$this->assertTrue(FilesValidatorMock::ext('foo[a]', [], 'pdf', 'png'));
+		$this->assertFalse(FilesValidator::ext('foo[a]', [], 'pdf', 'png'));
 	}
 
 	public function testImage()
@@ -125,8 +125,8 @@ class FilesValidatorTest extends TestCase
 
 	public function testMaxDimensions()
 	{
-		$this->assertFalse(FilesValidatorMock::maxDimensions('foo[a]', [], 200, 200));
-		$this->assertTrue(FilesValidatorMock::maxDimensions('foo[a]', [], 400, 500));
-		$this->assertFalse(FilesValidator::maxDimensions('foo[a]', [], 400, 500));
+		$this->assertFalse(FilesValidatorMock::maxDim('foo[a]', [], 200, 200));
+		$this->assertTrue(FilesValidatorMock::maxDim('foo[a]', [], 400, 500));
+		$this->assertFalse(FilesValidator::maxDim('foo[a]', [], 400, 500));
 	}
 }

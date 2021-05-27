@@ -97,7 +97,7 @@ class FilesValidator
 	 *
 	 * @return bool
 	 */
-	public static function mimeTypes(string $field, array $data, string ...$allowed_types) : bool
+	public static function mimes(string $field, array $data, string ...$allowed_types) : bool
 	{
 		$uploaded = static::uploaded($field);
 		if ( ! $uploaded) {
@@ -117,11 +117,8 @@ class FilesValidator
 	 *
 	 * @return bool
 	 */
-	public static function extensions(
-		string $field,
-		array $data,
-		string ...$allowed_extensions
-	) : bool {
+	public static function ext(string $field, array $data, string ...$allowed_extensions) : bool
+	{
 		$uploaded = static::uploaded($field);
 		if ( ! $uploaded) {
 			return false;
@@ -164,7 +161,7 @@ class FilesValidator
 	 *
 	 * @return bool
 	 */
-	public static function maxDimensions(string $field, array $data, int $width, int $height)
+	public static function maxDim(string $field, array $data, int $width, int $height)
 	{
 		$is_image = static::image($field);
 		if ( ! $is_image) {
