@@ -129,4 +129,18 @@ class FilesValidatorTest extends TestCase
 		$this->assertTrue(FilesValidatorMock::maxDim('foo[a]', [], 400, 500));
 		$this->assertFalse(FilesValidator::maxDim('foo[a]', [], 400, 500));
 	}
+
+	public function testMinDimensions()
+	{
+		$this->assertFalse(FilesValidatorMock::minDim('foo[a]', [], 500, 500));
+		$this->assertTrue(FilesValidatorMock::minDim('foo[a]', [], 300, 400));
+		$this->assertFalse(FilesValidator::minDim('foo[a]', [], 300, 500));
+	}
+
+	public function testDimensions()
+	{
+		$this->assertFalse(FilesValidatorMock::dim('foo[a]', [], 500, 500));
+		$this->assertTrue(FilesValidatorMock::dim('foo[a]', [], 400, 400));
+		$this->assertFalse(FilesValidator::dim('foo[a]', [], 300, 500));
+	}
 }

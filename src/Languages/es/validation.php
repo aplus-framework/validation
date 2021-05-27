@@ -33,4 +33,6 @@ return [
 	'mimes' => 'El archivo en el campo {field} no tiene un tipo MIME aceptado.',
 	'image' => 'El archivo en el campo {field} debe ser una imagen.',
 	'maxDim' => 'La imagen en el campo {field} excede las dimensiones máximas.',
+	'minDim' => 'La imagen en el campo {field} no tiene las dimensiones mínimas.',
+	'dim' => 'La imagen en el campo {field} no tiene las dimensiones requeridas.',
 ];

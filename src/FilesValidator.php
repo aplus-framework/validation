@@ -173,4 +173,46 @@ class FilesValidator
 		$sizes = \getimagesize($file['tmp_name']);
 		return ! ($sizes === false || $sizes[0] > $width || $sizes[1] > $height);
 	}
+
+	/**
+	 * Validates image min dimensions.
+	 *
+	 * @param string $field
+	 * @param array  $data
+	 * @param int    $width
+	 * @param int    $height
+	 *
+	 * @return bool
+	 */
+	public static function minDim(string $field, array $data, int $width, int $height)
+	{
+		$is_image = static::image($field);
+		if ( ! $is_image) {
+			return false;
+		}
+		$file = static::getFile($field);
+		$sizes = \getimagesize($file['tmp_name']);
+		return ! ($sizes === false || $sizes[0] < $width || $sizes[1] < $height);
+	}
+
+	/**
+	 * Validates image dimensions.
+	 *
+	 * @param string $field
+	 * @param array  $data
+	 * @param int    $width
+	 * @param int    $height
+	 *
+	 * @return bool
+	 */
+	public static function dim(string $field, array $data, int $width, int $height)
+	{
+		$is_image = static::image($field);
+		if ( ! $is_image) {
+			return false;
+		}
+		$file = static::getFile($field);
+		$sizes = \getimagesize($file['tmp_name']);
+		return ! ($sizes === false || $sizes[0] !== $width || $sizes[1] !== $height);
+	}
 }
