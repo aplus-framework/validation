@@ -1,6 +1,7 @@
 <?php namespace Framework\Validation;
 
 use InvalidArgumentException;
+use JetBrains\PhpStorm\Language;
 
 /**
  * Class Validator.
@@ -178,8 +179,11 @@ class Validator
 	 *
 	 * @return bool
 	 */
-	public static function regex(string $field, array $data, string $pattern) : bool
-	{
+	public static function regex(
+		string $field,
+		array $data,
+		#[Language('RegExp')] string $pattern
+	) : bool {
 		$data = static::getData($field, $data);
 		return ! ($data === null) && \preg_match($pattern, $data) === 1;
 	}
@@ -193,8 +197,11 @@ class Validator
 	 *
 	 * @return bool
 	 */
-	public static function notRegex(string $field, array $data, string $pattern) : bool
-	{
+	public static function notRegex(
+		string $field,
+		array $data,
+		#[Language('RegExp')] string $pattern
+	) : bool {
 		return ! static::regex($field, $data, $pattern);
 	}
 
