@@ -195,6 +195,7 @@ class Validation
 		if ($error === null) {
 			return null;
 		}
+		$error['params']['params'] = $error['params'] ? \implode(', ', $error['params']) : '';
 		$error['params']['field'] = $this->getLabel($field) ?? $field;
 		return $this->language->render('validation', $error['rule'], $error['params']);
 	}
