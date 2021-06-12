@@ -3,7 +3,7 @@
 use Framework\Validation\FilesValidator;
 use PHPUnit\Framework\TestCase;
 
-class FilesValidatorTest extends TestCase
+final class FilesValidatorTest extends TestCase
 {
 	protected function setUp() : void
 	{
@@ -52,9 +52,9 @@ class FilesValidatorTest extends TestCase
 		];
 	}
 
-	public function testOrganizedFiles()
+	public function testOrganizedFiles() : void
 	{
-		$this->assertEquals([
+		self::assertSame([
 			'foo' => [
 				'a' => [
 					'name' => 'logo-circle.png',
@@ -85,62 +85,62 @@ class FilesValidatorTest extends TestCase
 		], FilesValidatorMock::getOrganizedFiles());
 	}
 
-	public function testUploaded()
+	public function testUploaded() : void
 	{
-		$this->assertFalse(FilesValidator::uploaded('foo[a]'));
-		$this->assertFalse(FilesValidator::uploaded('bar'));
-		$this->assertFalse(FilesValidator::uploaded('unknown'));
+		self::assertFalse(FilesValidator::uploaded('foo[a]'));
+		self::assertFalse(FilesValidator::uploaded('bar'));
+		self::assertFalse(FilesValidator::uploaded('unknown'));
 	}
 
-	public function testMaxSize()
+	public function testMaxSize() : void
 	{
-		$this->assertFalse(FilesValidatorMock::maxSize('foo[a]', [], 10));
-		$this->assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 40));
-		$this->assertFalse(FilesValidator::maxSize('foo[a]', [], 40));
+		self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], 10));
+		self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 40));
+		self::assertFalse(FilesValidator::maxSize('foo[a]', [], 40));
 	}
 
-	public function testMimeTypes()
+	public function testMimeTypes() : void
 	{
-		$this->assertFalse(FilesValidatorMock::mimes('foo[a]', [], 'application/json'));
-		$this->assertTrue(
+		self::assertFalse(FilesValidatorMock::mimes('foo[a]', [], 'application/json'));
+		self::assertTrue(
 			FilesValidatorMock::mimes('foo[a]', [], 'application/json', 'image/png')
 		);
-		$this->assertFalse(
+		self::assertFalse(
 			FilesValidator::mimes('foo[a]', [], 'application/json', 'image/png')
 		);
 	}
 
-	public function testExtensions()
+	public function testExtensions() : void
 	{
-		$this->assertFalse(FilesValidatorMock::ext('foo[a]', [], 'pdf', 'svg'));
-		$this->assertTrue(FilesValidatorMock::ext('foo[a]', [], 'pdf', 'png'));
-		$this->assertFalse(FilesValidator::ext('foo[a]', [], 'pdf', 'png'));
+		self::assertFalse(FilesValidatorMock::ext('foo[a]', [], 'pdf', 'svg'));
+		self::assertTrue(FilesValidatorMock::ext('foo[a]', [], 'pdf', 'png'));
+		self::assertFalse(FilesValidator::ext('foo[a]', [], 'pdf', 'png'));
 	}
 
-	public function testImage()
+	public function testImage() : void
 	{
-		$this->assertTrue(FilesValidatorMock::image('foo[a]'));
-		$this->assertFalse(FilesValidator::image('foo[a]'));
+		self::assertTrue(FilesValidatorMock::image('foo[a]'));
+		self::assertFalse(FilesValidator::image('foo[a]'));
 	}
 
-	public function testMaxDimensions()
+	public function testMaxDimensions() : void
 	{
-		$this->assertFalse(FilesValidatorMock::maxDim('foo[a]', [], 200, 200));
-		$this->assertTrue(FilesValidatorMock::maxDim('foo[a]', [], 400, 500));
-		$this->assertFalse(FilesValidator::maxDim('foo[a]', [], 400, 500));
+		self::assertFalse(FilesValidatorMock::maxDim('foo[a]', [], 200, 200));
+		self::assertTrue(FilesValidatorMock::maxDim('foo[a]', [], 400, 500));
+		self::assertFalse(FilesValidator::maxDim('foo[a]', [], 400, 500));
 	}
 
-	public function testMinDimensions()
+	public function testMinDimensions() : void
 	{
-		$this->assertFalse(FilesValidatorMock::minDim('foo[a]', [], 500, 500));
-		$this->assertTrue(FilesValidatorMock::minDim('foo[a]', [], 300, 400));
-		$this->assertFalse(FilesValidator::minDim('foo[a]', [], 300, 500));
+		self::assertFalse(FilesValidatorMock::minDim('foo[a]', [], 500, 500));
+		self::assertTrue(FilesValidatorMock::minDim('foo[a]', [], 300, 400));
+		self::assertFalse(FilesValidator::minDim('foo[a]', [], 300, 500));
 	}
 
-	public function testDimensions()
+	public function testDimensions() : void
 	{
-		$this->assertFalse(FilesValidatorMock::dim('foo[a]', [], 500, 500));
-		$this->assertTrue(FilesValidatorMock::dim('foo[a]', [], 400, 400));
-		$this->assertFalse(FilesValidator::dim('foo[a]', [], 300, 500));
+		self::assertFalse(FilesValidatorMock::dim('foo[a]', [], 500, 500));
+		self::assertTrue(FilesValidatorMock::dim('foo[a]', [], 400, 400));
+		self::assertFalse(FilesValidator::dim('foo[a]', [], 300, 500));
 	}
 }

@@ -3,7 +3,7 @@
 use Framework\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
-class ValidatorTest extends TestCase
+final class ValidatorTest extends TestCase
 {
 	protected array $array;
 
@@ -35,222 +35,222 @@ class ValidatorTest extends TestCase
 		];
 	}
 
-	public function testAlpha()
+	public function testAlpha() : void
 	{
-		$this->assertTrue(Validator::alpha('alpha', $this->array));
-		$this->assertFalse(Validator::alpha('alphaNumber', $this->array));
-		$this->assertFalse(Validator::alpha('unknown', $this->array));
+		self::assertTrue(Validator::alpha('alpha', $this->array));
+		self::assertFalse(Validator::alpha('alphaNumber', $this->array));
+		self::assertFalse(Validator::alpha('unknown', $this->array));
 	}
 
-	public function testNumber()
+	public function testNumber() : void
 	{
-		$this->assertTrue(Validator::number('number', $this->array));
-		$this->assertFalse(Validator::number('alphaNumber', $this->array));
-		$this->assertFalse(Validator::number('unknown', $this->array));
+		self::assertTrue(Validator::number('number', $this->array));
+		self::assertFalse(Validator::number('alphaNumber', $this->array));
+		self::assertFalse(Validator::number('unknown', $this->array));
 	}
 
-	public function testAlphaNumber()
+	public function testAlphaNumber() : void
 	{
-		$this->assertTrue(Validator::alphaNumber('alpha', $this->array));
-		$this->assertTrue(Validator::alphaNumber('number', $this->array));
-		$this->assertTrue(Validator::alphaNumber('number', $this->array));
-		$this->assertFalse(Validator::alphaNumber('timezone', $this->array));
-		$this->assertFalse(Validator::alphaNumber('unknown', $this->array));
+		self::assertTrue(Validator::alphaNumber('alpha', $this->array));
+		self::assertTrue(Validator::alphaNumber('number', $this->array));
+		self::assertTrue(Validator::alphaNumber('number', $this->array));
+		self::assertFalse(Validator::alphaNumber('timezone', $this->array));
+		self::assertFalse(Validator::alphaNumber('unknown', $this->array));
 	}
 
-	public function testTimezone()
+	public function testTimezone() : void
 	{
-		$this->assertTrue(Validator::timezone('timezone', $this->array));
-		$this->assertFalse(Validator::timezone('alpha', $this->array));
-		$this->assertFalse(Validator::timezone('unknown', $this->array));
+		self::assertTrue(Validator::timezone('timezone', $this->array));
+		self::assertFalse(Validator::timezone('alpha', $this->array));
+		self::assertFalse(Validator::timezone('unknown', $this->array));
 	}
 
-	public function testBase64()
+	public function testBase64() : void
 	{
-		$this->assertTrue(Validator::base64('base64', $this->array));
-		$this->assertFalse(Validator::base64('alpha', $this->array));
-		$this->assertFalse(Validator::base64('unknown', $this->array));
+		self::assertTrue(Validator::base64('base64', $this->array));
+		self::assertFalse(Validator::base64('alpha', $this->array));
+		self::assertFalse(Validator::base64('unknown', $this->array));
 	}
 
-	public function testMD5()
+	public function testMD5() : void
 	{
-		$this->assertTrue(Validator::md5('md5', $this->array));
-		$this->assertFalse(Validator::md5('alpha', $this->array));
-		$this->assertFalse(Validator::md5('unknown', $this->array));
+		self::assertTrue(Validator::md5('md5', $this->array));
+		self::assertFalse(Validator::md5('alpha', $this->array));
+		self::assertFalse(Validator::md5('unknown', $this->array));
 	}
 
-	public function testHex()
+	public function testHex() : void
 	{
-		$this->assertTrue(Validator::hex('hex', $this->array));
-		$this->assertTrue(Validator::hex('alpha', $this->array));
-		$this->assertFalse(Validator::hex('unknown', $this->array));
+		self::assertTrue(Validator::hex('hex', $this->array));
+		self::assertTrue(Validator::hex('alpha', $this->array));
+		self::assertFalse(Validator::hex('unknown', $this->array));
 	}
 
-	public function testJson()
+	public function testJson() : void
 	{
-		$this->assertTrue(Validator::json('json', $this->array));
-		$this->assertFalse(Validator::json('alpha', $this->array));
-		$this->assertFalse(Validator::json('unknown', $this->array));
+		self::assertTrue(Validator::json('json', $this->array));
+		self::assertFalse(Validator::json('alpha', $this->array));
+		self::assertFalse(Validator::json('unknown', $this->array));
 	}
 
-	public function testMaxLength()
+	public function testMaxLength() : void
 	{
-		$this->assertTrue(Validator::maxLength('alpha', $this->array, 3));
-		$this->assertTrue(Validator::maxLength('number', $this->array, 3));
-		$this->assertFalse(Validator::maxLength('alphaNumber', $this->array, 3));
-		$this->assertFalse(Validator::maxLength('unknown', $this->array, 3));
+		self::assertTrue(Validator::maxLength('alpha', $this->array, 3));
+		self::assertTrue(Validator::maxLength('number', $this->array, 3));
+		self::assertFalse(Validator::maxLength('alphaNumber', $this->array, 3));
+		self::assertFalse(Validator::maxLength('unknown', $this->array, 3));
 	}
 
-	public function testMinLength()
+	public function testMinLength() : void
 	{
-		$this->assertTrue(Validator::minLength('alpha', $this->array, 3));
-		$this->assertTrue(Validator::minLength('number', $this->array, 3));
-		$this->assertFalse(Validator::minLength('alpha', $this->array, 4));
-		$this->assertFalse(Validator::minLength('unknown', $this->array, 3));
+		self::assertTrue(Validator::minLength('alpha', $this->array, 3));
+		self::assertTrue(Validator::minLength('number', $this->array, 3));
+		self::assertFalse(Validator::minLength('alpha', $this->array, 4));
+		self::assertFalse(Validator::minLength('unknown', $this->array, 3));
 	}
 
-	public function testLength()
+	public function testLength() : void
 	{
-		$this->assertTrue(Validator::length('alpha', $this->array, 3));
-		$this->assertTrue(Validator::length('number', $this->array, 3));
-		$this->assertFalse(Validator::length('alpha', $this->array, 4));
-		$this->assertFalse(Validator::length('unknown', $this->array, 3));
+		self::assertTrue(Validator::length('alpha', $this->array, 3));
+		self::assertTrue(Validator::length('number', $this->array, 3));
+		self::assertFalse(Validator::length('alpha', $this->array, 4));
+		self::assertFalse(Validator::length('unknown', $this->array, 3));
 	}
 
-	public function testRequired()
+	public function testRequired() : void
 	{
-		$this->assertTrue(Validator::required('alpha', $this->array));
-		$this->assertTrue(Validator::required('number', $this->array));
-		$this->assertFalse(Validator::required('empty', $this->array));
-		$this->assertFalse(Validator::required('unknown', $this->array));
+		self::assertTrue(Validator::required('alpha', $this->array));
+		self::assertTrue(Validator::required('number', $this->array));
+		self::assertFalse(Validator::required('empty', $this->array));
+		self::assertFalse(Validator::required('unknown', $this->array));
 	}
 
-	public function testIsset()
+	public function testIsset() : void
 	{
-		$this->assertTrue(Validator::isset('alpha', $this->array));
-		$this->assertTrue(Validator::isset('empty', $this->array));
-		$this->assertFalse(Validator::isset('unknown', $this->array));
-		$this->assertFalse(Validator::isset('unknown-2', $this->array));
+		self::assertTrue(Validator::isset('alpha', $this->array));
+		self::assertTrue(Validator::isset('empty', $this->array));
+		self::assertFalse(Validator::isset('unknown', $this->array));
+		self::assertFalse(Validator::isset('unknown-2', $this->array));
 	}
 
-	public function testEmail()
+	public function testEmail() : void
 	{
-		$this->assertTrue(Validator::email('email', $this->array));
-		$this->assertFalse(Validator::email('email-false', $this->array));
-		$this->assertFalse(Validator::email('unknown', $this->array));
+		self::assertTrue(Validator::email('email', $this->array));
+		self::assertFalse(Validator::email('email-false', $this->array));
+		self::assertFalse(Validator::email('unknown', $this->array));
 	}
 
-	public function testDatetime()
+	public function testDatetime() : void
 	{
-		$this->assertTrue(Validator::datetime('datetime', $this->array));
-		$this->assertTrue(Validator::datetime('year', $this->array, 'Y'));
-		$this->assertFalse(Validator::datetime('alpha', $this->array));
-		$this->assertFalse(Validator::datetime('unknown', $this->array));
+		self::assertTrue(Validator::datetime('datetime', $this->array));
+		self::assertTrue(Validator::datetime('year', $this->array, 'Y'));
+		self::assertFalse(Validator::datetime('alpha', $this->array));
+		self::assertFalse(Validator::datetime('unknown', $this->array));
 	}
 
-	public function testEquals()
+	public function testEquals() : void
 	{
-		$this->assertTrue(Validator::equals('alpha', $this->array, 'equals-alpha'));
-		$this->assertTrue(Validator::equals('equals-alpha', $this->array, 'alpha'));
-		$this->assertFalse(Validator::equals('alpha', $this->array, 'number'));
-		$this->assertFalse(Validator::equals('alpha', $this->array, 'unknown'));
-		$this->assertFalse(Validator::equals('unknown', $this->array, 'alpha'));
+		self::assertTrue(Validator::equals('alpha', $this->array, 'equals-alpha'));
+		self::assertTrue(Validator::equals('equals-alpha', $this->array, 'alpha'));
+		self::assertFalse(Validator::equals('alpha', $this->array, 'number'));
+		self::assertFalse(Validator::equals('alpha', $this->array, 'unknown'));
+		self::assertFalse(Validator::equals('unknown', $this->array, 'alpha'));
 	}
 
-	public function testNotEquals()
+	public function testNotEquals() : void
 	{
-		$this->assertFalse(Validator::notEquals('alpha', $this->array, 'equals-alpha'));
-		$this->assertFalse(Validator::notEquals('equals-alpha', $this->array, 'alpha'));
-		$this->assertTrue(Validator::notEquals('alpha', $this->array, 'number'));
-		$this->assertTrue(Validator::notEquals('alpha', $this->array, 'unknown'));
-		$this->assertTrue(Validator::notEquals('unknown', $this->array, 'alpha'));
+		self::assertFalse(Validator::notEquals('alpha', $this->array, 'equals-alpha'));
+		self::assertFalse(Validator::notEquals('equals-alpha', $this->array, 'alpha'));
+		self::assertTrue(Validator::notEquals('alpha', $this->array, 'number'));
+		self::assertTrue(Validator::notEquals('alpha', $this->array, 'unknown'));
+		self::assertTrue(Validator::notEquals('unknown', $this->array, 'alpha'));
 	}
 
-	public function testBetween()
+	public function testBetween() : void
 	{
-		$this->assertTrue(Validator::between('alpha', $this->array, 'a', 'b'));
-		$this->assertTrue(Validator::between('number', $this->array, 120, 123));
-		$this->assertFalse(Validator::between('alpha', $this->array, 'b', 'c'));
-		$this->assertFalse(Validator::between('unknown', $this->array, 1, 2));
+		self::assertTrue(Validator::between('alpha', $this->array, 'a', 'b'));
+		self::assertTrue(Validator::between('number', $this->array, 120, 123));
+		self::assertFalse(Validator::between('alpha', $this->array, 'b', 'c'));
+		self::assertFalse(Validator::between('unknown', $this->array, 1, 2));
 	}
 
-	public function testNotBetween()
+	public function testNotBetween() : void
 	{
-		$this->assertFalse(Validator::notBetween('alpha', $this->array, 'a', 'b'));
-		$this->assertFalse(Validator::notBetween('number', $this->array, 120, 123));
-		$this->assertTrue(Validator::notBetween('alpha', $this->array, 'b', 'c'));
-		$this->assertTrue(Validator::notBetween('unknown', $this->array, 1, 2));
+		self::assertFalse(Validator::notBetween('alpha', $this->array, 'a', 'b'));
+		self::assertFalse(Validator::notBetween('number', $this->array, 120, 123));
+		self::assertTrue(Validator::notBetween('alpha', $this->array, 'b', 'c'));
+		self::assertTrue(Validator::notBetween('unknown', $this->array, 1, 2));
 	}
 
-	public function testIn()
+	public function testIn() : void
 	{
-		$this->assertTrue(Validator::in('alpha', $this->array, 'a', 'abc', 'def'));
-		$this->assertTrue(Validator::in('number', $this->array, 120, 123, 456));
-		$this->assertFalse(Validator::in('alpha', $this->array, 'b', 'c', 'd'));
-		$this->assertFalse(Validator::in('unknown', $this->array, 1, 2, 3));
+		self::assertTrue(Validator::in('alpha', $this->array, 'a', 'abc', 'def'));
+		self::assertTrue(Validator::in('number', $this->array, 120, 123, 456));
+		self::assertFalse(Validator::in('alpha', $this->array, 'b', 'c', 'd'));
+		self::assertFalse(Validator::in('unknown', $this->array, 1, 2, 3));
 	}
 
-	public function testNotIn()
+	public function testNotIn() : void
 	{
-		$this->assertFalse(Validator::notIn('alpha', $this->array, 'a', 'abc', 'def'));
-		$this->assertFalse(Validator::notIn('number', $this->array, 120, 123, 456));
-		$this->assertTrue(Validator::notIn('alpha', $this->array, 'b', 'c', 'd'));
-		$this->assertTrue(Validator::notIn('unknown', $this->array, 1, 2, 3));
+		self::assertFalse(Validator::notIn('alpha', $this->array, 'a', 'abc', 'def'));
+		self::assertFalse(Validator::notIn('number', $this->array, 120, 123, 456));
+		self::assertTrue(Validator::notIn('alpha', $this->array, 'b', 'c', 'd'));
+		self::assertTrue(Validator::notIn('unknown', $this->array, 1, 2, 3));
 	}
 
-	public function testLatin()
+	public function testLatin() : void
 	{
-		$this->assertTrue(Validator::latin('alpha', $this->array));
-		$this->assertTrue(Validator::latin('latin', $this->array));
-		$this->assertFalse(Validator::latin('phrase', $this->array));
-		$this->assertFalse(Validator::latin('number', $this->array));
-		$this->assertFalse(Validator::latin('unknown', $this->array));
+		self::assertTrue(Validator::latin('alpha', $this->array));
+		self::assertTrue(Validator::latin('latin', $this->array));
+		self::assertFalse(Validator::latin('phrase', $this->array));
+		self::assertFalse(Validator::latin('number', $this->array));
+		self::assertFalse(Validator::latin('unknown', $this->array));
 	}
 
-	public function testIp()
+	public function testIp() : void
 	{
-		$this->assertTrue(Validator::ip('ipv4', $this->array));
-		$this->assertTrue(Validator::ip('ipv6', $this->array));
-		$this->assertTrue(Validator::ip('ipv4', $this->array, 4));
-		$this->assertTrue(Validator::ip('ipv6', $this->array, 6));
-		$this->assertFalse(Validator::ip('ipv4', $this->array, 6));
-		$this->assertFalse(Validator::ip('ipv6', $this->array, 4));
-		$this->assertFalse(Validator::ip('unknown', $this->array));
+		self::assertTrue(Validator::ip('ipv4', $this->array));
+		self::assertTrue(Validator::ip('ipv6', $this->array));
+		self::assertTrue(Validator::ip('ipv4', $this->array, 4));
+		self::assertTrue(Validator::ip('ipv6', $this->array, 6));
+		self::assertFalse(Validator::ip('ipv4', $this->array, 6));
+		self::assertFalse(Validator::ip('ipv6', $this->array, 4));
+		self::assertFalse(Validator::ip('unknown', $this->array));
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid IP Version: 7');
 		Validator::ip('ipv4', $this->array, 7);
 	}
 
-	public function testUrl()
+	public function testUrl() : void
 	{
-		$this->assertTrue(Validator::url('url', $this->array));
-		$this->assertTrue(Validator::url('alpha', $this->array));
-		$this->assertFalse(Validator::url('url-false', $this->array));
-		$this->assertFalse(Validator::url('json', $this->array));
-		$this->assertFalse(Validator::url('unknown', $this->array));
+		self::assertTrue(Validator::url('url', $this->array));
+		self::assertTrue(Validator::url('alpha', $this->array));
+		self::assertFalse(Validator::url('url-false', $this->array));
+		self::assertFalse(Validator::url('json', $this->array));
+		self::assertFalse(Validator::url('unknown', $this->array));
 	}
 
-	public function testRegex()
+	public function testRegex() : void
 	{
-		$this->assertTrue(Validator::regex('alpha', $this->array, '/[a-z]/'));
-		$this->assertTrue(Validator::regex('number', $this->array, '/[0-9]/'));
-		$this->assertFalse(Validator::regex('alpha', $this->array, '/[0-9]/'));
-		$this->assertFalse(Validator::regex('unknown', $this->array, '/[0-9]/'));
+		self::assertTrue(Validator::regex('alpha', $this->array, '/[a-z]/'));
+		self::assertTrue(Validator::regex('number', $this->array, '/[0-9]/'));
+		self::assertFalse(Validator::regex('alpha', $this->array, '/[0-9]/'));
+		self::assertFalse(Validator::regex('unknown', $this->array, '/[0-9]/'));
 	}
 
-	public function testNotRegex()
+	public function testNotRegex() : void
 	{
-		$this->assertFalse(Validator::notRegex('alpha', $this->array, '/[a-z]/'));
-		$this->assertFalse(Validator::notRegex('number', $this->array, '/[0-9]/'));
-		$this->assertTrue(Validator::notRegex('alpha', $this->array, '/[0-9]/'));
-		$this->assertTrue(Validator::notRegex('unknown', $this->array, '/[0-9]/'));
+		self::assertFalse(Validator::notRegex('alpha', $this->array, '/[a-z]/'));
+		self::assertFalse(Validator::notRegex('number', $this->array, '/[0-9]/'));
+		self::assertTrue(Validator::notRegex('alpha', $this->array, '/[0-9]/'));
+		self::assertTrue(Validator::notRegex('unknown', $this->array, '/[0-9]/'));
 	}
 
-	public function testUuid()
+	public function testUuid() : void
 	{
-		$this->assertTrue(Validator::uuid('uuid', $this->array));
-		$this->assertFalse(Validator::uuid('alpha', $this->array));
-		$this->assertFalse(Validator::uuid('uuid-zero', $this->array));
-		$this->assertFalse(Validator::uuid('unknown', $this->array));
+		self::assertTrue(Validator::uuid('uuid', $this->array));
+		self::assertFalse(Validator::uuid('alpha', $this->array));
+		self::assertFalse(Validator::uuid('uuid-zero', $this->array));
+		self::assertFalse(Validator::uuid('unknown', $this->array));
 	}
 }

@@ -4,7 +4,7 @@ use Framework\Language\Language;
 use Framework\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
-class ValidationTest extends TestCase
+final class ValidationTest extends TestCase
 {
 	protected ValidationMock $validation;
 
@@ -13,65 +13,65 @@ class ValidationTest extends TestCase
 		$this->validation = new ValidationMock();
 	}
 
-	public function testParseRule()
+	public function testParseRule() : void
 	{
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'foo',
 				'params' => [],
 			],
 			$this->validation->parseRule('foo')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'foo',
 				'params' => ['bar:baz'],
 			],
 			$this->validation->parseRule('foo:bar:baz')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'fo,o',
 				'params' => ['bar:baz'],
 			],
 			$this->validation->parseRule('fo,o:bar:baz')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'foo',
 				'params' => ['param'],
 			],
 			$this->validation->parseRule('foo:param')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'foo',
 				'params' => ['param', 'param2'],
 			],
 			$this->validation->parseRule('foo:param,param2')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'foo',
 				'params' => ['  param', ' param2 '],
 			],
 			$this->validation->parseRule('foo:  param, param2 ')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'foo',
 				'params' => ['param', 'param2', 'param3'],
 			],
 			$this->validation->parseRule('foo:param,param2,param3')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'foo',
 				'params' => ['param', 'param2,param3'],
 			],
 			$this->validation->parseRule('foo:param,param2\,param3')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'rule' => 'foo',
 				'params' => ['param', 'param2\,param3'],
@@ -80,9 +80,9 @@ class ValidationTest extends TestCase
 		);
 	}
 
-	public function testExtractRules()
+	public function testExtractRules() : void
 	{
-		$this->assertEquals(
+		self::assertSame(
 			[
 				[
 					'rule' => 'foo',
@@ -91,7 +91,7 @@ class ValidationTest extends TestCase
 			],
 			$this->validation->extractRules('foo')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				[
 					'rule' => 'foo',
@@ -104,7 +104,7 @@ class ValidationTest extends TestCase
 			],
 			$this->validation->extractRules('foo|bar')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				[
 					'rule' => 'foo',
@@ -117,7 +117,7 @@ class ValidationTest extends TestCase
 			],
 			$this->validation->extractRules('foo|bar\|baz')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				[
 					'rule' => 'foo',
@@ -130,7 +130,7 @@ class ValidationTest extends TestCase
 			],
 			$this->validation->extractRules('foo|bar\\\|baz')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			[
 				[
 					'rule' => 'foo',
@@ -149,11 +149,11 @@ class ValidationTest extends TestCase
 		);
 	}
 
-	public function testRule()
+	public function testRule() : void
 	{
-		$this->assertEmpty($this->validation->getRules());
+		self::assertEmpty($this->validation->getRules());
 		$this->validation->setRule('foo', 'foo:a|bar');
-		$this->assertEquals([
+		self::assertSame([
 			'foo' => [
 				[
 					'rule' => 'foo',
@@ -166,7 +166,7 @@ class ValidationTest extends TestCase
 			],
 		], $this->validation->getRules());
 		$this->validation->setRule('bar', ['foo:a', 'bar']);
-		$this->assertEquals([
+		self::assertSame([
 			'foo' => [
 				[
 					'rule' => 'foo',
@@ -189,7 +189,7 @@ class ValidationTest extends TestCase
 			],
 		], $this->validation->getRules());
 		$this->validation->setRule('foo', 'baz');
-		$this->assertEquals([
+		self::assertSame([
 			'foo' => [
 				[
 					'rule' => 'baz',
@@ -208,7 +208,7 @@ class ValidationTest extends TestCase
 			],
 		], $this->validation->getRules());
 		$this->validation->setRule('baz', ['b|a|\z:s', 'x']);
-		$this->assertEquals([
+		self::assertSame([
 			'foo' => [
 				[
 					'rule' => 'baz',
@@ -238,15 +238,15 @@ class ValidationTest extends TestCase
 		], $this->validation->getRules());
 	}
 
-	public function testRules()
+	public function testRules() : void
 	{
-		$this->assertEmpty($this->validation->getRules());
+		self::assertEmpty($this->validation->getRules());
 		$this->validation->setRules([
 			'foo' => 'baz',
 			'bar' => 'foo:a|bar',
 			'baz' => ['b|a|\z:s', 'x'],
 		]);
-		$this->assertEquals([
+		self::assertSame([
 			'foo' => [
 				[
 					'rule' => 'baz',
@@ -276,39 +276,39 @@ class ValidationTest extends TestCase
 		], $this->validation->getRules());
 	}
 
-	public function testLabel()
+	public function testLabel() : void
 	{
-		$this->assertEquals([], $this->validation->getLabels());
-		$this->assertNull($this->validation->getLabel('foo'));
+		self::assertSame([], $this->validation->getLabels());
+		self::assertNull($this->validation->getLabel('foo'));
 		$this->validation->setLabel('foo', 'Foo');
-		$this->assertEquals('Foo', $this->validation->getLabel('foo'));
+		self::assertSame('Foo', $this->validation->getLabel('foo'));
 		$this->validation->setLabels(['foo' => 'Foo ', 'bar' => 'Bar']);
-		$this->assertEquals(['foo' => 'Foo ', 'bar' => 'Bar'], $this->validation->getLabels());
+		self::assertSame(['foo' => 'Foo ', 'bar' => 'Bar'], $this->validation->getLabels());
 		$this->validation->reset();
-		$this->assertEquals([], $this->validation->getLabels());
+		self::assertSame([], $this->validation->getLabels());
 	}
 
-	public function testSetError()
+	public function testSetError() : void
 	{
-		$this->assertEquals([], $this->validation->getErrors());
-		$this->assertNull($this->validation->getError('foo'));
+		self::assertSame([], $this->validation->getErrors());
+		self::assertNull($this->validation->getError('foo'));
 		$this->validation->setError('foo', 'test', ['a', 'b']);
-		$this->assertEquals(
+		self::assertSame(
 			'validation.test',
 			$this->validation->getError('foo')
 		);
 	}
 
-	public function testValidate()
+	public function testValidate() : void
 	{
-		$this->assertTrue($this->validation->validate([]));
-		$this->assertEquals([], $this->validation->getErrors());
+		self::assertTrue($this->validation->validate([]));
+		self::assertSame([], $this->validation->getErrors());
 		$this->validation->setRules([
 			'name' => 'minLength:5',
 			'email' => 'email',
 		]);
-		$this->assertFalse($this->validation->validate([]));
-		$this->assertEquals(
+		self::assertFalse($this->validation->validate([]));
+		self::assertSame(
 			[
 				'name' => 'The name field requires 5 or more characters in length.',
 				'email' => 'The email field requires a valid email address.',
@@ -317,7 +317,7 @@ class ValidationTest extends TestCase
 		);
 	}
 
-	public function testValidateUnknownRule()
+	public function testValidateUnknownRule() : void
 	{
 		$this->validation->setRule('name', 'foo');
 		$this->expectException(\InvalidArgumentException::class);
@@ -327,21 +327,21 @@ class ValidationTest extends TestCase
 		$this->validation->validate([]);
 	}
 
-	public function testValidateOnly()
+	public function testValidateOnly() : void
 	{
-		$this->assertTrue($this->validation->validateOnly([]));
-		$this->assertEquals([], $this->validation->getErrors());
+		self::assertTrue($this->validation->validateOnly([]));
+		self::assertSame([], $this->validation->getErrors());
 		$this->validation->setRules([
 			'name' => 'minLength:5',
 			'email' => 'email',
 		]);
-		$this->assertTrue($this->validation->validateOnly([]));
-		$this->assertEquals([], $this->validation->getErrors());
-		$this->assertFalse($this->validation->validateOnly([
+		self::assertTrue($this->validation->validateOnly([]));
+		self::assertSame([], $this->validation->getErrors());
+		self::assertFalse($this->validation->validateOnly([
 			'name' => 'foo',
 			'email' => 'email',
 		]));
-		$this->assertEquals(
+		self::assertSame(
 			[
 				'name' => 'The name field requires 5 or more characters in length.',
 				'email' => 'The email field requires a valid email address.',
@@ -350,49 +350,49 @@ class ValidationTest extends TestCase
 		);
 	}
 
-	public function testError()
+	public function testError() : void
 	{
 		$this->validation->setRules([
 			'email' => 'email',
 		]);
-		$this->assertFalse($this->validation->validate([]));
-		$this->assertEquals(
+		self::assertFalse($this->validation->validate([]));
+		self::assertSame(
 			[
 				'email' => 'The email field requires a valid email address.',
 			],
 			$this->validation->getErrors()
 		);
-		$this->assertNull(
+		self::assertNull(
 			$this->validation->getError('unknown')
 		);
 		$this->validation = new ValidationMock([Validator::class], new Language('en'));
 		$this->validation->setRules([
 			'email' => 'email',
 		]);
-		$this->assertFalse($this->validation->validate([]));
-		$this->assertEquals(
+		self::assertFalse($this->validation->validate([]));
+		self::assertSame(
 			'The email field requires a valid email address.',
 			$this->validation->getError('email')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			['email' => 'The email field requires a valid email address.'],
 			$this->validation->getErrors()
 		);
 		$this->validation->setLabel('email', 'E-mail');
-		$this->assertEquals(
+		self::assertSame(
 			'The E-mail field requires a valid email address.',
 			$this->validation->getError('email')
 		);
-		$this->assertEquals(
+		self::assertSame(
 			['email' => 'The E-mail field requires a valid email address.'],
 			$this->validation->getErrors()
 		);
-		$this->assertNull(
+		self::assertNull(
 			$this->validation->getError('unknown')
 		);
 	}
 
-	public function testOptional()
+	public function testOptional() : void
 	{
 		$this->validation->setRule('email', 'email');
 		$this->validation->setRule('other', 'email');
@@ -401,28 +401,28 @@ class ValidationTest extends TestCase
 			'email' => 'user@domain.tld',
 			'other' => 'other@domain.tld',
 		]);
-		$this->assertTrue($status);
-		$this->assertNull($this->validation->getError('email'));
-		$this->assertNull($this->validation->getError('other'));
-		$this->assertNull($this->validation->getError('name'));
+		self::assertTrue($status);
+		self::assertNull($this->validation->getError('email'));
+		self::assertNull($this->validation->getError('other'));
+		self::assertNull($this->validation->getError('name'));
 	}
 
-	public function testOptionalAsLastRule()
+	public function testOptionalAsLastRule() : void
 	{
 		$this->validation->setRule('email', 'email|optional');
 		$this->validation->setRule('name', 'minLength:5|optional');
 		$status = $this->validation->validate([
 			'name' => 'Jon',
 		]);
-		$this->assertFalse($status);
-		$this->assertNull($this->validation->getError('email'));
-		$this->assertStringContainsString(
+		self::assertFalse($status);
+		self::assertNull($this->validation->getError('email'));
+		self::assertStringContainsString(
 			'The name field requires 5 or more characters in length.',
 			$this->validation->getError('name')
 		);
 	}
 
-	public function testEqualsField()
+	public function testEqualsField() : void
 	{
 		$this->validation->setRule('password', 'minLength:5');
 		$this->validation->setRule('confirmPassword', 'equals:password');
@@ -434,14 +434,14 @@ class ValidationTest extends TestCase
 			'password' => '123',
 			'confirmPassword' => '',
 		]);
-		$this->assertFalse($validated);
-		$this->assertEquals(
+		self::assertFalse($validated);
+		self::assertSame(
 			'The Confirm Password field must be equals the Password field.',
 			$this->validation->getError('confirmPassword')
 		);
 	}
 
-	public function testEqualsFieldWithoutLabels()
+	public function testEqualsFieldWithoutLabels() : void
 	{
 		$this->validation->setRule('password', 'minLength:5');
 		$this->validation->setRule('confirmPassword', 'equals:password');
@@ -449,8 +449,8 @@ class ValidationTest extends TestCase
 			'password' => '123',
 			'confirmPassword' => '',
 		]);
-		$this->assertFalse($validated);
-		$this->assertEquals(
+		self::assertFalse($validated);
+		self::assertSame(
 			'The confirmPassword field must be equals the password field.',
 			$this->validation->getError('confirmPassword')
 		);
