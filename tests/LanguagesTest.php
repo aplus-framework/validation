@@ -4,7 +4,7 @@ use Framework\Validation\FilesValidator;
 use Framework\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
-class LanguagesTest extends TestCase
+final class LanguagesTest extends TestCase
 {
 	protected string $langDir = __DIR__ . '/../src/Languages/';
 
@@ -18,7 +18,7 @@ class LanguagesTest extends TestCase
 		return $codes;
 	}
 
-	public function testKeys()
+	public function testKeys() : void
 	{
 		$validator_rules = \get_class_methods(Validator::class);
 		$files_validator_rules = \get_class_methods(FilesValidator::class);
@@ -28,7 +28,7 @@ class LanguagesTest extends TestCase
 			$lines = require $this->langDir . $code . '/validation.php';
 			$lines = \array_keys($lines);
 			\sort($lines);
-			$this->assertEquals($rules, $lines, 'Language: ' . $code);
+			self::assertSame($rules, $lines, 'Language: ' . $code);
 		}
 	}
 }
