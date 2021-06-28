@@ -10,14 +10,17 @@
 namespace Tests\Validation;
 
 use Framework\Validation\Validation;
+use JetBrains\PhpStorm\Pure;
 
 class ValidationMock extends Validation
 {
+	#[Pure]
 	public function parseRule(string $rule) : array
 	{
 		return parent::parseRule($rule);
 	}
 
+	#[Pure]
 	public function extractRules(string $rules) : array
 	{
 		return parent::extractRules($rules);
