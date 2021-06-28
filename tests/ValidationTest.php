@@ -1,4 +1,13 @@
-<?php namespace Tests\Validation;
+<?php
+/*
+ * This file is part of The Framework Validation Library.
+ *
+ * (c) Natan Felles <natanfelles@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace Tests\Validation;
 
 use Framework\Language\Language;
 use Framework\Validation\Validator;
