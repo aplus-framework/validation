@@ -188,16 +188,20 @@ final class ValidatorTest extends TestCase
 	public function testIn() : void
 	{
 		self::assertTrue(Validator::in('alpha', $this->array, 'a', 'abc', 'def'));
+		// @phpstan-ignore-next-line
 		self::assertTrue(Validator::in('number', $this->array, 120, 123, 456));
 		self::assertFalse(Validator::in('alpha', $this->array, 'b', 'c', 'd'));
+		// @phpstan-ignore-next-line
 		self::assertFalse(Validator::in('unknown', $this->array, 1, 2, 3));
 	}
 
 	public function testNotIn() : void
 	{
 		self::assertFalse(Validator::notIn('alpha', $this->array, 'a', 'abc', 'def'));
+		// @phpstan-ignore-next-line
 		self::assertFalse(Validator::notIn('number', $this->array, 120, 123, 456));
 		self::assertTrue(Validator::notIn('alpha', $this->array, 'b', 'c', 'd'));
+		// @phpstan-ignore-next-line
 		self::assertTrue(Validator::notIn('unknown', $this->array, 1, 2, 3));
 	}
 
