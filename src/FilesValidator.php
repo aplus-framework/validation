@@ -152,7 +152,7 @@ class FilesValidator
 			return false;
 		}
 		$file = static::getFile($field);
-		$mime = \mime_content_type($file['tmp_name']);
+		$mime = \mime_content_type($file['tmp_name']) ?: 'application/octet-stream';
 		return \str_starts_with($mime, 'image/');
 	}
 
