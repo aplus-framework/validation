@@ -60,9 +60,9 @@ class Validation
 	/**
 	 * Reset the validation.
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function reset()
+	public function reset() : static
 	{
 		$this->labels = [];
 		$this->rules = [];
@@ -76,9 +76,9 @@ class Validation
 	 * @param string $field
 	 * @param string $label
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setLabel(string $field, string $label)
+	public function setLabel(string $field, string $label) : static
 	{
 		$this->labels[$field] = $label;
 		return $this;
@@ -111,9 +111,9 @@ class Validation
 	 *
 	 * @param array<string,string> $labels An associative array with fields as keys and label as values
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setLabels(array $labels)
+	public function setLabels(array $labels) : static
 	{
 		foreach ($labels as $field => $label) {
 			$this->setLabel($field, $label);
@@ -171,9 +171,9 @@ class Validation
 	 * @param string $field
 	 * @param array<int|string,string>|string $rules
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setRule(string $field, array | string $rules)
+	public function setRule(string $field, array | string $rules) : static
 	{
 		if (\is_array($rules)) {
 			foreach ($rules as &$rule) {
@@ -192,9 +192,9 @@ class Validation
 	 *
 	 * @param array<string,array|string> $rules an associative array with field as keys and values as rules
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setRules(array $rules)
+	public function setRules(array $rules) : static
 	{
 		foreach ($rules as $field => $rule) {
 			$this->setRule($field, $rule);
@@ -241,9 +241,9 @@ class Validation
 	 * @param string $rule
 	 * @param array<int|string,array|string> $params
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	protected function setError(string $field, string $rule, array $params)
+	protected function setError(string $field, string $rule, array $params) : static
 	{
 		$this->errors[$field] = [
 			'rule' => $rule,

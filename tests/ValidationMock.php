@@ -23,7 +23,7 @@ class ValidationMock extends Validation
 		return parent::extractRules($rules);
 	}
 
-	public function setError(string $field, string $rule, array $params)
+	public function setError(string $field, string $rule, array $params) : static
 	{
 		return parent::setError($field, $rule, $params);
 	}
