@@ -124,7 +124,7 @@ class Validation
 			[$rule, $params] = \explode(':', $rule, 2);
 			$params = (array) \preg_split('#(?<!\\\)\,#', $params);
 			foreach ($params as &$param) {
-				$param = \strtr($param, ['\,' => ',']);
+				$param = \strtr((string) $param, ['\,' => ',']);
 			}
 		}
 		return ['rule' => $rule, 'params' => $params];
@@ -137,12 +137,13 @@ class Validation
 	 */
 	protected function extractRules(string $rules) : array
 	{
+		$result = [];
 		$rules = (array) \preg_split('#(?<!\\\)\|#', $rules);
-		foreach ($rules as &$rule) {
-			$rule = \strtr($rule, ['\|' => '|']);
-			$rule = $this->parseRule($rule);
+		foreach ($rules as $rule) {
+			$rule = \strtr((string) $rule, ['\|' => '|']);
+			$result[] = $this->parseRule($rule);
 		}
-		return $rules;
+		return $result;
 	}
 
 	/**
