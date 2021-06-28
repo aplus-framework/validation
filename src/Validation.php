@@ -21,7 +21,7 @@ class Validation
 	 */
 	protected array $errors = [];
 	/**
-	 * @var array<int,Validator>
+	 * @var array<int,string|Validator>
 	 */
 	protected array $validators = [];
 	protected Language $language;
@@ -230,7 +230,7 @@ class Validation
 	/**
 	 * @param string $field
 	 * @param string $rule
-	 * @param array<int|string,string> $params
+	 * @param array<int|string,array|string> $params
 	 *
 	 * @return $this
 	 */
@@ -296,9 +296,9 @@ class Validation
 	}
 
 	/**
-	 * @param array<string,array|string> $rule
+	 * @param array<string,mixed> $rule
 	 *
-	 * @return array<string,array|string>
+	 * @return array<string,mixed>
 	 */
 	protected function setEqualsField(array $rule) : array
 	{

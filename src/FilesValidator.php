@@ -49,6 +49,11 @@ class FilesValidator
 		return static::$files = $files;
 	}
 
+	/**
+	 * @param string $field
+	 *
+	 * @return array<string,mixed>|null
+	 */
 	protected static function getFile(string $field) : array | null
 	{
 		$files = static::getOrganizedFiles();
@@ -181,7 +186,7 @@ class FilesValidator
 	 * Validates image min dimensions.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 * @param int $width
 	 * @param int $height
 	 *
