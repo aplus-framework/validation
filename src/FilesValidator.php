@@ -1,52 +1,25 @@
 <?php namespace Framework\Validation;
 
+use ArraySimple;
+
 class FilesValidator
 {
 	/**
-	 * @var array<string,mixed>|null
+	 * @var array<string,mixed>
 	 */
-	protected static ?array $files = null;
+	protected static array $files;
 
 	/**
 	 * Get $_FILES in an re-organized way.
-	 *
-	 * @see https://stackoverflow.com/a/33261775/6027968
 	 *
 	 * @return array<string,mixed>
 	 */
 	protected static function getOrganizedFiles() : array
 	{
-		if (static::$files !== null) {
+		if (isset(static::$files)) {
 			return static::$files;
 		}
-		$walker = static function ($array, $fileInfokey, callable $walker) {
-			$return = [];
-			foreach ($array as $k => $v) {
-				if (\is_array($v)) {
-					$return[$k] = $walker($v, $fileInfokey, $walker);
-					continue;
-				}
-				$return[$k][$fileInfokey] = $v;
-			}
-			return $return;
-		};
-		$files = [];
-		foreach ($_FILES as $name => $values) {
-			if ( ! isset($files[$name])) {
-				$files[$name] = [];
-			}
-			if ( ! \is_array($values['error'])) {
-				$files[$name] = $values;
-				continue;
-			}
-			foreach ($values as $fileInfoKey => $subArray) {
-				$files[$name] = \array_replace_recursive(
-					$files[$name],
-					$walker($subArray, $fileInfoKey, $walker)
-				);
-			}
-		}
-		return static::$files = $files;
+		return static::$files = ArraySimple::files();
 	}
 
 	/**
@@ -57,7 +30,7 @@ class FilesValidator
 	protected static function getFile(string $field) : array | null
 	{
 		$files = static::getOrganizedFiles();
-		return \ArraySimple::value($field, $files);
+		return ArraySimple::value($field, $files);
 	}
 
 	/**
