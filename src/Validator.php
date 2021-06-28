@@ -19,7 +19,7 @@ class Validator
 	protected static function getData(string $field, array $data) : ?string
 	{
 		$data = \ArraySimple::value($field, $data);
-		return ($data === null || ! \is_scalar($data)) ? null : $data;
+		return ($data === null || ! \is_scalar($data)) ? null : (string) $data;
 	}
 
 	/**
@@ -132,7 +132,7 @@ class Validator
 		if ($data === null) {
 			return false;
 		}
-		return \preg_match('/^[a-f0-9]{32}$/', $data);
+		return (bool) \preg_match('/^[a-f0-9]{32}$/', $data);
 	}
 
 	/**
@@ -379,9 +379,13 @@ class Validator
 			return false;
 		}
 		$data = \DateTime::createFromFormat($format, $data);
-		return (bool) $data
-			&& \DateTime::getLastErrors()['warning_count'] === 0
-			&& \DateTime::getLastErrors()['error_count'] === 0;
+		if ($data === false) {
+			return false;
+		}
+		$last_errors = \DateTime::getLastErrors();
+		return $last_errors
+			&& $last_errors['warning_count'] === 0
+			&& $last_errors['error_count'] === 0;
 	}
 
 	/**
@@ -419,7 +423,7 @@ class Validator
 		if ($data === null) {
 			return false;
 		}
-		return \preg_match('/^[\p{Latin}]+$/u', $data);
+		return (bool) \preg_match('/^[\p{Latin}]+$/u', $data);
 	}
 
 	/**
