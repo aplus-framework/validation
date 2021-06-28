@@ -3,14 +3,17 @@
 	"type": "library",
 	"description": "The Framework Validation Library",
 	"keywords": [
-		"validation"
+		"validation",
+		"validator",
+		"files-validation"
 	],
 	"homepage": "https://the-framework.gitlab.io/libraries/validation.html",
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "Natan Felles",
-			"email": "natanfelles@gmail.com"
+			"email": "natanfelles@gmail.com",
+			"homepage": "https://natanfelles.github.io"
 		}
 	],
 	"require": {
@@ -18,14 +21,14 @@
 		"ext-fileinfo": "*",
 		"ext-intl": "*",
 		"ext-json": "*",
-		"natanfelles/array-simple": "^1.0",
-		"natanfelles/language": "^1.2"
+		"natanfelles/array-simple": "^1.1",
+		"natanfelles/language": "^1.4"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
-		"ergebnis/composer-normalize": "^2.13",
+		"ergebnis/composer-normalize": "^2.15",
 		"jetbrains/phpstorm-attributes": "^1.0",
-		"natanfelles/coding-standard": "^1.5",
+		"natanfelles/coding-standard": "^1.7",
 		"phpmd/phpmd": "^2.10",
 		"phpstan/phpstan": "^0.12",
 		"phpunit/phpunit": "^9.5"
