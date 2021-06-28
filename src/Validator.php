@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of The Framework Validation Library.
  *
@@ -323,17 +323,18 @@ class Validator
 	 *
 	 * @param string $field
 	 * @param array<string,mixed> $data
-	 * @param int|null $version 4 or 6
+	 * @param int|string $version 4, 6 or 0 to both
 	 *
 	 * @return bool
 	 */
-	public static function ip(string $field, array $data, int $version = null) : bool
+	public static function ip(string $field, array $data, int | string $version = 0) : bool
 	{
 		$data = static::getData($field, $data);
 		if ($data === null) {
 			return false;
 		}
-		if ($version) {
+		$version = (int) $version;
+		if ($version !== 0) {
 			$version = match ($version) {
 				4 => \FILTER_FLAG_IPV4,
 				6 => \FILTER_FLAG_IPV6,
@@ -440,14 +441,14 @@ class Validator
 	 *
 	 * @param string $field
 	 * @param array<string,mixed> $data
-	 * @param int $max_length
+	 * @param int|string $max_length
 	 *
 	 * @return bool
 	 */
-	public static function maxLength(string $field, array $data, int $max_length) : bool
+	public static function maxLength(string $field, array $data, int | string $max_length) : bool
 	{
 		$data = static::getData($field, $data);
-		return ! ($data === null) && \mb_strlen($data) <= $max_length;
+		return ! ($data === null) && \mb_strlen($data) <= (int) $max_length;
 	}
 
 	/**
@@ -455,14 +456,14 @@ class Validator
 	 *
 	 * @param string $field
 	 * @param array<string,mixed> $data
-	 * @param int $min_length
+	 * @param int|string $min_length
 	 *
 	 * @return bool
 	 */
-	public static function minLength(string $field, array $data, int $min_length) : bool
+	public static function minLength(string $field, array $data, int | string $min_length) : bool
 	{
 		$data = static::getData($field, $data);
-		return ! ($data === null) && \mb_strlen($data) >= $min_length;
+		return ! ($data === null) && \mb_strlen($data) >= (int) $min_length;
 	}
 
 	/**
@@ -470,13 +471,14 @@ class Validator
 	 *
 	 * @param string $field
 	 * @param array<string,mixed> $data
+	 * @param int|string $length
 	 *
 	 * @return bool
 	 */
-	public static function length(string $field, array $data, int $length) : bool
+	public static function length(string $field, array $data, int | string $length) : bool
 	{
 		$data = static::getData($field, $data);
-		return ! ($data === null) && \mb_strlen($data) === $length;
+		return ! ($data === null) && \mb_strlen($data) === (int) $length;
 	}
 
 	/**
