@@ -12,7 +12,7 @@ class Validator
 	 * Get field value from data.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return string|null
 	 */
@@ -26,7 +26,7 @@ class Validator
 	 * Validates alphabetic characters.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -40,7 +40,7 @@ class Validator
 	 * Validates a number.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -54,7 +54,7 @@ class Validator
 	 * Validates a number or alphabetic characters.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -68,7 +68,7 @@ class Validator
 	 * Validates a UUID.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -91,7 +91,7 @@ class Validator
 	 * Validates a timezone.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -104,7 +104,7 @@ class Validator
 	 * Validates a base64 string.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -122,7 +122,7 @@ class Validator
 	 * Validates a md5 hash.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -139,7 +139,7 @@ class Validator
 	 * Validates a hexadecimal string.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -156,7 +156,7 @@ class Validator
 	 * Validates a JSON string.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -174,7 +174,7 @@ class Validator
 	 * Validates a Regex pattern.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 * @param string $pattern
 	 *
 	 * @return bool
@@ -192,7 +192,7 @@ class Validator
 	 * Validates a Regex no matching pattern.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 * @param string $pattern
 	 *
 	 * @return bool
@@ -209,7 +209,7 @@ class Validator
 	 * Validate field has value equals other field.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 * @param string $equals_field
 	 *
 	 * @return bool
@@ -231,7 +231,7 @@ class Validator
 	 * Validate field has not value equals other field.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 * @param string $diff_field
 	 *
 	 * @return bool
@@ -244,8 +244,8 @@ class Validator
 	/**
 	 * Validate field between min and max values.
 	 *
-	 * @param string     $field
-	 * @param array      $data
+	 * @param string $field
+	 * @param array<string,mixed> $data
 	 * @param int|string $min
 	 * @param int|string $max
 	 *
@@ -264,8 +264,8 @@ class Validator
 	/**
 	 * Validate field not between min and max values.
 	 *
-	 * @param string     $field
-	 * @param array      $data
+	 * @param string $field
+	 * @param array<string,mixed> $data
 	 * @param int|string $min
 	 * @param int|string $max
 	 *
@@ -284,8 +284,8 @@ class Validator
 	 * Validate field is in list.
 	 *
 	 * @param string $field
-	 * @param array  $data
-	 * @param mixed  $in
+	 * @param array<string,mixed> $data
+	 * @param string ...$in
 	 *
 	 * @return bool
 	 */
@@ -299,8 +299,8 @@ class Validator
 	 * Validate field is not in list.
 	 *
 	 * @param string $field
-	 * @param array  $data
-	 * @param mixed  $not_in
+	 * @param array<string,mixed> $data
+	 * @param string ...$not_in
 	 *
 	 * @return bool
 	 */
@@ -312,8 +312,8 @@ class Validator
 	/**
 	 * Validates an IP.
 	 *
-	 * @param string   $field
-	 * @param array    $data
+	 * @param string $field
+	 * @param array<string,mixed> $data
 	 * @param int|null $version 4 or 6
 	 *
 	 * @return bool
@@ -340,7 +340,7 @@ class Validator
 	 * Validates an URL.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -364,7 +364,7 @@ class Validator
 	 * Validates a datetime format.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 * @param string $format
 	 *
 	 * @return bool
@@ -388,7 +388,7 @@ class Validator
 	 * Validates a email.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -409,7 +409,7 @@ class Validator
 	 * Validates a latin text.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -426,8 +426,8 @@ class Validator
 	 * Validates max length.
 	 *
 	 * @param string $field
-	 * @param array  $data
-	 * @param int    $max_length
+	 * @param array<string,mixed> $data
+	 * @param int $max_length
 	 *
 	 * @return bool
 	 */
@@ -441,8 +441,8 @@ class Validator
 	 * Validates min length.
 	 *
 	 * @param string $field
-	 * @param array  $data
-	 * @param int    $min_length
+	 * @param array<string,mixed> $data
+	 * @param int $min_length
 	 *
 	 * @return bool
 	 */
@@ -456,7 +456,7 @@ class Validator
 	 * Validates exact length.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -470,7 +470,7 @@ class Validator
 	 * Validates required value.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -484,7 +484,7 @@ class Validator
 	 * Validates field is set.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */

@@ -9,19 +9,19 @@ use InvalidArgumentException;
 class Validation
 {
 	/**
-	 * @var array|string[]
+	 * @var array<string,string>
 	 */
 	protected array $labels = [];
 	/**
-	 * @var array|array[]
+	 * @var array<string,array>
 	 */
 	protected array $rules = [];
 	/**
-	 * @var array|string[]
+	 * @var array<string,array|string>
 	 */
 	protected array $errors = [];
 	/**
-	 * @var array|Validator[]
+	 * @var array<int,Validator>
 	 */
 	protected array $validators = [];
 	protected Language $language;
@@ -29,8 +29,8 @@ class Validation
 	/**
 	 * Validation constructor.
 	 *
-	 * @param array|Validator[]|null $validators
-	 * @param Language|null          $language
+	 * @param array<int,string|Validator>|null $validators
+	 * @param Language|null $language
 	 */
 	public function __construct(array $validators = null, Language $language = null)
 	{
@@ -90,7 +90,7 @@ class Validation
 	/**
 	 * Get a list of all labels.
 	 *
-	 * @return array
+	 * @return array<string,string>
 	 */
 	public function getLabels() : array
 	{
@@ -100,7 +100,7 @@ class Validation
 	/**
 	 * Set fields labels.
 	 *
-	 * @param array $labels An associative array with fields as keys and label as values
+	 * @param array<string,string> $labels An associative array with fields as keys and label as values
 	 *
 	 * @return $this
 	 */
@@ -112,6 +112,11 @@ class Validation
 		return $this;
 	}
 
+	/**
+	 * @param string $rule
+	 *
+	 * @return array<string,array|string>
+	 */
 	protected function parseRule(string $rule) : array
 	{
 		$params = [];
@@ -125,6 +130,11 @@ class Validation
 		return ['rule' => $rule, 'params' => $params];
 	}
 
+	/**
+	 * @param string $rules
+	 *
+	 * @return array<int,array>
+	 */
 	protected function extractRules(string $rules) : array
 	{
 		$rules = (array) \preg_split('#(?<!\\\)\|#', $rules);
@@ -138,7 +148,7 @@ class Validation
 	/**
 	 * Get a list of current rules.
 	 *
-	 * @return array
+	 * @return array<string,array>
 	 */
 	public function getRules() : array
 	{
@@ -148,8 +158,8 @@ class Validation
 	/**
 	 * Set rules for a given field.
 	 *
-	 * @param string       $field
-	 * @param array|string $rules
+	 * @param string $field
+	 * @param array<int|string,string>|string $rules
 	 *
 	 * @return $this
 	 */
@@ -170,7 +180,7 @@ class Validation
 	/**
 	 * Set field rules.
 	 *
-	 * @param array $rules an associative array with field as keys and values as rules
+	 * @param array<string,array|string> $rules an associative array with field as keys and values as rules
 	 *
 	 * @return $this
 	 */
@@ -195,15 +205,17 @@ class Validation
 		if ($error === null) {
 			return null;
 		}
+		// @phpstan-ignore-next-line
 		$error['params']['params'] = $error['params'] ? \implode(', ', $error['params']) : '';
 		$error['params']['field'] = $this->getLabel($field) ?? $field;
+		// @phpstan-ignore-next-line
 		return $this->language->render('validation', $error['rule'], $error['params']);
 	}
 
 	/**
 	 * Get latest errors.
 	 *
-	 * @return array
+	 * @return array<string,string>
 	 */
 	public function getErrors() : array
 	{
@@ -214,6 +226,13 @@ class Validation
 		return $messages;
 	}
 
+	/**
+	 * @param string $field
+	 * @param string $rule
+	 * @param array<int|string,string> $params
+	 *
+	 * @return $this
+	 */
 	protected function setError(string $field, string $rule, array $params)
 	{
 		$this->errors[$field] = [
@@ -223,6 +242,14 @@ class Validation
 		return $this;
 	}
 
+	/**
+	 * @param string $rule
+	 * @param string $field
+	 * @param array<int|string,mixed> $params
+	 * @param array<string,mixed> $data
+	 *
+	 * @return bool
+	 */
 	protected function validateRule(string $rule, string $field, array $params, array $data) : bool
 	{
 		foreach ($this->validators as $validator) {
@@ -235,6 +262,13 @@ class Validation
 		);
 	}
 
+	/**
+	 * @param string $field
+	 * @param array<string,array> $rules
+	 * @param array<string,mixed> $data
+	 *
+	 * @return bool
+	 */
 	protected function validateField(string $field, array $rules, array $data) : bool
 	{
 		foreach ($rules as $key => $rule) {
@@ -260,6 +294,11 @@ class Validation
 		return $status;
 	}
 
+	/**
+	 * @param array<string,array|string> $rule
+	 *
+	 * @return array<string,array|string>
+	 */
 	protected function setEqualsField(array $rule) : array
 	{
 		if ($rule['rule'] === 'equals' || $rule['rule'] === 'notEquals') {
@@ -268,6 +307,12 @@ class Validation
 		return $rule;
 	}
 
+	/**
+	 * @param array<string,array> $field_rules
+	 * @param array<string,mixed> $data
+	 *
+	 * @return bool
+	 */
 	protected function run(array $field_rules, array $data) : bool
 	{
 		$this->errors = [];
@@ -284,7 +329,7 @@ class Validation
 	/**
 	 * Validate data with all rules.
 	 *
-	 * @param array $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -296,7 +341,7 @@ class Validation
 	/**
 	 * Validate only fields set on data.
 	 *
-	 * @param array $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */

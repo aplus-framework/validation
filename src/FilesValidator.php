@@ -2,6 +2,9 @@
 
 class FilesValidator
 {
+	/**
+	 * @var array<string,mixed>|null
+	 */
 	protected static ?array $files = null;
 
 	/**
@@ -9,7 +12,7 @@ class FilesValidator
 	 *
 	 * @see https://stackoverflow.com/a/33261775/6027968
 	 *
-	 * @return array
+	 * @return array<string,mixed>
 	 */
 	protected static function getOrganizedFiles() : array
 	{
@@ -56,7 +59,7 @@ class FilesValidator
 	 * Validates file is uploaded.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -73,8 +76,8 @@ class FilesValidator
 	 * Validates file size.
 	 *
 	 * @param string $field
-	 * @param array  $data
-	 * @param int    $kilobytes
+	 * @param array<string,mixed> $data
+	 * @param int $kilobytes
 	 *
 	 * @return bool
 	 */
@@ -92,7 +95,7 @@ class FilesValidator
 	 * Validates file accepted MIME types.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 * @param string ...$allowed_types
 	 *
 	 * @return bool
@@ -114,7 +117,7 @@ class FilesValidator
 	 * NOTE: For greater security use the {@see FilesValidator::mimes} method to filter the file type.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 * @param string ...$allowed_extensions
 	 *
 	 * @return bool
@@ -138,7 +141,7 @@ class FilesValidator
 	 * Validates file is an image.
 	 *
 	 * @param string $field
-	 * @param array  $data
+	 * @param array<string,mixed> $data
 	 *
 	 * @return bool
 	 */
@@ -157,9 +160,9 @@ class FilesValidator
 	 * Validates image max dimensions.
 	 *
 	 * @param string $field
-	 * @param array  $data
-	 * @param int    $width
-	 * @param int    $height
+	 * @param array<string,mixed> $data
+	 * @param int $width
+	 * @param int $height
 	 *
 	 * @return bool
 	 */
@@ -179,8 +182,8 @@ class FilesValidator
 	 *
 	 * @param string $field
 	 * @param array  $data
-	 * @param int    $width
-	 * @param int    $height
+	 * @param int $width
+	 * @param int $height
 	 *
 	 * @return bool
 	 */
@@ -199,9 +202,9 @@ class FilesValidator
 	 * Validates image dimensions.
 	 *
 	 * @param string $field
-	 * @param array  $data
-	 * @param int    $width
-	 * @param int    $height
+	 * @param array<string,mixed> $data
+	 * @param int $width
+	 * @param int $height
 	 *
 	 * @return bool
 	 */
