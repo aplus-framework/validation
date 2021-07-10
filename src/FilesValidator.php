@@ -9,7 +9,7 @@
  */
 namespace Framework\Validation;
 
-use ArraySimple;
+use Framework\Helpers\ArraySimple;
 
 class FilesValidator
 {

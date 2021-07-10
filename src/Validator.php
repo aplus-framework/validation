@@ -9,6 +9,7 @@
  */
 namespace Framework\Validation;
 
+use Framework\Helpers\ArraySimple;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Language;
 
@@ -27,7 +28,7 @@ class Validator
 	 */
 	protected static function getData(string $field, array $data) : ?string
 	{
-		$data = \ArraySimple::value($field, $data);
+		$data = ArraySimple::value($field, $data);
 		return ($data === null || ! \is_scalar($data)) ? null : (string) $data;
 	}
 
@@ -225,11 +226,11 @@ class Validator
 	 */
 	public static function equals(string $field, array $data, string $equals_field) : bool
 	{
-		$field = \ArraySimple::value($field, $data);
+		$field = ArraySimple::value($field, $data);
 		if ($field === null || ! \is_scalar($field)) {
 			return false;
 		}
-		$equals_field = \ArraySimple::value($equals_field, $data);
+		$equals_field = ArraySimple::value($equals_field, $data);
 		if ($equals_field === null || ! \is_scalar($equals_field)) {
 			return false;
 		}

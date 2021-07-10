@@ -9,6 +9,7 @@
  */
 namespace Framework\Validation;
 
+use Framework\Helpers\ArraySimple;
 use Framework\Language\Language;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
@@ -366,7 +367,7 @@ class Validation
 	{
 		$field_rules = \array_intersect_key(
 			$this->getRules(),
-			\ArraySimple::convert($data)
+			ArraySimple::convert($data)
 		);
 		return $this->run($field_rules, $data);
 	}

@@ -21,7 +21,7 @@
 		"ext-fileinfo": "*",
 		"ext-intl": "*",
 		"ext-json": "*",
-		"natanfelles/array-simple": "^1.1",
+		"natanfelles/helpers": "^2.0",
 		"natanfelles/language": "^1.4"
 	},
 	"require-dev": {
