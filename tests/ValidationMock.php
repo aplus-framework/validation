@@ -14,20 +14,20 @@ use JetBrains\PhpStorm\Pure;
 
 class ValidationMock extends Validation
 {
-	#[Pure]
-	public function parseRule(string $rule) : array
-	{
-		return parent::parseRule($rule);
-	}
+    #[Pure]
+    public function parseRule(string $rule) : array
+    {
+        return parent::parseRule($rule);
+    }
 
-	#[Pure]
-	public function extractRules(string $rules) : array
-	{
-		return parent::extractRules($rules);
-	}
+    #[Pure]
+    public function extractRules(string $rules) : array
+    {
+        return parent::extractRules($rules);
+    }
 
-	public function setError(string $field, string $rule, array $params) : static
-	{
-		return parent::setError($field, $rule, $params);
-	}
+    public function setError(string $field, string $rule, array $params) : static
+    {
+        return parent::setError($field, $rule, $params);
+    }
 }
