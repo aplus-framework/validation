@@ -1,60 +1,60 @@
 {
-	"name": "natanfelles/validation",
-	"type": "library",
-	"description": "The Framework Validation Library",
-	"keywords": [
-		"validation",
-		"validator",
-		"files-validation"
-	],
-	"homepage": "https://the-framework.gitlab.io/libraries/validation.html",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Natan Felles",
-			"email": "natanfelles@gmail.com",
-			"homepage": "https://natanfelles.github.io"
-		}
-	],
-	"require": {
-		"php": ">=8.0",
-		"ext-fileinfo": "*",
-		"ext-intl": "*",
-		"ext-json": "*",
-		"natanfelles/helpers": "^2.0",
-		"natanfelles/language": "^1.4"
-	},
-	"require-dev": {
-		"ext-xdebug": "*",
-		"ergebnis/composer-normalize": "^2.15",
-		"jetbrains/phpstorm-attributes": "^1.0",
-		"natanfelles/coding-standard": "^1.7",
-		"phpmd/phpmd": "^2.10",
-		"phpstan/phpstan": "^0.12",
-		"phpunit/phpunit": "^9.5"
-	},
-	"config": {
-		"optimize-autoloader": true,
-		"preferred-install": "dist",
-		"sort-packages": true
-	},
-	"autoload": {
-		"psr-4": {
-			"Framework\\Validation\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Validation\\": "tests/"
-		}
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"support": {
-		"email": "natanfelles@gmail.com",
-		"issues": "https://gitlab.com/the-framework/libraries/validation/issues",
-		"wiki": "https://gitlab.com/the-framework/libraries/validation/wikis/home",
-		"source": "https://gitlab.com/the-framework/libraries/validation",
-		"docs": "https://the-framework.gitlab.io/libraries/validation/docs/"
-	}
+    "name": "natanfelles/validation",
+    "type": "library",
+    "description": "The Framework Validation Library",
+    "keywords": [
+        "validation",
+        "validator",
+        "files-validation"
+    ],
+    "homepage": "https://the-framework.gitlab.io/libraries/validation.html",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Natan Felles",
+            "email": "natanfelles@gmail.com",
+            "homepage": "https://natanfelles.github.io"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "ext-fileinfo": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "natanfelles/helpers": "^2.0",
+        "natanfelles/language": "^1.4"
+    },
+    "require-dev": {
+        "ext-xdebug": "*",
+        "ergebnis/composer-normalize": "^2.15",
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "natanfelles/coding-standard": "^1.7",
+        "phpmd/phpmd": "^2.10",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^9.5"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Framework\\Validation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Validation\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "support": {
+        "email": "natanfelles@gmail.com",
+        "issues": "https://gitlab.com/the-framework/libraries/validation/issues",
+        "wiki": "https://gitlab.com/the-framework/libraries/validation/wikis/home",
+        "source": "https://gitlab.com/the-framework/libraries/validation",
+        "docs": "https://the-framework.gitlab.io/libraries/validation/docs/"
+    }
 }
