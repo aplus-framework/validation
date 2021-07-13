@@ -1,13 +1,13 @@
 {
-    "name": "natanfelles/validation",
+    "name": "aplus/validation",
     "type": "library",
-    "description": "The Framework Validation Library",
+    "description": "Aplus Framework Validation Library",
     "keywords": [
         "validation",
         "validator",
         "files-validation"
     ],
-    "homepage": "https://the-framework.gitlab.io/libraries/validation.html",
+    "homepage": "https://aplus-framework.com/docs/validation",
     "license": "MIT",
     "authors": [
         {
@@ -52,9 +52,9 @@
     "prefer-stable": true,
     "support": {
         "email": "natanfelles@gmail.com",
-        "issues": "https://gitlab.com/the-framework/libraries/validation/issues",
-        "wiki": "https://gitlab.com/the-framework/libraries/validation/wikis/home",
-        "source": "https://gitlab.com/the-framework/libraries/validation",
-        "docs": "https://the-framework.gitlab.io/libraries/validation/docs/"
+        "issues": "https://gitlab.com/aplus-framework/libraries/validation/issues",
+        "wiki": "https://gitlab.com/aplus-framework/libraries/validation/wikis/home",
+        "source": "https://gitlab.com/aplus-framework/libraries/validation",
+        "docs": "https://aplus-framework.gitlab.io/libraries/validation/docs/"
     }
 }
