@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of The Framework Validation Library.
+ * This file is part of Aplus Framework Validation Library.
  *
  * (c) Natan Felles <natanfelles@gmail.com>
  *
