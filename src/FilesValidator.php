@@ -11,6 +11,9 @@ namespace Framework\Validation;
 
 use Framework\Helpers\ArraySimple;
 
+/**
+ * Class FilesValidator.
+ */
 class FilesValidator
 {
     /**
@@ -101,7 +104,8 @@ class FilesValidator
     /**
      * Validates file accepted extensions.
      *
-     * NOTE: For greater security use the {@see FilesValidator::mimes} method to filter the file type.
+     * NOTE: For greater security use the {@see FilesValidator::mimes()} method
+     * to filter the file type.
      *
      * @param string $field
      * @param array<string,mixed> $data

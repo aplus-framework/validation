@@ -20,27 +20,44 @@ use JetBrains\PhpStorm\Pure;
 class Validation
 {
     /**
-     * @var array<string,string>
+     * The labels used to replace field names.
+     *
+     * @var array<string,string> The field names as keys and the labels as values
      */
     protected array $labels = [];
     /**
-     * @var array<string,array>
+     * The Validators rules.
+     *
+     * @var array<string,array> The field names as keys and the rules and
+     * arguments as values
      */
     protected array $rules = [];
     /**
-     * @var array<string,array|string>
+     * The last errors.
+     *
+     * @var array<string,array> The field names as keys and the rule and
+     * arguments as values
      */
     protected array $errors = [];
     /**
      * Custom error messages.
      *
-     * @var array<string,array<string,string>>
+     * @var array<string,array<string,string>> The field name as keys and an
+     * associative array of rule names as keys and messages as values
      */
     protected array $messages = [];
     /**
-     * @var array<int,string|Validator>
+     * The current Validators.
+     *
+     * @var array<int,string|Validator> Values are the Validators FQCN or
+     * instances
      */
     protected array $validators = [];
+    /**
+     * The Language instance.
+     *
+     * @var Language
+     */
     protected Language $language;
 
     /**
@@ -233,12 +250,10 @@ class Validation
         if ($error === null) {
             return null;
         }
-        // @phpstan-ignore-next-line
         $error['args']['args'] = $error['args'] ? \implode(', ', $error['args']) : '';
         $error['args']['field'] = $this->getLabel($field) ?? $field;
-        $message = $this->getMessage($field, $error['rule']); // @phpstan-ignore-line
+        $message = $this->getMessage($field, $error['rule']);
         if ($message === null) {
-            // @phpstan-ignore-next-line
             return $this->language->render('validation', $error['rule'], $error['args']);
         }
         return $this->language->formatMessage($message, $error['args']);
