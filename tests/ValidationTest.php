@@ -464,4 +464,68 @@ final class ValidationTest extends TestCase
             $this->validation->getError('confirmPassword')
         );
     }
+
+    public function testMessages() : void
+    {
+        self::assertSame([], $this->validation->getMessages());
+        self::assertNull($this->validation->getMessage('name', 'minLength'));
+        self::assertNull($this->validation->getMessage('name', 'maxLength'));
+        $this->validation->setMessage('name', 'minLength', 'Field {field} is too short.');
+        $this->validation->setMessage('name', 'latin', 'Field {field} must have only latin chars.');
+        $this->validation->setMessage('country[city]', 'in', 'Not available in the selected city.');
+        self::assertSame([
+            'name' => [
+                'minLength' => 'Field {field} is too short.',
+                'latin' => 'Field {field} must have only latin chars.',
+            ],
+            'country[city]' => [
+                'in' => 'Not available in the selected city.',
+            ],
+        ], $this->validation->getMessages());
+        self::assertSame(
+            'Field {field} is too short.',
+            $this->validation->getMessage('name', 'minLength')
+        );
+        self::assertSame(
+            'Field {field} must have only latin chars.',
+            $this->validation->getMessage('name', 'latin')
+        );
+        $messages = [
+            'name' => [
+                'minLength' => 'Nome muito curto!',
+            ],
+        ];
+        $this->validation->setMessages($messages);
+        self::assertSame($messages, $this->validation->getMessages());
+    }
+
+    public function testMessageErrors() : void
+    {
+        $this->validation->setRule('name', 'minLength:5')->validate([]);
+        self::assertSame(
+            [
+                'name' => 'The name field requires 5 or more characters in length.',
+            ],
+            $this->validation->getErrors()
+        );
+        $this->validation->setRule('name', 'minLength:5')
+            ->setMessage('name', 'minLength', 'Field {field} too short.')
+            ->validate([]);
+        self::assertSame(
+            [
+                'name' => 'Field name too short.',
+            ],
+            $this->validation->getErrors()
+        );
+        $this->validation->setRule('name', 'minLength:5')
+            ->setMessage('name', 'minLength', 'Field {field} too short. Min length is {params} chars.')
+            ->setLabel('name', 'Nombre')
+            ->validate([]);
+        self::assertSame(
+            [
+                'name' => 'Field Nombre too short. Min length is 5 chars.',
+            ],
+            $this->validation->getErrors()
+        );
+    }
 }

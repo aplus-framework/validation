@@ -32,6 +32,12 @@ class Validation
      */
     protected array $errors = [];
     /**
+     * Custom error messages.
+     *
+     * @var array<string,array<string,string>>
+     */
+    protected array $messages = [];
+    /**
      * @var array<int,string|Validator>
      */
     protected array $validators = [];
@@ -69,6 +75,7 @@ class Validation
         $this->labels = [];
         $this->rules = [];
         $this->errors = [];
+        $this->messages = [];
         return $this;
     }
 
@@ -113,7 +120,8 @@ class Validation
     /**
      * Set fields labels.
      *
-     * @param array<string,string> $labels An associative array with fields as keys and label as values
+     * @param array<string,string> $labels An associative array with fields as
+     * keys and label as values
      *
      * @return static
      */
@@ -197,7 +205,8 @@ class Validation
     /**
      * Set field rules.
      *
-     * @param array<string,array|string> $rules an associative array with field as keys and values as rules
+     * @param array<string,array|string> $rules An associative array with field
+     * as keys and values as rules
      *
      * @return static
      */
@@ -225,8 +234,12 @@ class Validation
         // @phpstan-ignore-next-line
         $error['params']['params'] = $error['params'] ? \implode(', ', $error['params']) : '';
         $error['params']['field'] = $this->getLabel($field) ?? $field;
-        // @phpstan-ignore-next-line
-        return $this->language->render('validation', $error['rule'], $error['params']);
+        $message = $this->getMessage($field, $error['rule']); // @phpstan-ignore-line
+        if ($message === null) {
+            // @phpstan-ignore-next-line
+            return $this->language->render('validation', $error['rule'], $error['params']);
+        }
+        return $this->language->formatMessage($message, $error['params']);
     }
 
     /**
@@ -257,6 +270,64 @@ class Validation
             'params' => $params,
         ];
         return $this;
+    }
+
+    /**
+     * Set a custom error message for a field rule.
+     *
+     * @param string $field The field name
+     * @param string $rule The field rule name
+     * @param string $message The custom error message for the field rule
+     *
+     * @return static
+     */
+    public function setMessage(string $field, string $rule, string $message) : static
+    {
+        $this->messages[$field][$rule] = $message;
+        return $this;
+    }
+
+    /**
+     * Get the custom error message from a field rule.
+     *
+     * @param string $field The field name
+     * @param string $rule The rule name
+     *
+     * @return string|null The message string or null if the message is not set
+     */
+    public function getMessage(string $field, string $rule) : ?string
+    {
+        return $this->messages[$field][$rule] ?? null;
+    }
+
+    /**
+     * Set many custom error messages.
+     *
+     * @param array<string,array<string,string>> $messages A multi-dimensional
+     * array with field names as keys and values as arrays where the keys are
+     * rule names and values are the custom error message strings
+     *
+     * @return static
+     */
+    public function setMessages(array $messages) : static
+    {
+        $this->messages = [];
+        foreach ($messages as $field => $rules) {
+            foreach ($rules as $rule => $message) {
+                $this->setMessage($field, $rule, $message);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Get all custom error messages set.
+     *
+     * @return array<string,array<string,string>>
+     */
+    public function getMessages() : array
+    {
+        return $this->messages;
     }
 
     /**
