@@ -127,6 +127,7 @@ class Validation
      */
     public function setLabels(array $labels) : static
     {
+        $this->labels = [];
         foreach ($labels as $field => $label) {
             $this->setLabel($field, $label);
         }
@@ -212,6 +213,7 @@ class Validation
      */
     public function setRules(array $rules) : static
     {
+        $this->rules = [];
         foreach ($rules as $field => $rule) {
             $this->setRule($field, $rule);
         }
