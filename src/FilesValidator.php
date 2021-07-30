@@ -83,19 +83,19 @@ class FilesValidator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param string ...$allowed_types
+     * @param string ...$allowedTypes
      *
      * @return bool
      */
-    public static function mimes(string $field, array $data, string ...$allowed_types) : bool
+    public static function mimes(string $field, array $data, string ...$allowedTypes) : bool
     {
         $uploaded = static::uploaded($field);
         if ( ! $uploaded) {
             return false;
         }
         $file = static::getFile($field);
-        $mime_type = \mime_content_type($file['tmp_name']);
-        return \in_array($mime_type, $allowed_types, true);
+        $mimeType = \mime_content_type($file['tmp_name']);
+        return \in_array($mimeType, $allowedTypes, true);
     }
 
     /**
@@ -105,18 +105,18 @@ class FilesValidator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param string ...$allowed_extensions
+     * @param string ...$allowedExtensions
      *
      * @return bool
      */
-    public static function ext(string $field, array $data, string ...$allowed_extensions) : bool
+    public static function ext(string $field, array $data, string ...$allowedExtensions) : bool
     {
         $uploaded = static::uploaded($field);
         if ( ! $uploaded) {
             return false;
         }
         $file = static::getFile($field);
-        foreach ($allowed_extensions as $extension) {
+        foreach ($allowedExtensions as $extension) {
             if (\str_ends_with($file['name'], '.' . $extension)) {
                 return true;
             }
@@ -155,8 +155,8 @@ class FilesValidator
      */
     public static function maxDim(string $field, array $data, int $width, int $height)
     {
-        $is_image = static::image($field);
-        if ( ! $is_image) {
+        $isImage = static::image($field);
+        if ( ! $isImage) {
             return false;
         }
         $file = static::getFile($field);
@@ -176,8 +176,8 @@ class FilesValidator
      */
     public static function minDim(string $field, array $data, int $width, int $height)
     {
-        $is_image = static::image($field);
-        if ( ! $is_image) {
+        $isImage = static::image($field);
+        if ( ! $isImage) {
             return false;
         }
         $file = static::getFile($field);
@@ -197,8 +197,8 @@ class FilesValidator
      */
     public static function dim(string $field, array $data, int $width, int $height)
     {
-        $is_image = static::image($field);
-        if ( ! $is_image) {
+        $isImage = static::image($field);
+        if ( ! $isImage) {
             return false;
         }
         $file = static::getFile($field);

@@ -16,10 +16,7 @@
         </properties>
     </rule>
     <!-- controversial -->
-    <rule ref="rulesets/controversial.xml">
-        <exclude name="CamelCaseParameterName"/>
-        <exclude name="CamelCaseVariableName"/>
-    </rule>
+    <rule ref="rulesets/controversial.xml"/>
     <!-- design -->
     <rule ref="rulesets/design.xml"/>
     <!-- naming -->

@@ -220,21 +220,21 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param string $equals_field
+     * @param string $equalsField
      *
      * @return bool
      */
-    public static function equals(string $field, array $data, string $equals_field) : bool
+    public static function equals(string $field, array $data, string $equalsField) : bool
     {
         $field = ArraySimple::value($field, $data);
         if ($field === null || ! \is_scalar($field)) {
             return false;
         }
-        $equals_field = ArraySimple::value($equals_field, $data);
-        if ($equals_field === null || ! \is_scalar($equals_field)) {
+        $equalsField = ArraySimple::value($equalsField, $data);
+        if ($equalsField === null || ! \is_scalar($equalsField)) {
             return false;
         }
-        return (string) $field === (string) $equals_field;
+        return (string) $field === (string) $equalsField;
     }
 
     /**
@@ -242,13 +242,13 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param string $diff_field
+     * @param string $diffField
      *
      * @return bool
      */
-    public static function notEquals(string $field, array $data, string $diff_field) : bool
+    public static function notEquals(string $field, array $data, string $diffField) : bool
     {
-        return ! static::equals($field, $data, $diff_field);
+        return ! static::equals($field, $data, $diffField);
     }
 
     /**
@@ -310,13 +310,13 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param string ...$not_in
+     * @param string ...$notIn
      *
      * @return bool
      */
-    public static function notIn(string $field, array $data, string ...$not_in) : bool
+    public static function notIn(string $field, array $data, string ...$notIn) : bool
     {
-        return ! static::in($field, $data, ...$not_in);
+        return ! static::in($field, $data, ...$notIn);
     }
 
     /**
@@ -393,10 +393,10 @@ class Validator
         if ($data === false) {
             return false;
         }
-        $last_errors = \DateTime::getLastErrors();
-        return $last_errors
-            && $last_errors['warning_count'] === 0
-            && $last_errors['error_count'] === 0;
+        $lastErrors = \DateTime::getLastErrors();
+        return $lastErrors
+            && $lastErrors['warning_count'] === 0
+            && $lastErrors['error_count'] === 0;
     }
 
     /**
@@ -442,14 +442,14 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param int|string $max_length
+     * @param int|string $maxLength
      *
      * @return bool
      */
-    public static function maxLength(string $field, array $data, int | string $max_length) : bool
+    public static function maxLength(string $field, array $data, int | string $maxLength) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \mb_strlen($data) <= (int) $max_length;
+        return ! ($data === null) && \mb_strlen($data) <= (int) $maxLength;
     }
 
     /**
@@ -457,14 +457,14 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param int|string $min_length
+     * @param int|string $minLength
      *
      * @return bool
      */
-    public static function minLength(string $field, array $data, int | string $min_length) : bool
+    public static function minLength(string $field, array $data, int | string $minLength) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \mb_strlen($data) >= (int) $min_length;
+        return ! ($data === null) && \mb_strlen($data) >= (int) $minLength;
     }
 
     /**

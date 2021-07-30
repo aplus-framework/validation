@@ -51,12 +51,12 @@ class Validation
      */
     public function __construct(array $validators = null, Language $language = null)
     {
-        $default_validators = [
+        $defaultValidators = [
             Validator::class,
             FilesValidator::class,
         ];
         $this->validators = empty($validators)
-            ? $default_validators
+            ? $defaultValidators
             : \array_reverse($validators);
         if ($language === null) {
             $language = new Language('en');
@@ -399,16 +399,16 @@ class Validation
     }
 
     /**
-     * @param array<string,array> $field_rules
+     * @param array<string,array> $fieldRules
      * @param array<string,mixed> $data
      *
      * @return bool
      */
-    protected function run(array $field_rules, array $data) : bool
+    protected function run(array $fieldRules, array $data) : bool
     {
         $this->errors = [];
         $result = true;
-        foreach ($field_rules as $field => $rules) {
+        foreach ($fieldRules as $field => $rules) {
             $status = $this->validateField($field, $rules, $data);
             if ( ! $status) {
                 $result = false;
@@ -438,10 +438,10 @@ class Validation
      */
     public function validateOnly(array $data) : bool
     {
-        $field_rules = \array_intersect_key(
+        $fieldRules = \array_intersect_key(
             $this->getRules(),
             ArraySimple::convert($data)
         );
-        return $this->run($field_rules, $data);
+        return $this->run($fieldRules, $data);
     }
 }
