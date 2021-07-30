@@ -142,15 +142,15 @@ class Validation
     #[Pure]
     protected function parseRule(string $rule) : array
     {
-        $params = [];
+        $args = [];
         if (\str_contains($rule, ':')) {
-            [$rule, $params] = \explode(':', $rule, 2);
-            $params = (array) \preg_split('#(?<!\\\)\,#', $params);
-            foreach ($params as &$param) {
-                $param = \strtr((string) $param, ['\,' => ',']);
+            [$rule, $args] = \explode(':', $rule, 2);
+            $args = (array) \preg_split('#(?<!\\\)\,#', $args);
+            foreach ($args as &$arg) {
+                $arg = \strtr((string) $arg, ['\,' => ',']);
             }
         }
-        return ['rule' => $rule, 'params' => $params];
+        return ['rule' => $rule, 'args' => $args];
     }
 
     /**
@@ -234,14 +234,14 @@ class Validation
             return null;
         }
         // @phpstan-ignore-next-line
-        $error['params']['params'] = $error['params'] ? \implode(', ', $error['params']) : '';
-        $error['params']['field'] = $this->getLabel($field) ?? $field;
+        $error['args']['args'] = $error['args'] ? \implode(', ', $error['args']) : '';
+        $error['args']['field'] = $this->getLabel($field) ?? $field;
         $message = $this->getMessage($field, $error['rule']); // @phpstan-ignore-line
         if ($message === null) {
             // @phpstan-ignore-next-line
-            return $this->language->render('validation', $error['rule'], $error['params']);
+            return $this->language->render('validation', $error['rule'], $error['args']);
         }
-        return $this->language->formatMessage($message, $error['params']);
+        return $this->language->formatMessage($message, $error['args']);
     }
 
     /**
@@ -261,15 +261,15 @@ class Validation
     /**
      * @param string $field
      * @param string $rule
-     * @param array<int|string,array|string> $params
+     * @param array<int|string,array|string> $args
      *
      * @return static
      */
-    protected function setError(string $field, string $rule, array $params) : static
+    protected function setError(string $field, string $rule, array $args) : static
     {
         $this->errors[$field] = [
             'rule' => $rule,
-            'params' => $params,
+            'args' => $args,
         ];
         return $this;
     }
@@ -335,16 +335,16 @@ class Validation
     /**
      * @param string $rule
      * @param string $field
-     * @param array<int|string,mixed> $params
+     * @param array<int|string,mixed> $args
      * @param array<string,mixed> $data
      *
      * @return bool
      */
-    protected function validateRule(string $rule, string $field, array $params, array $data) : bool
+    protected function validateRule(string $rule, string $field, array $args, array $data) : bool
     {
         foreach ($this->validators as $validator) {
             if (\is_callable([$validator, $rule])) {
-                return $validator::$rule($field, $data, ...$params);
+                return $validator::$rule($field, $data, ...$args);
             }
         }
         throw new InvalidArgumentException(
@@ -374,10 +374,10 @@ class Validation
         }
         $status = true;
         foreach ($rules as $rule) {
-            $status = $this->validateRule($rule['rule'], $field, $rule['params'], $data);
+            $status = $this->validateRule($rule['rule'], $field, $rule['args'], $data);
             if ($status !== true) {
                 $rule = $this->setEqualsField($rule);
-                $this->setError($field, $rule['rule'], $rule['params']);
+                $this->setError($field, $rule['rule'], $rule['args']);
                 break;
             }
         }
@@ -393,7 +393,7 @@ class Validation
     protected function setEqualsField(array $rule) : array
     {
         if ($rule['rule'] === 'equals' || $rule['rule'] === 'notEquals') {
-            $rule['params'][0] = $this->getLabel($rule['params'][0]) ?? $rule['params'][0];
+            $rule['args'][0] = $this->getLabel($rule['args'][0]) ?? $rule['args'][0];
         }
         return $rule;
     }

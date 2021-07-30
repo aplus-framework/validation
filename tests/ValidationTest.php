@@ -27,63 +27,63 @@ final class ValidationTest extends TestCase
         self::assertSame(
             [
                 'rule' => 'foo',
-                'params' => [],
+                'args' => [],
             ],
             $this->validation->parseRule('foo')
         );
         self::assertSame(
             [
                 'rule' => 'foo',
-                'params' => ['bar:baz'],
+                'args' => ['bar:baz'],
             ],
             $this->validation->parseRule('foo:bar:baz')
         );
         self::assertSame(
             [
                 'rule' => 'fo,o',
-                'params' => ['bar:baz'],
+                'args' => ['bar:baz'],
             ],
             $this->validation->parseRule('fo,o:bar:baz')
         );
         self::assertSame(
             [
                 'rule' => 'foo',
-                'params' => ['param'],
+                'args' => ['param'],
             ],
             $this->validation->parseRule('foo:param')
         );
         self::assertSame(
             [
                 'rule' => 'foo',
-                'params' => ['param', 'param2'],
+                'args' => ['param', 'param2'],
             ],
             $this->validation->parseRule('foo:param,param2')
         );
         self::assertSame(
             [
                 'rule' => 'foo',
-                'params' => ['  param', ' param2 '],
+                'args' => ['  param', ' param2 '],
             ],
             $this->validation->parseRule('foo:  param, param2 ')
         );
         self::assertSame(
             [
                 'rule' => 'foo',
-                'params' => ['param', 'param2', 'param3'],
+                'args' => ['param', 'param2', 'param3'],
             ],
             $this->validation->parseRule('foo:param,param2,param3')
         );
         self::assertSame(
             [
                 'rule' => 'foo',
-                'params' => ['param', 'param2,param3'],
+                'args' => ['param', 'param2,param3'],
             ],
             $this->validation->parseRule('foo:param,param2\,param3')
         );
         self::assertSame(
             [
                 'rule' => 'foo',
-                'params' => ['param', 'param2\,param3'],
+                'args' => ['param', 'param2\,param3'],
             ],
             $this->validation->parseRule('foo:param,param2\\\,param3')
         );
@@ -95,7 +95,7 @@ final class ValidationTest extends TestCase
             [
                 [
                     'rule' => 'foo',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             $this->validation->extractRules('foo')
@@ -104,11 +104,11 @@ final class ValidationTest extends TestCase
             [
                 [
                     'rule' => 'foo',
-                    'params' => [],
+                    'args' => [],
                 ],
                 [
                     'rule' => 'bar',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             $this->validation->extractRules('foo|bar')
@@ -117,11 +117,11 @@ final class ValidationTest extends TestCase
             [
                 [
                     'rule' => 'foo',
-                    'params' => [],
+                    'args' => [],
                 ],
                 [
                     'rule' => 'bar|baz',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             $this->validation->extractRules('foo|bar\|baz')
@@ -130,11 +130,11 @@ final class ValidationTest extends TestCase
             [
                 [
                     'rule' => 'foo',
-                    'params' => [],
+                    'args' => [],
                 ],
                 [
                     'rule' => 'bar\|baz',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             $this->validation->extractRules('foo|bar\\\|baz')
@@ -143,15 +143,15 @@ final class ValidationTest extends TestCase
             [
                 [
                     'rule' => 'foo',
-                    'params' => ['a', 'b,c'],
+                    'args' => ['a', 'b,c'],
                 ],
                 [
                     'rule' => 'bar',
-                    'params' => ['|\|'],
+                    'args' => ['|\|'],
                 ],
                 [
                     'rule' => 'baz',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             $this->validation->extractRules('foo:a,b\,c|bar:\|\\\||baz')
@@ -166,11 +166,11 @@ final class ValidationTest extends TestCase
             'foo' => [
                 [
                     'rule' => 'foo',
-                    'params' => ['a'],
+                    'args' => ['a'],
                 ],
                 [
                     'rule' => 'bar',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
         ], $this->validation->getRules());
@@ -179,21 +179,21 @@ final class ValidationTest extends TestCase
             'foo' => [
                 [
                     'rule' => 'foo',
-                    'params' => ['a'],
+                    'args' => ['a'],
                 ],
                 [
                     'rule' => 'bar',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             'bar' => [
                 [
                     'rule' => 'foo',
-                    'params' => ['a'],
+                    'args' => ['a'],
                 ],
                 [
                     'rule' => 'bar',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
         ], $this->validation->getRules());
@@ -202,17 +202,17 @@ final class ValidationTest extends TestCase
             'foo' => [
                 [
                     'rule' => 'baz',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             'bar' => [
                 [
                     'rule' => 'foo',
-                    'params' => ['a'],
+                    'args' => ['a'],
                 ],
                 [
                     'rule' => 'bar',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
         ], $this->validation->getRules());
@@ -221,27 +221,27 @@ final class ValidationTest extends TestCase
             'foo' => [
                 [
                     'rule' => 'baz',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             'bar' => [
                 [
                     'rule' => 'foo',
-                    'params' => ['a'],
+                    'args' => ['a'],
                 ],
                 [
                     'rule' => 'bar',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             'baz' => [
                 [
                     'rule' => 'b|a|\z',
-                    'params' => ['s'],
+                    'args' => ['s'],
                 ],
                 [
                     'rule' => 'x',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
         ], $this->validation->getRules());
@@ -259,27 +259,27 @@ final class ValidationTest extends TestCase
             'foo' => [
                 [
                     'rule' => 'baz',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             'bar' => [
                 [
                     'rule' => 'foo',
-                    'params' => ['a'],
+                    'args' => ['a'],
                 ],
                 [
                     'rule' => 'bar',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
             'baz' => [
                 [
                     'rule' => 'b|a|\z',
-                    'params' => ['s'],
+                    'args' => ['s'],
                 ],
                 [
                     'rule' => 'x',
-                    'params' => [],
+                    'args' => [],
                 ],
             ],
         ], $this->validation->getRules());
@@ -518,7 +518,7 @@ final class ValidationTest extends TestCase
             $this->validation->getErrors()
         );
         $this->validation->setRule('name', 'minLength:5')
-            ->setMessage('name', 'minLength', 'Field {field} too short. Min length is {params} chars.')
+            ->setMessage('name', 'minLength', 'Field {field} too short. Min length is {args} chars.')
             ->setLabel('name', 'Nombre')
             ->validate([]);
         self::assertSame(
