@@ -5,11 +5,6 @@
         <exclude name="StaticAccess"/>
     </rule>
     <!-- codesize -->
-    <rule ref="rulesets/codesize.xml/ExcessiveParameterList">
-        <properties>
-            <property name="minimum" value="7"/>
-        </properties>
-    </rule>
     <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
         <properties>
             <property name="maxmethods" value="30"/>
