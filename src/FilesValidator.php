@@ -13,6 +13,8 @@ use Framework\Helpers\ArraySimple;
 
 /**
  * Class FilesValidator.
+ *
+ * @package validation
  */
 class FilesValidator
 {

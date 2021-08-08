@@ -15,6 +15,8 @@ use JetBrains\PhpStorm\Language;
 
 /**
  * Class Validator.
+ *
+ * @package validation
  */
 class Validator
 {

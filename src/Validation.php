@@ -16,6 +16,8 @@ use JetBrains\PhpStorm\Pure;
 
 /**
  * Class Validation.
+ *
+ * @package validation
  */
 class Validation
 {
