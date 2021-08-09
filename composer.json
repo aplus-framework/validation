@@ -7,7 +7,7 @@
         "validator",
         "files-validation"
     ],
-    "homepage": "https://aplus-framework.com/docs/validation",
+    "homepage": "https://docs.aplus-framework.com/guides/libraries/validation/",
     "license": "MIT",
     "authors": [
         {
@@ -55,6 +55,6 @@
         "issues": "https://gitlab.com/aplus-framework/libraries/validation/issues",
         "wiki": "https://gitlab.com/aplus-framework/libraries/validation/wikis/home",
         "source": "https://gitlab.com/aplus-framework/libraries/validation",
-        "docs": "https://aplus-framework.gitlab.io/libraries/validation/docs/"
+        "docs": "https://docs.aplus-framework.com/guides/libraries/validation/"
     }
 }
