@@ -1,3 +1,5 @@
+<a href="https://gitlab.com/aplus-framework/libraries/validation"><img src="https://gitlab.com/aplus-framework/libraries/validation/-/raw/master/guide/image.png" alt="Aplus Framework Validation Library" align="right" width="100"></a>
+
 # Aplus Framework Validation Library
 
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/validation/index.html)
