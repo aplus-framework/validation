@@ -528,4 +528,11 @@ final class ValidationTest extends TestCase
             $this->validation->getErrors()
         );
     }
+
+    public function testIsRuleAvailable() : void
+    {
+        self::assertTrue($this->validation->isRuleAvailable('alpha'));
+        self::assertFalse($this->validation->isRuleAvailable('foo'));
+        self::assertTrue($this->validation->isRuleAvailable('json'));
+    }
 }

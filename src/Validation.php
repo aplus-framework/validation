@@ -461,4 +461,21 @@ class Validation
         );
         return $this->run($fieldRules, $data);
     }
+
+    /**
+     * Tells if a rule is available in the current validators.
+     *
+     * @param string $rule
+     *
+     * @return bool
+     */
+    public function isRuleAvailable(string $rule) : bool
+    {
+        foreach ($this->validators as $validator) {
+            if (\is_callable([$validator, $rule])) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
