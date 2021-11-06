@@ -1,6 +1,9 @@
 Validation
 ==========
 
+.. image:: image.png
+    :alt: Aplus Framework Validation Library
+
 Aplus Framework Validation Library.
 
 - `Installation`_
