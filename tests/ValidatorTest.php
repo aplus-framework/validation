@@ -269,4 +269,40 @@ final class ValidatorTest extends TestCase
         self::assertFalse(Validator::uuid('uuid-zero', $this->array));
         self::assertFalse(Validator::uuid('unknown', $this->array));
     }
+
+    public function testGreater() : void
+    {
+        self::assertTrue(Validator::greater('number', $this->array, 122));
+        self::assertFalse(Validator::greater('number', $this->array, 123));
+        self::assertTrue(Validator::greater('alpha', $this->array, 'abb'));
+        self::assertFalse(Validator::greater('alpha', $this->array, 'abc'));
+    }
+
+    public function testGreaterOrEqual() : void
+    {
+        self::assertTrue(Validator::greaterOrEqual('number', $this->array, 122));
+        self::assertTrue(Validator::greaterOrEqual('number', $this->array, 123));
+        self::assertFalse(Validator::greaterOrEqual('number', $this->array, 124));
+        self::assertTrue(Validator::greaterOrEqual('alpha', $this->array, 'abb'));
+        self::assertTrue(Validator::greaterOrEqual('alpha', $this->array, 'abc'));
+        self::assertFalse(Validator::greaterOrEqual('alpha', $this->array, 'abd'));
+    }
+
+    public function testLess() : void
+    {
+        self::assertTrue(Validator::less('number', $this->array, 124));
+        self::assertFalse(Validator::less('number', $this->array, 123));
+        self::assertTrue(Validator::less('alpha', $this->array, 'abd'));
+        self::assertFalse(Validator::less('alpha', $this->array, 'abc'));
+    }
+
+    public function testLessOrEqual() : void
+    {
+        self::assertTrue(Validator::lessOrEqual('number', $this->array, 124));
+        self::assertTrue(Validator::lessOrEqual('number', $this->array, 123));
+        self::assertFalse(Validator::lessOrEqual('number', $this->array, 122));
+        self::assertTrue(Validator::lessOrEqual('alpha', $this->array, 'abd'));
+        self::assertTrue(Validator::lessOrEqual('alpha', $this->array, 'abc'));
+        self::assertFalse(Validator::lessOrEqual('alpha', $this->array, 'abb'));
+    }
 }

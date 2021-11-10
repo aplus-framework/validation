@@ -423,6 +423,78 @@ class Validator
     }
 
     /**
+     * Validates is greater than.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     * @param int|string $greaterThan
+     *
+     * @return bool
+     */
+    public static function greater(
+        string $field,
+        array $data,
+        int | string $greaterThan
+    ) : bool {
+        $data = static::getData($field, $data);
+        return $data !== null && $data > $greaterThan;
+    }
+
+    /**
+     * Validates is greater than or equal to.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     * @param int|string $greaterThanOrEqualTo
+     *
+     * @return bool
+     */
+    public static function greaterOrEqual(
+        string $field,
+        array $data,
+        int | string $greaterThanOrEqualTo
+    ) : bool {
+        $data = static::getData($field, $data);
+        return $data !== null && $data >= $greaterThanOrEqualTo;
+    }
+
+    /**
+     * Validates is less than.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     * @param int|string $lessThan
+     *
+     * @return bool
+     */
+    public static function less(
+        string $field,
+        array $data,
+        int | string $lessThan
+    ) : bool {
+        $data = static::getData($field, $data);
+        return $data !== null && $data < $lessThan;
+    }
+
+    /**
+     * Validates is less than or equal to.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     * @param int|string $lessThanOrEqualTo
+     *
+     * @return bool
+     */
+    public static function lessOrEqual(
+        string $field,
+        array $data,
+        int | string $lessThanOrEqualTo
+    ) : bool {
+        $data = static::getData($field, $data);
+        return $data !== null && $data <= $lessThanOrEqualTo;
+    }
+
+    /**
      * Validates a latin text.
      *
      * @param string $field
