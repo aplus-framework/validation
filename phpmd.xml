@@ -7,7 +7,7 @@
     <!-- codesize -->
     <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
         <properties>
-            <property name="maxmethods" value="30"/>
+            <property name="maxmethods" value="40"/>
         </properties>
     </rule>
     <!-- controversial -->
