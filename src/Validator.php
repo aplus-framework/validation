@@ -31,7 +31,7 @@ class Validator
     protected static function getData(string $field, array $data) : ?string
     {
         $data = ArraySimple::value($field, $data);
-        return ($data === null || ! \is_scalar($data)) ? null : (string) $data;
+        return \is_scalar($data) ? (string) $data : null;
     }
 
     /**
@@ -45,7 +45,7 @@ class Validator
     public static function alpha(string $field, array $data) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \ctype_alpha($data);
+        return $data !== null && \ctype_alpha($data);
     }
 
     /**
@@ -59,7 +59,7 @@ class Validator
     public static function number(string $field, array $data) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \is_numeric($data);
+        return $data !== null && \is_numeric($data);
     }
 
     /**
@@ -73,7 +73,7 @@ class Validator
     public static function alphaNumber(string $field, array $data) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \ctype_alnum($data);
+        return $data !== null && \ctype_alnum($data);
     }
 
     /**
@@ -158,10 +158,7 @@ class Validator
     public static function hex(string $field, array $data) : bool
     {
         $data = static::getData($field, $data);
-        if ($data === null) {
-            return false;
-        }
-        return \ctype_xdigit($data);
+        return $data !== null && \ctype_xdigit($data);
     }
 
     /**
@@ -197,7 +194,7 @@ class Validator
         #[Language('RegExp')] string $pattern
     ) : bool {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \preg_match($pattern, $data) === 1;
+        return $data !== null && \preg_match($pattern, $data) === 1;
     }
 
     /**
@@ -270,7 +267,7 @@ class Validator
         int | string $max
     ) : bool {
         $data = static::getData($field, $data);
-        return ! ($data === null) && $data >= $min && $data <= $max;
+        return $data !== null && $data >= $min && $data <= $max;
     }
 
     /**
@@ -304,7 +301,7 @@ class Validator
     public static function in(string $field, array $data, string ...$in) : bool
     {
         $data = static::getData($field, $data);
-        return $data === null ? false : \in_array($data, $in, true);
+        return $data !== null && \in_array($data, $in, true);
     }
 
     /**
@@ -505,10 +502,7 @@ class Validator
     public static function latin(string $field, array $data) : bool
     {
         $data = static::getData($field, $data);
-        if ($data === null) {
-            return false;
-        }
-        return (bool) \preg_match('/^[\p{Latin}]+$/u', $data);
+        return $data !== null && \preg_match('/^[\p{Latin}]+$/u', $data);
     }
 
     /**
@@ -523,7 +517,7 @@ class Validator
     public static function maxLength(string $field, array $data, int | string $maxLength) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \mb_strlen($data) <= (int) $maxLength;
+        return $data !== null && \mb_strlen($data) <= (int) $maxLength;
     }
 
     /**
@@ -538,7 +532,7 @@ class Validator
     public static function minLength(string $field, array $data, int | string $minLength) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \mb_strlen($data) >= (int) $minLength;
+        return $data !== null && \mb_strlen($data) >= (int) $minLength;
     }
 
     /**
@@ -553,7 +547,7 @@ class Validator
     public static function length(string $field, array $data, int | string $length) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \mb_strlen($data) === (int) $length;
+        return $data !== null && \mb_strlen($data) === (int) $length;
     }
 
     /**
@@ -567,7 +561,7 @@ class Validator
     public static function required(string $field, array $data) : bool
     {
         $data = static::getData($field, $data);
-        return ! ($data === null) && \trim($data) !== '';
+        return $data !== null && \trim($data) !== '';
     }
 
     /**
