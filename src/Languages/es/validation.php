@@ -16,6 +16,7 @@ return [
     'base64' => 'El campo {field} requiere una string base64 válida.',
     'md5' => 'El campo {field} requiere un hash MD5 válido.',
     'hex' => 'El campo {field} requiere una string hexadecimal válida.',
+    'hexColor' => 'El campo {field} requiere un color hexadecimal válido.',
     'json' => 'El campo {field} requiere una string JSON válida.',
     'regex' => 'El campo {field} no coincide con el estándar requerido.',
     'notRegex' => 'El campo {field} coincide con un estándar no válido.',

@@ -162,6 +162,19 @@ class Validator
     }
 
     /**
+     * Validates a hexadecimal color.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @return bool
+     */
+    public static function hexColor(string $field, array $data) : bool
+    {
+        return static::regex($field, $data, '/^#([0-9A-Fa-f]{3}){1,2}$/');
+    }
+
+    /**
      * Validates a JSON string.
      *
      * @param string $field

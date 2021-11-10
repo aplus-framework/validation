@@ -16,6 +16,7 @@ return [
     'base64' => 'The {field} field requires a valid base64 string.',
     'md5' => 'The {field} field requires a valid MD5 hash.',
     'hex' => 'The {field} field requires a valid hexadecimal string.',
+    'hexColor' => 'The {field} field requires a valid hexadecimal color.',
     'json' => 'The {field} field requires a valid JSON string.',
     'regex' => 'The {field} field does not matches the required pattern.',
     'notRegex' => 'The {field} field matches a invalid pattern.',

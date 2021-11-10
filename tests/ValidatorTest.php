@@ -98,6 +98,24 @@ final class ValidatorTest extends TestCase
         self::assertFalse(Validator::hex('unknown', $this->array));
     }
 
+    public function testHexColor() : void
+    {
+        $data = [
+            '3-nohash' => 'abc',
+            '3-ok' => '#abc',
+            '3-invalid' => '#abg',
+            '6-nohash' => 'abc123',
+            '6-ok' => '#abc123',
+            '6-invalid' => '#abh123',
+        ];
+        self::assertFalse(Validator::hexColor('3-nohash', $data));
+        self::assertTrue(Validator::hexColor('3-ok', $data));
+        self::assertFalse(Validator::hexColor('3-invalid', $data));
+        self::assertFalse(Validator::hexColor('6-nohash', $data));
+        self::assertTrue(Validator::hexColor('6-ok', $data));
+        self::assertFalse(Validator::hexColor('6-invalid', $data));
+    }
+
     public function testJson() : void
     {
         self::assertTrue(Validator::json('json', $this->array));
