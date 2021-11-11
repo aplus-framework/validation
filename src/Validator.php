@@ -589,4 +589,47 @@ class Validator
     {
         return static::getData($field, $data) !== null;
     }
+
+    /**
+     * Validates special characters.
+     *
+     * @see https://owasp.org/www-community/password-special-characters
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     * @param int|string $quantity
+     * @param string $characters
+     *
+     * @return bool
+     */
+    public static function specialChar(
+        string $field,
+        array $data,
+        int | string $quantity = 1,
+        string $characters = '!"#$%&\'()*+,-./:;=<>?@[\]^_`{|}~'
+    ) : bool {
+        $quantity = (int) $quantity;
+        if ($quantity < 1) {
+            throw new InvalidArgumentException('Special characters quantity must be greater than 0');
+        }
+        $data = static::getData($field, $data);
+        if ($data === null) {
+            return false;
+        }
+        $data = (array) \preg_split('//u', $data, -1, \PREG_SPLIT_NO_EMPTY);
+        $characters = (array) \preg_split('//u', $characters, -1, \PREG_SPLIT_NO_EMPTY);
+        $found = 0;
+        foreach ($characters as $char) {
+            foreach ($data as $item) {
+                if ($char === $item) {
+                    $found++;
+                    if ($found === $quantity) {
+                        return true;
+                    }
+                    break;
+                }
+            }
+        }
+        return false;
+    }
 }

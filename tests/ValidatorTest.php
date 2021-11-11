@@ -323,4 +323,28 @@ final class ValidatorTest extends TestCase
         self::assertTrue(Validator::lessOrEqual('alpha', $this->array, 'abc'));
         self::assertFalse(Validator::lessOrEqual('alpha', $this->array, 'abb'));
     }
+
+    public function testSpecialChar() : void
+    {
+        $data = [
+            'p1' => 'abcde',
+            'p2' => 'a@cde',
+            'p3' => 'a@c%!',
+            'p4' => 'çb♦a♥',
+            'p5' => '  0 0',
+        ];
+        self::assertFalse(Validator::specialChar('p0', $data));
+        self::assertFalse(Validator::specialChar('p1', $data));
+        self::assertTrue(Validator::specialChar('p2', $data));
+        self::assertFalse(Validator::specialChar('p2', $data, 3));
+        self::assertTrue(Validator::specialChar('p3', $data, 3));
+        self::assertFalse(Validator::specialChar('p3', $data, 3, '♦♥ç'));
+        self::assertTrue(Validator::specialChar('p4', $data, 3, '♦♥ç'));
+        self::assertFalse(Validator::specialChar('p5', $data, 3, ' 0'));
+        self::assertFalse(Validator::specialChar('p5', $data, 2, '0'));
+        self::assertTrue(Validator::specialChar('p5', $data, 1, '0'));
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Special characters quantity must be greater than 0');
+        Validator::specialChar('p4', $data, 0);
+    }
 }

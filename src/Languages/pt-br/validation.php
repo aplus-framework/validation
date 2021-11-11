@@ -48,4 +48,5 @@ return [
     'maxDim' => 'O campo {field} requer uma imagem que não exceda as dimensões máximas de {0} de largura e {1} de altura.',
     'minDim' => 'O campo {field} requer uma imagem que possua as dimensões mínimas de {0} de largura e {1} de altura.',
     'dim' => 'O campo {field} requer uma imagem com as dimensões exatas de {0} de largura e {1} de altura.',
+    'specialChar' => 'O campo {field} requer caracteres especiais.',
 ];
