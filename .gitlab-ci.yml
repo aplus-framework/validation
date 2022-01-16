@@ -9,6 +9,7 @@ variables:
 
 test:php:
   stage: test
+  timeout: 10 minutes
   cache:
     paths:
       - build/
