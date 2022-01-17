@@ -34,6 +34,7 @@
         "ext-fileinfo": "*",
         "ext-intl": "*",
         "ext-json": "*",
+        "aplus/debug": "^2.3",
         "aplus/helpers": "^2.2",
         "aplus/language": "^1.6"
     },
