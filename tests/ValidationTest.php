@@ -10,6 +10,7 @@
 namespace Tests\Validation;
 
 use Framework\Language\Language;
+use Framework\Validation\FilesValidator;
 use Framework\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
@@ -20,6 +21,19 @@ final class ValidationTest extends TestCase
     public function setup() : void
     {
         $this->validation = new ValidationMock();
+    }
+
+    public function testGetLanguage() : void
+    {
+        self::assertInstanceOf(Language::class, $this->validation->getLanguage());
+    }
+
+    public function testGetValidators() : void
+    {
+        self::assertSame([
+            Validator::class,
+            FilesValidator::class,
+        ], $this->validation->getValidators());
     }
 
     public function testParseRule() : void

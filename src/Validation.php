@@ -84,6 +84,19 @@ class Validation
         $this->language = $language;
     }
 
+    public function getLanguage() : Language
+    {
+        return $this->language;
+    }
+
+    /**
+     * @return array<int,string|Validator>
+     */
+    public function getValidators() : array
+    {
+        return $this->validators;
+    }
+
     /**
      * Reset the validation.
      *
