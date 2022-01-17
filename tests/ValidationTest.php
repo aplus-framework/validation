@@ -299,6 +299,65 @@ final class ValidationTest extends TestCase
         ], $this->validation->getRules());
     }
 
+    public function testGetRuleset() : void
+    {
+        self::assertEmpty($this->validation->getRuleset());
+        $this->validation->setRule('name', 'minLength:5|in:a,b\,c');
+        self::assertSame([
+            [
+                'field' => 'name',
+                'label' => null,
+                'rules' => [
+                    [
+                        'rule' => 'minLength:5',
+                        'message' => $this->validation->getFilledMessage('name', 'minLength', [
+                            'field' => 'name',
+                            0 => 5,
+                        ]),
+                    ],
+                    [
+                        'rule' => 'in:a,b\,c',
+                        'message' => $this->validation->getFilledMessage('name', 'in', [
+                            'field' => 'name',
+                        ]),
+                    ],
+                ],
+            ],
+        ], $this->validation->getRuleset());
+        $this->validation->setLabels(['name' => 'Foo', 'email' => 'E-mail'])
+            ->setRule('email', 'email')
+            ->setMessage('name', 'minLength', 'Foo {0}.')
+            ->setMessage('email', 'email', 'Invalid email.');
+        self::assertSame([
+            [
+                'field' => 'name',
+                'label' => 'Foo',
+                'rules' => [
+                    [
+                        'rule' => 'minLength:5',
+                        'message' => 'Foo 5.',
+                    ],
+                    [
+                        'rule' => 'in:a,b\,c',
+                        'message' => $this->validation->getFilledMessage('name', 'in', [
+                            'field' => 'Foo',
+                        ]),
+                    ],
+                ],
+            ],
+            [
+                'field' => 'email',
+                'label' => 'E-mail',
+                'rules' => [
+                    [
+                        'rule' => 'email',
+                        'message' => 'Invalid email.',
+                    ],
+                ],
+            ],
+        ], $this->validation->getRuleset());
+    }
+
     public function testLabel() : void
     {
         self::assertSame([], $this->validation->getLabels());

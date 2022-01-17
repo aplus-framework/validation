@@ -167,6 +167,43 @@ class Validation
     }
 
     /**
+     * @return array<mixed>
+     */
+    public function getRuleset() : array
+    {
+        $result = [];
+        foreach ($this->getRules() as $field => $rules) {
+            $label = $this->getLabel($field);
+            $tmp = [
+                'field' => $field,
+                'label' => $label,
+                'rules' => [],
+            ];
+            foreach ($rules as $rule) {
+                $rule['args'] = \array_map(
+                    static fn ($arg) => \strtr($arg, [',' => '\,']),
+                    $rule['args']
+                );
+                $args = \implode(',', $rule['args']);
+                $ruleString = $rule['rule'] . ($args === '' ? '' : ':' . $args);
+                $tmp['rules'][] = [
+                    'rule' => $ruleString,
+                    'message' => $this->getFilledMessage(
+                        $field,
+                        $rule['rule'],
+                        \array_merge(
+                            ['field' => $label ?? $field],
+                            $rule['args']
+                        )
+                    ),
+                ];
+            }
+            $result[] = $tmp;
+        }
+        return $result;
+    }
+
+    /**
      * @param string $rule
      *
      * @return array<string,array|string>
@@ -209,7 +246,7 @@ class Validation
      *
      * @return string
      */
-    public function getFilledMessage(string $field, string $rule, array $args) : string
+    public function getFilledMessage(string $field, string $rule, array $args = []) : string
     {
         $message = $this->getMessage($field, $rule);
         if ($message === null) {
