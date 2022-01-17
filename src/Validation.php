@@ -203,6 +203,22 @@ class Validation
     }
 
     /**
+     * @param string $field
+     * @param string $rule
+     * @param array<mixed> $args
+     *
+     * @return string
+     */
+    public function getFilledMessage(string $field, string $rule, array $args) : string
+    {
+        $message = $this->getMessage($field, $rule);
+        if ($message === null) {
+            return $this->language->render('validation', $rule, $args);
+        }
+        return $this->language->formatMessage($message, $args);
+    }
+
+    /**
      * Get a list of current rules.
      *
      * @return array<string,array>
@@ -267,11 +283,7 @@ class Validation
         }
         $error['args']['args'] = $error['args'] ? \implode(', ', $error['args']) : '';
         $error['args']['field'] = $this->getLabel($field) ?? $field;
-        $message = $this->getMessage($field, $error['rule']);
-        if ($message === null) {
-            return $this->language->render('validation', $error['rule'], $error['args']);
-        }
-        return $this->language->formatMessage($message, $error['args']);
+        return $this->getFilledMessage($field, $error['rule'], $error['args']);
     }
 
     /**
