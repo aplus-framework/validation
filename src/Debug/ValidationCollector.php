@@ -139,8 +139,12 @@ class ValidationCollector extends Collector
                             <pre><code class="language-php"><?= \htmlentities($data['params']) ?></code></pre>
                         <?php endif ?>
                     </td>
-                    <td><?= \htmlentities($this->validation->getLanguage()
-                            ->render('validation', $rule)) ?></td>
+                    <td>
+                        <pre><code class="language-icu-message-format"><?=
+                                \htmlentities(
+                                    $this->validation->getLanguage()->render('validation', $rule)
+                                ) ?></code></pre>
+                    </td>
                     <td><?= \htmlentities($data['validator']) ?></td>
                 </tr>
             <?php endforeach ?>
