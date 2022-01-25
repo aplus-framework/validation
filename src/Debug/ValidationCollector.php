@@ -51,21 +51,40 @@ class ValidationCollector extends Collector
 
     protected function renderErrors() : string
     {
-        if ( ! $this->validation->getErrors()) {
-            return '<p>No errors.</p>';
+        if ( ! $this->hasData()) {
+            return '<p>No data has been validated.</p>';
         }
+        $data = $this->getData();
+        $data = $data[\array_key_last($data)];
+        $errors = $this->validation->getErrors();
+        $countErrors = \count($errors);
         \ob_start(); ?>
-        <p>The following errors occurred:</p>
+        <p>Validated <?=
+            $data['type'] === 'all'
+                ? 'all rules against the data'
+                : 'only the rules with fields set in the data'
+            ?> in <?= \round($data['end'] - $data['start'], 6) ?> seconds and <?=
+            $countErrors
+                ? $countErrors . ' error' . ($countErrors === 1 ? '' : 's') . ' occurred:'
+                : 'no error occurred.'
+            ?></p>
+        <?php
+        if ( ! $errors) {
+            return \ob_get_clean(); // @phpstan-ignore-line
+        }
+        $currentError = 1; ?>
         <table>
             <thead>
             <tr>
+                <th>#</th>
                 <th>Field</th>
                 <th>Error Message</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($this->validation->getErrors() as $field => $error): ?>
+            <?php foreach ($errors as $field => $error): ?>
                 <tr>
+                    <td><?= $currentError++ ?></td>
                     <td><?= \htmlentities($field) ?></td>
                     <td><?= \htmlentities($error) ?></td>
                 </tr>

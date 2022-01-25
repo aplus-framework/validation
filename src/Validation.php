@@ -11,6 +11,7 @@ namespace Framework\Validation;
 
 use Framework\Helpers\ArraySimple;
 use Framework\Language\Language;
+use Framework\Validation\Debug\ValidationCollector;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 
@@ -61,6 +62,7 @@ class Validation
      * @var Language
      */
     protected Language $language;
+    protected ValidationCollector $debugCollector;
 
     /**
      * Validation constructor.
@@ -505,6 +507,18 @@ class Validation
      */
     public function validate(array $data) : bool
     {
+        if (isset($this->debugCollector)) {
+            $start = \microtime(true);
+            $validated = $this->run($this->getRules(), $data);
+            $end = \microtime(true);
+            $this->debugCollector->addData([
+                'start' => $start,
+                'end' => $end,
+                'validated' => $validated,
+                'type' => 'all',
+            ]);
+            return $validated;
+        }
         return $this->run($this->getRules(), $data);
     }
 
@@ -516,6 +530,28 @@ class Validation
      * @return bool
      */
     public function validateOnly(array $data) : bool
+    {
+        if (isset($this->debugCollector)) {
+            $start = \microtime(true);
+            $validated = $this->validateOnlySet($data);
+            $end = \microtime(true);
+            $this->debugCollector->addData([
+                'start' => $start,
+                'end' => $end,
+                'validated' => $validated,
+                'type' => 'only',
+            ]);
+            return $validated;
+        }
+        return $this->validateOnlySet($data);
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     *
+     * @return bool
+     */
+    protected function validateOnlySet(array $data) : bool
     {
         $fieldRules = \array_intersect_key(
             $this->getRules(),
@@ -539,5 +575,12 @@ class Validation
             }
         }
         return false;
+    }
+
+    public function setDebugCollector(ValidationCollector $debugCollector) : static
+    {
+        $this->debugCollector = $debugCollector;
+        $this->debugCollector->setValidation($this);
+        return $this;
     }
 }
