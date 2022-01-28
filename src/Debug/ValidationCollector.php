@@ -32,6 +32,21 @@ class ValidationCollector extends Collector
         return $this;
     }
 
+    public function getActivities() : array
+    {
+        $activities = [];
+        foreach ($this->getData() as $data) {
+            $activities[] = [
+                'collector' => $this->getName(),
+                'class' => static::class,
+                'description' => 'Validate ' . $data['type'],
+                'start' => $data['start'],
+                'end' => $data['end'],
+            ];
+        }
+        return $activities;
+    }
+
     public function getContents() : string
     {
         if ( ! isset($this->validation)) {
