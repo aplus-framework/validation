@@ -38,6 +38,7 @@ class ValidationCollector extends Collector
             return '<p>A Validation instance has not been set in this collector.</p>';
         }
         \ob_start(); ?>
+        <?= $this->renderInfo() ?>
         <h1>Errors</h1>
         <?= $this->renderErrors() ?>
         <?php $this->validatorsRules = $this->getValidatorsRules(); ?>
@@ -47,6 +48,15 @@ class ValidationCollector extends Collector
         <?php
         echo $this->renderValidatorsRules();
         return \ob_get_clean(); // @phpstan-ignore-line
+    }
+
+    protected function renderInfo() : string
+    {
+        if ( ! $this->hasData()) {
+            return '<p>Validation did not run.</p>';
+        }
+        $count = \count($this->getData());
+        return '<p>Validation ran ' . $count . ' time' . ($count === 1 ? '' : 's') . '.<p>';
     }
 
     protected function renderErrors() : string
@@ -59,7 +69,7 @@ class ValidationCollector extends Collector
         $errors = $this->validation->getErrors();
         $countErrors = \count($errors);
         \ob_start(); ?>
-        <p>Validated <?=
+        <p>In the last validation, it validated <?=
             $data['type'] === 'all'
                 ? 'all rules against the data'
                 : 'only the rules with fields set in the data'
@@ -101,10 +111,11 @@ class ValidationCollector extends Collector
             return '<p>No rules set.</p>';
         }
         \ob_start(); ?>
-        <p>The following rules are set:</p>
+        <p>The following rules have been set:</p>
         <table>
             <thead>
             <tr>
+                <th>#</th>
                 <th>Field</th>
                 <th>Label</th>
                 <th>Rules</th>
@@ -112,9 +123,10 @@ class ValidationCollector extends Collector
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($this->validation->getRuleset() as $set): ?>
+            <?php foreach ($this->validation->getRuleset() as $index => $set): ?>
                 <?php $count = \count($set['rules']); ?>
                 <tr>
+                    <td rowspan="<?= $count ?>"><?= $index + 1 ?></td>
                     <td rowspan="<?= $count ?>"><?= \htmlentities($set['field']) ?></td>
                     <td rowspan="<?= $count ?>"><?= \htmlentities((string) $set['label']) ?></td>
                     <td><?= $this->sRule($set['rules'][0]['rule'], $this->validatorsRules) ?></td>
