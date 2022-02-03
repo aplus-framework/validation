@@ -53,11 +53,9 @@ class ValidationCollector extends Collector
             return '<p>A Validation instance has not been set in this collector.</p>';
         }
         \ob_start(); ?>
-        <?= $this->renderInfo() ?>
-        <h1>Errors</h1>
-        <?= $this->renderErrors() ?>
+        <?= $this->renderValidations() ?>
         <?php $this->validatorsRules = $this->getValidatorsRules(); ?>
-        <h1>Rule Set</h1>
+        <h1>Ruleset</h1>
         <?= $this->renderRuleset() ?>
         <h1>Validators Rules</h1>
         <?php
@@ -65,55 +63,54 @@ class ValidationCollector extends Collector
         return \ob_get_clean(); // @phpstan-ignore-line
     }
 
-    protected function renderInfo() : string
+    protected function renderValidations() : string
     {
         if ( ! $this->hasData()) {
             return '<p>Validation did not run.</p>';
         }
         $count = \count($this->getData());
-        return '<p>Validation ran ' . $count . ' time' . ($count === 1 ? '' : 's') . '.<p>';
-    }
-
-    protected function renderErrors() : string
-    {
-        if ( ! $this->hasData()) {
-            return '<p>No data has been validated.</p>';
-        }
-        $data = $this->getData();
-        $data = $data[\array_key_last($data)];
-        $errors = $this->validation->getErrors();
-        $countErrors = \count($errors);
         \ob_start(); ?>
-        <p>In the last validation, it validated <?=
-            $data['type'] === 'all'
-                ? 'all rules against the data'
-                : 'only the rules with fields set in the data'
-            ?> in <?= \round($data['end'] - $data['start'], 6) ?> seconds and <?=
-            $countErrors
-                ? $countErrors . ' error' . ($countErrors === 1 ? '' : 's') . ' occurred:'
-                : 'no error occurred.'
-            ?></p>
-        <?php
-        if ( ! $errors) {
-            return \ob_get_clean(); // @phpstan-ignore-line
-        }
-        $currentError = 1; ?>
+        <p>Validation ran <?= $count ?> time<?= $count === 1 ? '' : 's' ?>.
+        <p>
         <table>
             <thead>
             <tr>
                 <th>#</th>
-                <th>Field</th>
+                <th>Type</th>
+                <th>Errors Count</th>
+                <th>Error Field</th>
                 <th>Error Message</th>
+                <th title="Seconds">Time</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($errors as $field => $error): ?>
+            <?php
+            foreach ($this->getData() as $index => $item):
+                $count = \count($item['errors']);
+        $errors = [];
+        foreach ($item['errors'] as $field => $error) {
+            $errors[] = [
+                        'field' => $field,
+                        'error' => $error,
+                    ];
+        } ?>
                 <tr>
-                    <td><?= $currentError++ ?></td>
-                    <td><?= \htmlentities($field) ?></td>
-                    <td><?= \htmlentities($error) ?></td>
+                    <td rowspan="<?= $count ?>"><?= $index + 1 ?></td>
+                    <td rowspan="<?= $count ?>"><?= $item['type'] ?></td>
+                    <td rowspan="<?= $count ?>"><?= $count ?></td>
+                    <td><?= $errors[0]['field'] ?? '' ?></td>
+                    <td><?= $errors[0]['error'] ?? '' ?></td>
+                    <td rowspan="<?= $count ?>"><?= \round($item['end'] - $item['start'], 6) ?></td>
                 </tr>
-            <?php endforeach ?>
+                <?php
+                for ($i = 1; $i < $count; $i++): ?>
+                    <tr>
+                        <td><?= $errors[$i]['field'] ?></td>
+                        <td><?= $errors[$i]['error'] ?></td>
+                    </tr>
+                <?php
+                endfor;
+        endforeach ?>
             </tbody>
         </table>
         <?php
@@ -123,7 +120,7 @@ class ValidationCollector extends Collector
     protected function renderRuleset() : string
     {
         if ( ! $this->validation->getRules()) {
-            return '<p>No rules set.</p>';
+            return '<p>No rules have been set.</p>';
         }
         \ob_start(); ?>
         <p>The following rules have been set:</p>
@@ -133,8 +130,8 @@ class ValidationCollector extends Collector
                 <th>#</th>
                 <th>Field</th>
                 <th>Label</th>
-                <th>Rules</th>
-                <th>Possible Error Messages</th>
+                <th>Rule</th>
+                <th>Possible Error Message</th>
             </tr>
             </thead>
             <tbody>
