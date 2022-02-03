@@ -234,7 +234,7 @@ class ValidationCollector extends Collector
                         $params[] = $name . $value;
                     }
                     $rules[$method] = [
-                        'validator' => $validator,
+                        'validator' => \is_string($validator) ? $validator : $validator::class,
                         'params' => \implode(', ', $params),
                     ];
                 }
