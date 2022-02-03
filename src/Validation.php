@@ -79,15 +79,26 @@ class Validation
         $this->validators = empty($validators)
             ? $defaultValidators
             : \array_reverse($validators);
+        if ($language) {
+            $this->setLanguage($language);
+        }
+    }
+
+    public function setLanguage(Language $language = null) : static
+    {
         if ($language === null) {
-            $language = new Language('en');
+            $language = new Language();
         }
         $language->addDirectory(__DIR__ . '/Languages');
         $this->language = $language;
+        return $this;
     }
 
     public function getLanguage() : Language
     {
+        if ( ! isset($this->language)) {
+            $this->setLanguage();
+        }
         return $this->language;
     }
 
@@ -262,9 +273,9 @@ class Validation
     {
         $message = $this->getMessage($field, $rule);
         if ($message === null) {
-            return $this->language->render('validation', $rule, $args);
+            return $this->getLanguage()->render('validation', $rule, $args);
         }
-        return $this->language->formatMessage($message, $args);
+        return $this->getLanguage()->formatMessage($message, $args);
     }
 
     /**

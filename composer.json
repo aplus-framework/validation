@@ -36,7 +36,7 @@
         "ext-json": "*",
         "aplus/debug": "^2.4",
         "aplus/helpers": "^2.3",
-        "aplus/language": "^1.7"
+        "aplus/language": "^1.8"
     },
     "require-dev": {
         "ext-xdebug": "*",
