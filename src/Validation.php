@@ -182,10 +182,7 @@ class Validation
                 'rules' => [],
             ];
             foreach ($rules as $rule) {
-                $rule['args'] = \array_map(
-                    static fn ($arg) => \strtr($arg, [',' => '\,']),
-                    $rule['args']
-                );
+                $rule['args'] = $this->escapeArgs($rule['args']);
                 $args = \implode(',', $rule['args']);
                 $ruleString = $rule['rule'] . ($args === '' ? '' : ':' . $args);
                 $tmp['rules'][] = [
@@ -203,6 +200,19 @@ class Validation
             $result[] = $tmp;
         }
         return $result;
+    }
+
+    /**
+     * @param array<string> $args
+     *
+     * @return array<string>
+     */
+    protected function escapeArgs(array $args) : array
+    {
+        foreach ($args as &$arg) {
+            $arg = \strtr($arg, [',' => '\,']);
+        }
+        return $args;
     }
 
     /**
