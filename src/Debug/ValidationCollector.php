@@ -35,11 +35,11 @@ class ValidationCollector extends Collector
     public function getActivities() : array
     {
         $activities = [];
-        foreach ($this->getData() as $data) {
+        foreach ($this->getData() as $index => $data) {
             $activities[] = [
                 'collector' => $this->getName(),
                 'class' => static::class,
-                'description' => 'Validate ' . $data['type'],
+                'description' => 'Run validation ' . $index + 1,
                 'start' => $data['start'],
                 'end' => $data['end'],
             ];
