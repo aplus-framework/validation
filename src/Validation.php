@@ -515,6 +515,7 @@ class Validation
                 'start' => $start,
                 'end' => $end,
                 'validated' => $validated,
+                'errors' => $this->getErrors(),
                 'type' => 'all',
             ]);
             return $validated;
@@ -539,6 +540,7 @@ class Validation
                 'start' => $start,
                 'end' => $end,
                 'validated' => $validated,
+                'errors' => $this->getErrors(),
                 'type' => 'only',
             ]);
             return $validated;
