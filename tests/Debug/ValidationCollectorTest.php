@@ -144,7 +144,11 @@ final class ValidationCollectorTest extends TestCase
             $contents
         );
         self::assertStringContainsString(
-            '$str = \'foo\', $null = null',
+            'bar',
+            $contents
+        );
+        self::assertStringContainsString(
+            \htmlentities('$str = \'foo\', $null = null'),
             $contents
         );
     }
