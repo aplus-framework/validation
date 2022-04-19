@@ -39,7 +39,7 @@ class ValidationCollector extends Collector
             $activities[] = [
                 'collector' => $this->getName(),
                 'class' => static::class,
-                'description' => 'Run validation ' . $index + 1,
+                'description' => 'Run validation ' . ($index + 1),
                 'start' => $data['start'],
                 'end' => $data['end'],
             ];
