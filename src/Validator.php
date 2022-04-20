@@ -307,14 +307,15 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param string ...$in
+     * @param string $in
+     * @param string ...$others
      *
      * @return bool
      */
-    public static function in(string $field, array $data, string ...$in) : bool
+    public static function in(string $field, array $data, string $in, string ...$others) : bool
     {
         $data = static::getData($field, $data);
-        return $data !== null && \in_array($data, $in, true);
+        return $data !== null && \in_array($data, [$in, ...$others], true);
     }
 
     /**
@@ -322,13 +323,14 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param string ...$notIn
+     * @param string $notIn
+     * @param string ...$others
      *
      * @return bool
      */
-    public static function notIn(string $field, array $data, string ...$notIn) : bool
+    public static function notIn(string $field, array $data, string $notIn, string ...$others) : bool
     {
-        return ! static::in($field, $data, ...$notIn);
+        return ! static::in($field, $data, $notIn, ...$others);
     }
 
     /**

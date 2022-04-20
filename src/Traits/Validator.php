@@ -211,26 +211,28 @@ trait Validator
     /**
      * Validate field is in list.
      *
-     * @param string ...$in
+     * @param string $in
+     * @param string ...$others
      *
      * @return static
      */
-    public function in(string ...$in) : static
+    public function in(string $in, string ...$others) : static
     {
-        $this->rules[] = 'in:' . $this->implode($in);
+        $this->rules[] = 'in:' . $this->implode([$in, ...$others]);
         return $this;
     }
 
     /**
      * Validate field is not in list.
      *
-     * @param string ...$notIn
+     * @param string $notIn
+     * @param string ...$others
      *
      * @return static
      */
-    public function notIn(string ...$notIn) : static
+    public function notIn(string $notIn, string ...$others) : static
     {
-        $this->rules[] = 'notIn:' . $this->implode($notIn);
+        $this->rules[] = 'notIn:' . $this->implode([$notIn, ...$others]);
         return $this;
     }
 
