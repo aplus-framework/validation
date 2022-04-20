@@ -31,15 +31,15 @@ class Validation
     /**
      * The Validators rules.
      *
-     * @var array<string,array> The field names as keys and the rules and
-     * arguments as values
+     * @var array<string,array<int,array<string,array<int,string>|string>>> The
+     * field names as keys and the rules and arguments as values
      */
     protected array $rules = [];
     /**
      * The last errors.
      *
-     * @var array<string,array> The field names as keys and the rule and
-     * arguments as values
+     * @var array<string,array<string,array<string,array<int,string>|string>>> The
+     * field names as keys and the rule and arguments as values
      */
     protected array $errors = [];
     /**
@@ -193,14 +193,14 @@ class Validation
                 'rules' => [],
             ];
             foreach ($rules as $rule) {
-                $rule['args'] = $this->escapeArgs($rule['args']);
+                $rule['args'] = $this->escapeArgs($rule['args']); // @phpstan-ignore-line
                 $args = \implode(',', $rule['args']);
-                $ruleString = $rule['rule'] . ($args === '' ? '' : ':' . $args);
+                $ruleString = $rule['rule'] . ($args === '' ? '' : ':' . $args); // @phpstan-ignore-line
                 $tmp['rules'][] = [
                     'rule' => $ruleString,
                     'message' => $this->getFilledMessage(
                         $field,
-                        $rule['rule'],
+                        $rule['rule'], // @phpstan-ignore-line
                         \array_merge(
                             ['field' => $label ?? $field],
                             $rule['args']
@@ -229,7 +229,7 @@ class Validation
     /**
      * @param string $rule
      *
-     * @return array<string,array|string>
+     * @return array<string,array<int,string>|string>
      */
     #[Pure]
     protected function parseRule(string $rule) : array
@@ -242,13 +242,13 @@ class Validation
                 $arg = \strtr((string) $arg, ['\,' => ',']);
             }
         }
-        return ['rule' => $rule, 'args' => $args];
+        return ['rule' => $rule, 'args' => $args]; // @phpstan-ignore-line
     }
 
     /**
      * @param string $rules
      *
-     * @return array<int,array>
+     * @return array<int,array<string,array<int,string>|string>>
      */
     #[Pure]
     protected function extractRules(string $rules) : array
@@ -281,7 +281,7 @@ class Validation
     /**
      * Get a list of current rules.
      *
-     * @return array<string,array>
+     * @return array<string,array<int,array<string,array<int,string>|string>>>
      */
     #[Pure]
     public function getRules() : array
@@ -293,7 +293,7 @@ class Validation
      * Set rules for a given field.
      *
      * @param string $field
-     * @param array<int|string,string>|string $rules
+     * @param array<string>|string $rules
      *
      * @return static
      */
@@ -304,7 +304,7 @@ class Validation
                 $rule = $this->parseRule($rule);
             }
             unset($rule);
-            $this->rules[$field] = $rules;
+            $this->rules[$field] = $rules; // @phpstan-ignore-line
             return $this;
         }
         $this->rules[$field] = $this->extractRules($rules);
@@ -314,8 +314,8 @@ class Validation
     /**
      * Set field rules.
      *
-     * @param array<string,array|string> $rules An associative array with field
-     * as keys and values as rules
+     * @param array<string,array<string>|string> $rules An associative array
+     * with field as keys and values as rules
      *
      * @return static
      */
@@ -341,9 +341,9 @@ class Validation
         if ($error === null) {
             return null;
         }
-        $error['args']['args'] = $error['args'] ? \implode(', ', $error['args']) : '';
+        $error['args']['args'] = $error['args'] ? \implode(', ', $error['args']) : ''; // @phpstan-ignore-line
         $error['args']['field'] = $this->getLabel($field) ?? $field;
-        return $this->getFilledMessage($field, $error['rule'], $error['args']);
+        return $this->getFilledMessage($field, $error['rule'], $error['args']); // @phpstan-ignore-line
     }
 
     /**
@@ -363,12 +363,13 @@ class Validation
     /**
      * @param string $field
      * @param string $rule
-     * @param array<int|string,array|string> $args
+     * @param array<int,string> $args
      *
      * @return static
      */
     protected function setError(string $field, string $rule, array $args) : static
     {
+        // @phpstan-ignore-next-line
         $this->errors[$field] = [
             'rule' => $rule,
             'args' => $args,
@@ -456,7 +457,7 @@ class Validation
 
     /**
      * @param string $field
-     * @param array<string,array> $rules
+     * @param array<string,array<mixed>> $rules
      * @param array<string,mixed> $data
      *
      * @return bool
@@ -501,7 +502,7 @@ class Validation
     }
 
     /**
-     * @param array<string,array> $fieldRules
+     * @param array<string,array<mixed>> $fieldRules
      * @param array<string,mixed> $data
      *
      * @return bool
