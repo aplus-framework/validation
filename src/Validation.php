@@ -467,7 +467,7 @@ class Validation
         foreach ($rules as $key => $rule) {
             if ($rule['rule'] === 'optional') {
                 $ruleKey = $key;
-                if (empty($data[$field])) {
+                if ( ! \array_key_exists($field, $data)) {
                     return true;
                 }
             }

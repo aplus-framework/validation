@@ -477,6 +477,7 @@ final class ValidationTest extends TestCase
     public function testOptional() : void
     {
         $this->validation->setRule('email', 'email');
+        $this->validation->setRule('email2', 'optional|email');
         $this->validation->setRule('other', 'email');
         $this->validation->setRule('name', 'optional|minLength:5');
         $status = $this->validation->validate([
@@ -485,6 +486,7 @@ final class ValidationTest extends TestCase
         ]);
         self::assertTrue($status);
         self::assertNull($this->validation->getError('email'));
+        self::assertNull($this->validation->getError('email2'));
         self::assertNull($this->validation->getError('other'));
         self::assertNull($this->validation->getError('name'));
     }
@@ -492,12 +494,18 @@ final class ValidationTest extends TestCase
     public function testOptionalAsLastRule() : void
     {
         $this->validation->setRule('email', 'email|optional');
+        $this->validation->setRule('email2', 'email|minLength:5|optional');
         $this->validation->setRule('name', 'minLength:5|optional');
         $status = $this->validation->validate([
+            'email' => '',
             'name' => 'Jon',
         ]);
         self::assertFalse($status);
-        self::assertNull($this->validation->getError('email'));
+        self::assertStringContainsString(
+            'The email field requires a valid email address.',
+            $this->validation->getError('email')
+        );
+        self::assertNull($this->validation->getError('email2'));
         self::assertStringContainsString(
             'The name field requires 5 or more characters in length.',
             $this->validation->getError('name')
