@@ -87,13 +87,13 @@ class ValidationCollector extends Collector
             <?php
             foreach ($this->getData() as $index => $item):
                 $count = \count($item['errors']);
-        $errors = [];
-        foreach ($item['errors'] as $field => $error) {
-            $errors[] = [
+                $errors = [];
+                foreach ($item['errors'] as $field => $error) :
+                    $errors[] = [
                         'field' => $field,
                         'error' => $error,
                     ];
-        } ?>
+                endforeach; ?>
                 <tr>
                     <td rowspan="<?= $count ?>"><?= $index + 1 ?></td>
                     <td rowspan="<?= $count ?>"><?= $item['type'] ?></td>
@@ -102,19 +102,16 @@ class ValidationCollector extends Collector
                     <td><?= $errors[0]['error'] ?? '' ?></td>
                     <td rowspan="<?= $count ?>"><?= \round($item['end'] - $item['start'], 6) ?></td>
                 </tr>
-                <?php
-                for ($i = 1; $i < $count; $i++): ?>
+                <?php for ($i = 1; $i < $count; $i++): ?>
                     <tr>
                         <td><?= $errors[$i]['field'] ?></td>
                         <td><?= $errors[$i]['error'] ?></td>
                     </tr>
-                <?php
-                endfor;
-        endforeach ?>
+                <?php endfor;
+            endforeach; ?>
             </tbody>
         </table>
-        <?php
-        return \ob_get_clean(); // @phpstan-ignore-line
+        <?php return \ob_get_clean(); // @phpstan-ignore-line
     }
 
     protected function renderRuleset() : string
