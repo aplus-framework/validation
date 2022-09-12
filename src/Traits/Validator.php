@@ -421,8 +421,7 @@ trait Validator
     public function specialChar(
         int $quantity = 1,
         string $characters = '!"#$%&\'()*+,-./:;=<>?@[\]^_`{|}~'
-    ) : static
-    {
+    ) : static {
         $this->rules[] = 'specialChar:' . $quantity . ',' . $this->esc($characters);
         return $this;
     }
