@@ -381,6 +381,21 @@ final class ValidationTest extends TestCase
         );
     }
 
+    public function testReplaceArgs() : void
+    {
+        $args = ['foo', 'bar', '{id}', '{x}', 'baz', '{email}'];
+        $data = [
+            'email' => 'me@domain.tld',
+            'id' => 25,
+            'bar' => 'Bar',
+            'foo' => 'Foo',
+        ];
+        self::assertSame(
+            ['foo', 'bar', 25, '{x}', 'baz', 'me@domain.tld'],
+            $this->validation->replaceArgs($args, $data)
+        );
+    }
+
     public function testValidate() : void
     {
         self::assertTrue($this->validation->validate([]));

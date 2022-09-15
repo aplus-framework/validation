@@ -477,6 +477,7 @@ class Validation
         }
         $status = true;
         foreach ($rules as $rule) {
+            $rule['args'] = $this->replaceArgs($rule['args'], $data);
             $status = $this->validateRule($rule['rule'], $field, $rule['args'], $data);
             if ($status !== true) {
                 $rule = $this->setEqualsField($rule);
@@ -485,6 +486,30 @@ class Validation
             }
         }
         return $status;
+    }
+
+    /**
+     * Replace argument placeholders with data values.
+     *
+     * @param array<mixed> $args
+     * @param array<string,mixed> $data
+     *
+     * @return array<mixed>
+     */
+    protected function replaceArgs(array $args, array $data) : array
+    {
+        $result = [];
+        foreach ($args as $arg) {
+            if (\preg_match('#^{(\w+)}$#', $arg)) {
+                $key = \substr($arg, 1, -1);
+                if (isset($data[$key])) {
+                    $result[] = $data[$key];
+                    continue;
+                }
+            }
+            $result[] = $arg;
+        }
+        return $result;
     }
 
     /**
