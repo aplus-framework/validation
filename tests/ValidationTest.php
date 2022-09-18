@@ -527,6 +527,19 @@ final class ValidationTest extends TestCase
         );
     }
 
+    public function testOptionalRepeated() : void
+    {
+        $this->validation->setRules([
+            'email' => 'email|optional|optional',
+            'name' => 'required',
+        ]);
+        $status = $this->validation->validate([
+            'email' => 'foo@bar.com',
+            'name' => 'Jon',
+        ]);
+        self::assertTrue($status);
+    }
+
     public function testEqualsField() : void
     {
         $this->validation->setRule('password', 'minLength:5');

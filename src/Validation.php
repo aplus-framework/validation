@@ -464,16 +464,17 @@ class Validation
      */
     protected function validateField(string $field, array $rules, array $data) : bool
     {
+        $removeKeys = [];
         foreach ($rules as $key => $rule) {
             if ($rule['rule'] === 'optional') {
-                $ruleKey = $key;
+                $removeKeys[] = $key;
                 if ( ! \array_key_exists($field, $data)) {
                     return true;
                 }
             }
         }
-        if (isset($ruleKey)) {
-            unset($rules[$ruleKey]);
+        foreach ($removeKeys as $removeKey) {
+            unset($rules[$removeKey]);
         }
         $status = true;
         foreach ($rules as $rule) {
