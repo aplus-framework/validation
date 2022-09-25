@@ -49,5 +49,5 @@ return [
     'minDim' => 'The {field} field requires an image having the minimum dimensions of {0} in width and {1} in height.',
     'dim' => 'The {field} field requires an image with the exact dimensions of {0} in width and {1} in height.',
     'specialChar' => 'The {field} field requires special characters.',
-    'optional' => 'The {field} field is optional. If not present, validation passes.',
+    'optional' => 'The {field} field is optional. If undefined, validation passes.',
 ];

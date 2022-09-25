@@ -380,7 +380,7 @@ The field requires only numeric characters.
 optional
 ########
 
-The field is optional. If not present, validation passes.
+The field is optional. If undefined, validation passes.
 
 regex
 #####

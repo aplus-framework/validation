@@ -49,5 +49,5 @@ return [
     'minDim' => 'O campo {field} requer uma imagem que possua as dimensões mínimas de {0} de largura e {1} de altura.',
     'dim' => 'O campo {field} requer uma imagem com as dimensões exatas de {0} de largura e {1} de altura.',
     'specialChar' => 'O campo {field} requer caracteres especiais.',
-    'optional' => 'O campo {field} é opcional. Se não estiver presente, a validação passa.',
+    'optional' => 'O campo {field} é opcional. Se não estiver definido, a validação passa.',
 ];

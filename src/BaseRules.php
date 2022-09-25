@@ -44,7 +44,7 @@ abstract class BaseRules
     /**
      * Set field as optional.
      *
-     * If field is empty, validation passes.
+     * If field is undefined, validation passes.
      *
      * @return static
      */
