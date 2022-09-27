@@ -207,215 +207,546 @@ Available Rules
 
 The available rules are:
 
+- `alpha`_
+- `alphaNumber`_
+- `base64`_
+- `between`_
+- `datetime`_
+- `dim`_
+- `email`_
+- `equals`_
+- `ext`_
+- `greater`_
+- `greaterOrEqual`_
+- `hex`_
+- `hexColor`_
+- `image`_
+- `in`_
+- `ip`_
+- `isset`_
+- `json`_
+- `latin`_
+- `length`_
+- `less`_
+- `lessOrEqual`_
+- `maxDim`_
+- `maxLength`_
+- `maxSize`_
+- `md5`_
+- `mimes`_
+- `minDim`_
+- `minLength`_
+- `notBetween`_
+- `notEquals`_
+- `notIn`_
+- `notRegex`_
+- `number`_
+- `optional`_
+- `regex`_
+- `required`_
+- `specialChar`_
+- `timezone`_
+- `uploaded`_
+- `url`_
+- `uuid`_
+
 alpha
 #####
 
 The field requires only alphabetic characters.
+
+.. code-block:: php
+
+    alpha
 
 alphaNumber
 ###########
 
 The field requires only alphabetic and numeric characters.
 
+.. code-block:: php
+
+    alphaNumber
+
 base64
 ######
 
 The field requires a valid base64 string.
+
+.. code-block:: php
+
+    base64
 
 between
 #######
 
 The field must be between ``{0}`` and ``{1}``.
 
+.. code-block:: php
+
+    between:$min,$max
+
+The rule must take two parameters: ``$min`` and ``$max``.
+
+``$min`` is the minimum value.
+
+``$max`` is the maximum value.
+
 datetime
 ########
 
 The field does not match the required datetime format.
+
+.. code-block:: php
+
+    datetime
+    datetime:$format
+
+The rule can take one parameter: ``$format``.
+
+``$format`` is the date format. 
+
+By default the format is ``Y-m-d H:i:s``.
 
 dim
 ###
 
 The field requires an image with the exact dimensions of ``{0}`` in width and ``{1}`` in height.
 
+.. code-block:: php
+
+    dim:$width,$height
+
+The rule must take two parameters: ``$width`` and ``$height``.
+
+``$width`` is the exact width of the image.
+
+``$height`` is the exact height of the image.
+
 email
 #####
 
 The field requires a valid email address.
+
+.. code-block:: php
+
+    email
 
 equals
 ######
 
 The field must be equals the ``{0}`` field.
 
+.. code-block:: php
+
+    equals:$equalsField
+
+The rule must take one parameter: ``$equalsField``.
+
+``$equalsField`` is the name of the field which must be equal to this one.
+
 ext
 ###
 
 The field requires a file with an accepted extension: ``{args}``.
+
+.. code-block:: php
+
+    ext:...$allowedExtensions
+
+The rule can take several parameters: ``...$allowedExtensions``.
+
+``...$allowedExtensions`` is a comma-separated list of file extensions.
 
 greater
 #######
 
 The field must be greater than ``{0}``.
 
+.. code-block:: php
+
+    greater:$greaterThan
+
+The rule must take one parameter: ``$greaterThan``.
+
+``$greaterThan`` is the value the field must be greater than this. 
+
 greaterOrEqual
 ##############
 
 The field must be greater than or equal to ``{0}``.
+
+.. code-block:: php
+
+    greaterOrEqual:$greaterThanOrEqualTo
+
+The rule must take one parameter: ``$greaterThanOrEqualTo``.
+
+``$greaterThanOrEqualTo`` is the value that the field has greater than or equal to this. 
 
 hex
 ###
 
 The field requires a valid hexadecimal string.
 
+.. code-block:: php
+
+    hex
+
 hexColor
 ########
 
 The field requires a valid hexadecimal color.
+
+.. code-block:: php
+
+    hexColor
 
 image
 #####
 
 The field requires an image.
 
+.. code-block:: php
+
+    image
+
 in
 ##
 
 The field does not have an allowed value.
+
+.. code-block:: php
+
+    in:$in,...$others
+
+The rule must take one parameter: ``$in``. And also ``...$others``.
+
+``$in`` is a value required to be in.
+
+``...$others`` are other valid values to be in.
 
 ip
 ##
 
 The field requires a valid IP address.
 
+.. code-block:: php
+
+    ip
+    ip:$version
+
+The rule can take one parameter: ``$version``.
+
+``$version`` can be ``0`` for IPv4 and IPv6. ``4`` for IPv4 or ``6`` for IPv6. 
+
 isset
 #####
 
 The field must be sent.
+
+.. code-block:: php
+
+    isset
 
 json
 ####
 
 The field requires a valid JSON string.
 
+.. code-block:: php
+
+    json
+
 latin
 #####
 
 The field requires only latin characters.
+
+.. code-block:: php
+
+    latin
 
 length
 ######
 
 The field requires exactly ``{0}`` characters in length.
 
+.. code-block:: php
+
+    length:$length
+
+The rule can take one parameter: ``$length``.
+
+``$length`` is the exact number of characters the field must receive.
+
 less
 ####
 
 The field must be less than ``{0}``.
+
+.. code-block:: php
+
+    less:$lessThan
+
+The rule can take one parameter: ``$lessThan``.
+
+``$lessThan`` is the value that the field has less than this.
 
 lessOrEqual
 ###########
 
 The field must be less than or equal to ``{0}``.
 
+.. code-block:: php
+
+    lessOrEqual:$lessThanOrEqualTo
+
+The rule can take one parameter: ``$lessThanOrEqualTo``.
+
+``$lessThanOrEqualTo`` is the value that the field has less than or equal to this. 
+
 maxDim
 ######
 
 The field requires an image that does not exceed the maximum dimensions of ``{0}`` in width and ``{1}`` in height.
+
+.. code-block:: php
+
+    maxDim:$width,$height
+
+The rule can take two parameters: ``$width`` and ``$height``.
+
+``$width`` is the maximum width the image can be.
+
+``$height`` is the maximum height the image can be.
 
 maxLength
 #########
 
 The field requires ``{0}`` or less characters in length.
 
+.. code-block:: php
+
+    maxLength:$maxLength
+
+The rule can take one parameter: ``$maxLength``.
+
+``$maxLength`` is the maximum amount of characters that the field must receive.
+
 maxSize
 #######
 
 The field requires a file that does not exceed the maximum size of ``{0}`` kilobytes.
+
+.. code-block:: php
+
+    maxSize:$kilobytes
+
+The rule can take one parameter: ``$kilobytes``.
+
+``$kilobytes`` is the maximum number of kilobytes that the field file can receive.
 
 md5
 ###
 
 The field requires a valid MD5 hash.
 
+.. code-block:: php
+
+    md5
+
 mimes
 #####
 
 The field requires a file with an accepted MIME type: ``{args}``.
+
+.. code-block:: php
+
+    mimes:...$allowedTypes
+
+The rule can take many parameters: ``...$allowedTypes``.
+
+``...$allowedTypes`` are the MIME types of files the field can receive.
 
 minDim
 ######
 
 The field requires an image having the minimum dimensions of ``{0}`` in width and ``{1}`` in height.
 
+.. code-block:: php
+
+    minDim:$width,$height
+
+The rule can take two parameters: ``$width`` and ``$height``.
+
+``$width`` is the minimum width the image can be.
+
+``$height`` is the minimum height the image can be.
+
 minLength
 #########
 
 The field requires ``{0}`` or more characters in length.
+
+.. code-block:: php
+
+    minLength:$minLength
+
+The rule can take one parameter: ``$minLength``.
+
+``$minLength`` is the minimum number of characters the field must receive.
 
 notBetween
 ##########
 
 The field can not be between ``{0}`` and ``{1}``.
 
+.. code-block:: php
+
+    notBetween:$min,$max
+
+The rule can take two parameters: ``$min`` and ``$max``.
+
+``$min`` is the minimum value that the field value must not have.
+
+``$max`` is the maximum value the field value must not have.
+
 notEquals
 #########
 
 The field can not be equals the ``{0}`` field.
+
+.. code-block:: php
+
+    notEquals:$diffField
+
+The rule can take one parameter: ``$diffField``.
+
+``$diffField`` is the name of the field that must have a value different from this one.
 
 notIn
 #####
 
 The field has a disallowed value.
 
+.. code-block:: php
+
+    notIn:$notIn,...$others
+
+The rule can take one parameter: ``$notIn``. E também ``...$others``.
+
+``$notIn`` is the value required not to be in.
+
+``...$others`` are other values to not be in.
+
 notRegex
 ########
 
 The field matches a invalid pattern.
+
+.. code-block:: php
+
+    notRegex:$pattern
+
+The rule can take one parameter: ``$pattern``.
+
+``$pattern`` is the regular expression that the field value must not match.
 
 number
 ######
 
 The field requires only numeric characters.
 
+.. code-block:: php
+
+    number
+
 optional
 ########
 
 The field is optional. If undefined, validation passes.
 
+.. code-block:: php
+
+    optional
+
 regex
 #####
 
-The field does not matches the required pattern.
+The field must match the required pattern.
+
+.. code-block:: php
+
+    regex:$pattern
+
+The rule can take one parameter: ``$pattern``.
+
+``$pattern`` is the regular expression that the value of the field must match.
 
 required
 ########
 
 The field is required.
 
+.. code-block:: php
+
+    required
+
 specialChar
 ###########
 
 The field requires special characters.
+
+.. code-block:: php
+
+    specialChar
+    specialChar:$quantity
+    specialChar:$quantity,$characters
+
+The rule can take two parameters:: ``$quantity`` and ``$characters``.
+
+``$quantity`` x is the number and special characters the field value must have.
+By default the value is ``1``.
+
+``$characters`` are the characters considered special. By default they are these:
+``!"#$%&\'()*+,-./:;=<>?@[\]^_`{|}~``. 
 
 timezone
 ########
 
 The field requires a valid timezone.
 
+.. code-block:: php
+
+    timezone
+
 uploaded
 ########
 
 The field requires a file to be uploaded.
+
+.. code-block:: php
+
+    uploaded
 
 url
 ###
 
 The field requires a valid URL address.
 
+.. code-block:: php
+
+    url
+
 uuid
 ####
 
 The field requires a valid UUID.
+
+.. code-block:: php
+
+    uuid
 
 Conclusion
 ----------
