@@ -45,6 +45,7 @@ registerArgumentsSet(
     'notIn',
     'notRegex',
     'number',
+    'optional',
     'regex',
     'required',
     'specialChar',
