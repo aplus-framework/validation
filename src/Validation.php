@@ -619,6 +619,9 @@ class Validation
      */
     public function isRuleAvailable(string $rule) : bool
     {
+        if ($rule === 'optional') {
+            return true;
+        }
         foreach ($this->validators as $validator) {
             if (\is_callable([$validator, $rule])) {
                 return true;

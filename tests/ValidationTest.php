@@ -643,5 +643,6 @@ final class ValidationTest extends TestCase
         self::assertTrue($this->validation->isRuleAvailable('alpha'));
         self::assertFalse($this->validation->isRuleAvailable('foo'));
         self::assertTrue($this->validation->isRuleAvailable('json'));
+        self::assertTrue($this->validation->isRuleAvailable('optional'));
     }
 }
