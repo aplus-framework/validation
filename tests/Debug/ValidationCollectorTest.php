@@ -166,7 +166,7 @@ final class ValidationCollectorTest extends TestCase
                 'start',
                 'end',
             ],
-            \array_keys($this->collector->getActivities()[0])
+            \array_keys($this->collector->getActivities()[0]) // @phpstan-ignore-line
         );
     }
 }
