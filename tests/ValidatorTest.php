@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 final class ValidatorTest extends TestCase
 {
     /**
-     * @var array<string,int|string>
+     * @var array<mixed>
      */
     protected array $array;
 
@@ -44,6 +44,12 @@ final class ValidatorTest extends TestCase
             'url-false' => 'httd://domain.tld/path?foo=bar#id',
             'uuid' => 'b2b6ec94-5679-11e9-8647-d663bd873d93',
             'uuid-zero' => '00000000-0000-0000-0000-000000000000',
+            'array' => [],
+            'bool' => true,
+            'float' => 1.2,
+            'int' => 12,
+            'object' => new \stdClass(),
+            'string' => 'foo',
         ];
     }
 
@@ -322,6 +328,42 @@ final class ValidatorTest extends TestCase
         self::assertTrue(Validator::lessOrEqual('alpha', $this->array, 'abd'));
         self::assertTrue(Validator::lessOrEqual('alpha', $this->array, 'abc'));
         self::assertFalse(Validator::lessOrEqual('alpha', $this->array, 'abb'));
+    }
+
+    public function testArray() : void
+    {
+        self::assertFalse(Validator::array('int', $this->array));
+        self::assertTrue(Validator::array('array', $this->array));
+    }
+
+    public function testBool() : void
+    {
+        self::assertFalse(Validator::bool('int', $this->array));
+        self::assertTrue(Validator::bool('bool', $this->array));
+    }
+
+    public function testFloat() : void
+    {
+        self::assertFalse(Validator::float('int', $this->array));
+        self::assertTrue(Validator::float('float', $this->array));
+    }
+
+    public function testInt() : void
+    {
+        self::assertFalse(Validator::int('array', $this->array));
+        self::assertTrue(Validator::int('int', $this->array));
+    }
+
+    public function testObject() : void
+    {
+        self::assertFalse(Validator::object('int', $this->array));
+        self::assertTrue(Validator::object('object', $this->array));
+    }
+
+    public function testString() : void
+    {
+        self::assertFalse(Validator::string('int', $this->array));
+        self::assertTrue(Validator::string('string', $this->array));
     }
 
     public function testSpecialChar() : void

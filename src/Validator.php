@@ -593,6 +593,84 @@ class Validator
     }
 
     /**
+     * Validates array.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @return bool
+     */
+    public static function array(string $field, array $data) : bool
+    {
+        return \is_array(ArraySimple::value($field, $data));
+    }
+
+    /**
+     * Validates boolean.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @return bool
+     */
+    public static function bool(string $field, array $data) : bool
+    {
+        return \is_bool(ArraySimple::value($field, $data));
+    }
+
+    /**
+     * Validates float.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @return bool
+     */
+    public static function float(string $field, array $data) : bool
+    {
+        return \is_float(ArraySimple::value($field, $data));
+    }
+
+    /**
+     * Validates integer.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @return bool
+     */
+    public static function int(string $field, array $data) : bool
+    {
+        return \is_int(ArraySimple::value($field, $data));
+    }
+
+    /**
+     * Validates object.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @return bool
+     */
+    public static function object(string $field, array $data) : bool
+    {
+        return \is_object(ArraySimple::value($field, $data));
+    }
+
+    /**
+     * Validates string.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @return bool
+     */
+    public static function string(string $field, array $data) : bool
+    {
+        return \is_string(ArraySimple::value($field, $data));
+    }
+
+    /**
      * Validates special characters.
      *
      * @see https://owasp.org/www-community/password-special-characters
