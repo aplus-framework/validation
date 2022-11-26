@@ -409,6 +409,72 @@ trait Validator
     }
 
     /**
+     * Validates array.
+     *
+     * @return static
+     */
+    public function array() : static
+    {
+        $this->rules[] = 'array';
+        return $this;
+    }
+
+    /**
+     * Validates boolean.
+     *
+     * @return static
+     */
+    public function bool() : static
+    {
+        $this->rules[] = 'bool';
+        return $this;
+    }
+
+    /**
+     * Validates float.
+     *
+     * @return static
+     */
+    public function float() : static
+    {
+        $this->rules[] = 'float';
+        return $this;
+    }
+
+    /**
+     * Validates integer.
+     *
+     * @return static
+     */
+    public function int() : static
+    {
+        $this->rules[] = 'int';
+        return $this;
+    }
+
+    /**
+     * Validates object.
+     *
+     * @return static
+     */
+    public function object() : static
+    {
+        $this->rules[] = 'object';
+        return $this;
+    }
+
+    /**
+     * Validates string.
+     *
+     * @return static
+     */
+    public function string() : static
+    {
+        $this->rules[] = 'string';
+        return $this;
+    }
+
+    /**
      * Validates special characters.
      *
      * @see https://owasp.org/www-community/password-special-characters

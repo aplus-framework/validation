@@ -306,6 +306,36 @@ final class RulesTest extends TestCase
         self::assertRule('optional', $this->rules->optional());
     }
 
+    public function testRuleArray() : void
+    {
+        self::assertRule('array', $this->rules->array());
+    }
+
+    public function testRuleBool() : void
+    {
+        self::assertRule('bool', $this->rules->bool());
+    }
+
+    public function testRuleFloat() : void
+    {
+        self::assertRule('float', $this->rules->float());
+    }
+
+    public function testRuleInt() : void
+    {
+        self::assertRule('int', $this->rules->int());
+    }
+
+    public function testRuleObject() : void
+    {
+        self::assertRule('object', $this->rules->object());
+    }
+
+    public function testRuleString() : void
+    {
+        self::assertRule('string', $this->rules->string());
+    }
+
     protected static function assertRule(string $rule, Rules $rules) : void
     {
         self::assertSame($rule, (string) $rules);
