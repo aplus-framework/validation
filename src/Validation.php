@@ -474,10 +474,17 @@ class Validation
                     return true;
                 }
             }
-            // Field must be set and can be a blank string.
+            // Field must be defined and can have a blank string.
             if ($rule['rule'] === 'blank') {
                 $removeKeys[] = $key;
                 if ($fieldExists && $data[$field] === '') {
+                    return true;
+                }
+            }
+            // Field must be defined and can have a null value.
+            if ($rule['rule'] === 'null') {
+                $removeKeys[] = $key;
+                if ($fieldExists && $data[$field] === null) {
                     return true;
                 }
             }
@@ -629,6 +636,9 @@ class Validation
     public function isRuleAvailable(string $rule) : bool
     {
         if ($rule === 'blank') {
+            return true;
+        }
+        if ($rule === 'null') {
             return true;
         }
         if ($rule === 'optional') {

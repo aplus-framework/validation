@@ -245,6 +245,7 @@ The available rules are:
 - `notEquals`_
 - `notIn`_
 - `notRegex`_
+- `null`_
 - `number`_
 - `object`_
 - `optional`_
@@ -704,6 +705,15 @@ The field matches a invalid pattern.
 The rule can take one parameter: ``$pattern``.
 
 ``$pattern`` is the regular expression that the field value must not match.
+
+null
+####
+
+If the field value is null, the validation passes.
+
+.. code-block:: php
+
+    null
 
 number
 ######

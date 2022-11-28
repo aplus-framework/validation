@@ -65,6 +65,17 @@ abstract class BaseRules
         return $this;
     }
 
+    /**
+     * If the field value is null, the validation passes.
+     *
+     * @return static
+     */
+    public function null() : static
+    {
+        $this->rules[] = 'null';
+        return $this;
+    }
+
     protected function esc(string $value) : string
     {
         return \strtr($value, [',' => '\,']);
