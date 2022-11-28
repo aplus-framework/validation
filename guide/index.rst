@@ -331,7 +331,7 @@ The field requires a boolean value.
 datetime
 ########
 
-The field does not match the required datetime format.
+The field must match a required datetime format.
 
 .. code-block:: php
 
@@ -469,7 +469,7 @@ The field requires an image.
 in
 ##
 
-The field does not have an allowed value.
+The field must have an allowed value.
 
 .. code-block:: php
 
@@ -692,13 +692,13 @@ The rule can take one parameter: ``$diffField``.
 notIn
 #####
 
-The field has a disallowed value.
+The field must have a disallowed value.
 
 .. code-block:: php
 
     notIn:$notIn,...$others
 
-The rule can take one parameter: ``$notIn``. E também ``...$others``.
+The rule can take one parameter: ``$notIn``. And also ``...$others``.
 
 ``$notIn`` is the value required not to be in.
 
