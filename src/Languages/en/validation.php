@@ -50,4 +50,10 @@ return [
     'dim' => 'The {field} field requires an image with the exact dimensions of {0} in width and {1} in height.',
     'specialChar' => 'The {field} field requires special characters.',
     'optional' => 'The {field} field is optional. If undefined, validation passes.',
+    'array' => 'The {field} field requires an array.',
+    'bool' => 'The {field} field requires a boolean value.',
+    'float' => 'The {field} field requires a floating point number.',
+    'int' => 'The {field} field requires an integer.',
+    'object' => 'The {field} field requires an object.',
+    'string' => 'The {field} field requires a string.',
 ];

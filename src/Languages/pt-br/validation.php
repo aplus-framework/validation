@@ -50,4 +50,10 @@ return [
     'dim' => 'O campo {field} requer uma imagem com as dimensões exatas de {0} de largura e {1} de altura.',
     'specialChar' => 'O campo {field} requer caracteres especiais.',
     'optional' => 'O campo {field} é opcional. Se não estiver definido, a validação passa.',
+    'array' => 'O campo {field} requer uma array.',
+    'bool' => 'O campo {field} requer um valor booleano.',
+    'float' => 'O campo {field} requer um número de ponto flutuante.',
+    'int' => 'O campo {field} requer um número inteiro.',
+    'object' => 'O campo {field} requer um objeto.',
+    'string' => 'O campo {field} requer uma string.',
 ];
