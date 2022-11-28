@@ -209,19 +209,23 @@ The available rules are:
 
 - `alpha`_
 - `alphaNumber`_
+- `array`_
 - `base64`_
 - `between`_
+- `bool`_
 - `datetime`_
 - `dim`_
 - `email`_
 - `equals`_
 - `ext`_
+- `float`_
 - `greater`_
 - `greaterOrEqual`_
 - `hex`_
 - `hexColor`_
 - `image`_
 - `in`_
+- `int`_
 - `ip`_
 - `isset`_
 - `json`_
@@ -241,10 +245,12 @@ The available rules are:
 - `notIn`_
 - `notRegex`_
 - `number`_
+- `object`_
 - `optional`_
 - `regex`_
 - `required`_
 - `specialChar`_
+- `string`_
 - `timezone`_
 - `uploaded`_
 - `url`_
@@ -267,6 +273,15 @@ The field requires only alphabetic and numeric characters.
 .. code-block:: php
 
     alphaNumber
+
+array
+#####
+
+The field requires an array.
+
+.. code-block:: php
+
+    array
 
 base64
 ######
@@ -291,6 +306,15 @@ The rule must take two parameters: ``$min`` and ``$max``.
 ``$min`` is the minimum value.
 
 ``$max`` is the maximum value.
+
+bool
+####
+
+The field requires a boolean value.
+
+.. code-block:: php
+
+    bool
 
 datetime
 ########
@@ -357,6 +381,15 @@ The field requires a file with an accepted extension: ``{args}``.
 The rule can take several parameters: ``...$allowedExtensions``.
 
 ``...$allowedExtensions`` is a comma-separated list of file extensions.
+
+float
+#####
+
+The field requires a floating point number.
+
+.. code-block:: php
+
+    float
 
 greater
 #######
@@ -425,6 +458,15 @@ The rule must take one parameter: ``$in``. And also ``...$others``.
 ``$in`` is a value required to be in.
 
 ``...$others`` are other valid values to be in.
+
+int
+###
+
+The field requires an integer.
+
+.. code-block:: php
+
+    int
 
 ip
 ##
@@ -662,6 +704,15 @@ The field requires only numeric characters.
 
     number
 
+object
+######
+
+The field requires an object.
+
+.. code-block:: php
+
+    object
+
 optional
 ########
 
@@ -711,6 +762,15 @@ By default the value is ``1``.
 
 ``$characters`` are the characters considered special. By default they are these:
 ``!"#$%&\'()*+,-./:;=<>?@[\]^_`{|}~``. 
+
+string
+######
+
+The field requires a string.
+
+.. code-block:: php
+
+    string
 
 timezone
 ########
