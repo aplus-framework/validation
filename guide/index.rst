@@ -217,6 +217,7 @@ The available rules are:
 - `datetime`_
 - `dim`_
 - `email`_
+- `empty`_
 - `equals`_
 - `ext`_
 - `float`_
@@ -366,6 +367,16 @@ The field requires a valid email address.
 .. code-block:: php
 
     email
+
+empty
+#####
+
+If the field is defined and has an `empty <https://www.php.net/empty>`_ value,
+the validation passes.
+
+.. code-block:: php
+
+    empty
 
 equals
 ######

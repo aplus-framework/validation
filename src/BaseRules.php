@@ -76,6 +76,17 @@ abstract class BaseRules
         return $this;
     }
 
+    /**
+     * If the field has an empty value, the validation passes.
+     *
+     * @return static
+     */
+    public function empty() : static
+    {
+        $this->rules[] = 'empty';
+        return $this;
+    }
+
     protected function esc(string $value) : string
     {
         return \strtr($value, [',' => '\,']);

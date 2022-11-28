@@ -488,6 +488,13 @@ class Validation
                     return true;
                 }
             }
+            // Field must be defined and can have an empty value
+            if ($rule['rule'] === 'empty') {
+                $removeKeys[] = $key;
+                if ($fieldExists && empty($data[$field])) {
+                    return true;
+                }
+            }
         }
         foreach ($removeKeys as $removeKey) {
             unset($rules[$removeKey]);
@@ -635,13 +642,12 @@ class Validation
      */
     public function isRuleAvailable(string $rule) : bool
     {
-        if ($rule === 'blank') {
-            return true;
-        }
-        if ($rule === 'null') {
-            return true;
-        }
-        if ($rule === 'optional') {
+        if (\in_array($rule, [
+            'blank',
+            'empty',
+            'null',
+            'optional',
+        ])) {
             return true;
         }
         foreach ($this->validators as $validator) {
