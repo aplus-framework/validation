@@ -466,9 +466,18 @@ class Validation
     {
         $removeKeys = [];
         foreach ($rules as $key => $rule) {
+            $fieldExists = \array_key_exists($field, $data);
+            // Field is optional. If the field is undefined, validation passes.
             if ($rule['rule'] === 'optional') {
                 $removeKeys[] = $key;
-                if ( ! \array_key_exists($field, $data)) {
+                if ( ! $fieldExists) {
+                    return true;
+                }
+            }
+            // Field must be set and can be a blank string.
+            if ($rule['rule'] === 'blank') {
+                $removeKeys[] = $key;
+                if ($fieldExists && $data[$field] === '') {
                     return true;
                 }
             }
@@ -619,6 +628,9 @@ class Validation
      */
     public function isRuleAvailable(string $rule) : bool
     {
+        if ($rule === 'blank') {
+            return true;
+        }
         if ($rule === 'optional') {
             return true;
         }

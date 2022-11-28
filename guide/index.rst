@@ -212,6 +212,7 @@ The available rules are:
 - `array`_
 - `base64`_
 - `between`_
+- `blank`_
 - `bool`_
 - `datetime`_
 - `dim`_
@@ -306,6 +307,15 @@ The rule must take two parameters: ``$min`` and ``$max``.
 ``$min`` is the minimum value.
 
 ``$max`` is the maximum value.
+
+blank
+#####
+
+If the field has a blank string, the validation passes.
+
+.. code-block:: php
+
+    blank
 
 bool
 ####

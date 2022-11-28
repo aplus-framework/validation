@@ -306,6 +306,11 @@ final class RulesTest extends TestCase
         self::assertRule('optional', $this->rules->optional());
     }
 
+    public function testRuleBlank() : void
+    {
+        self::assertRule('blank', $this->rules->blank());
+    }
+
     public function testRuleArray() : void
     {
         self::assertRule('array', $this->rules->array());

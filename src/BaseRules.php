@@ -54,6 +54,17 @@ abstract class BaseRules
         return $this;
     }
 
+    /**
+     * If the field has a blank string, the validation passes.
+     *
+     * @return static
+     */
+    public function blank() : static
+    {
+        $this->rules[] = 'blank';
+        return $this;
+    }
+
     protected function esc(string $value) : string
     {
         return \strtr($value, [',' => '\,']);

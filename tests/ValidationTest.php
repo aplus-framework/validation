@@ -540,6 +540,26 @@ final class ValidationTest extends TestCase
         self::assertTrue($status);
     }
 
+    public function testBlank() : void
+    {
+        $this->validation->setRule('email', 'email|blank');
+        $status = $this->validation->validate([
+            'email' => 'user@domain.tld',
+        ]);
+        self::assertTrue($status);
+        self::assertNull($this->validation->getError('email'));
+        $status = $this->validation->validate([
+            'email' => '',
+        ]);
+        self::assertTrue($status);
+        self::assertNull($this->validation->getError('email'));
+        $status = $this->validation->validate([
+            'email' => 'foo',
+        ]);
+        self::assertFalse($status);
+        self::assertIsString($this->validation->getError('email'));
+    }
+
     public function testEqualsField() : void
     {
         $this->validation->setRule('password', 'minLength:5');
@@ -644,5 +664,6 @@ final class ValidationTest extends TestCase
         self::assertFalse($this->validation->isRuleAvailable('foo'));
         self::assertTrue($this->validation->isRuleAvailable('json'));
         self::assertTrue($this->validation->isRuleAvailable('optional'));
+        self::assertTrue($this->validation->isRuleAvailable('blank'));
     }
 }
