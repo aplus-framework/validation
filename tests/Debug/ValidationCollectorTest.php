@@ -81,20 +81,6 @@ final class ValidationCollectorTest extends TestCase
         );
     }
 
-    public function testNoValidators() : void
-    {
-        $validation = new class() extends Validation {
-            public function __construct()
-            {
-            }
-        };
-        $validation->setDebugCollector($this->collector);
-        self::assertStringContainsString(
-            'No Validators rules set',
-            $this->collector->getContents()
-        );
-    }
-
     public function testCustomValidatorsRules() : void
     {
         $validator = new class() extends Validator {

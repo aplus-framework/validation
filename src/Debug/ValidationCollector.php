@@ -156,9 +156,6 @@ class ValidationCollector extends Collector
 
     protected function renderValidatorsRules() : string
     {
-        if (empty($this->validatorsRules)) {
-            return '<p>No Validators rules set.</p>';
-        }
         \ob_start() ?>
         <p>There are <?= \count($this->validatorsRules) ?> rules available:</p>
         <table>
