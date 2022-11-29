@@ -469,7 +469,7 @@ The field requires an image.
 in
 ##
 
-The field must have an allowed value.
+The field must have one of the listed values.
 
 .. code-block:: php
 
@@ -692,7 +692,7 @@ The rule can take one parameter: ``$diffField``.
 notIn
 #####
 
-The field must have a disallowed value.
+The field must have a value other than those listed.
 
 .. code-block:: php
 
