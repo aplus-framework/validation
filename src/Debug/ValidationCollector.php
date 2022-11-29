@@ -237,6 +237,22 @@ class ValidationCollector extends Collector
                 }
             }
         }
+        $rules['optional'] = [
+            'validator' => '',
+            'params' => '',
+        ];
+        $rules['blank'] = [
+            'validator' => '',
+            'params' => '',
+        ];
+        $rules['null'] = [
+            'validator' => '',
+            'params' => '',
+        ];
+        $rules['empty'] = [
+            'validator' => '',
+            'params' => '',
+        ];
         \ksort($rules);
         return $rules;
     }
