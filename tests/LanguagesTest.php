@@ -41,6 +41,9 @@ final class LanguagesTest extends TestCase
         $files_validator_rules = \get_class_methods(FilesValidator::class);
         $rules = \array_merge($validator_rules, $files_validator_rules);
         $rules[] = 'optional';
+        $rules[] = 'blank';
+        $rules[] = 'null';
+        $rules[] = 'empty';
         \sort($rules);
         foreach ($this->getCodes() as $code) {
             $lines = require $this->langDir . $code . '/validation.php';
