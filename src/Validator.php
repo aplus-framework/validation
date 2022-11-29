@@ -598,6 +598,8 @@ class Validator
      * @param string $field
      * @param array<string,mixed> $data
      *
+     * @since 2.2
+     *
      * @return bool
      */
     public static function array(string $field, array $data) : bool
@@ -610,6 +612,8 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
+     *
+     * @since 2.2
      *
      * @return bool
      */
@@ -624,6 +628,8 @@ class Validator
      * @param string $field
      * @param array<string,mixed> $data
      *
+     * @since 2.2
+     *
      * @return bool
      */
     public static function float(string $field, array $data) : bool
@@ -636,6 +642,8 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
+     *
+     * @since 2.2
      *
      * @return bool
      */
@@ -650,6 +658,8 @@ class Validator
      * @param string $field
      * @param array<string,mixed> $data
      *
+     * @since 2.2
+     *
      * @return bool
      */
     public static function object(string $field, array $data) : bool
@@ -662,6 +672,8 @@ class Validator
      *
      * @param string $field
      * @param array<string,mixed> $data
+     *
+     * @since 2.2
      *
      * @return bool
      */

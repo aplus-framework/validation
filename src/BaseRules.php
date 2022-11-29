@@ -57,6 +57,8 @@ abstract class BaseRules
     /**
      * If the field has a blank string, the validation passes.
      *
+     * @since 2.2
+     *
      * @return static
      */
     public function blank() : static
@@ -68,6 +70,8 @@ abstract class BaseRules
     /**
      * If the field value is null, the validation passes.
      *
+     * @since 2.2
+     *
      * @return static
      */
     public function null() : static
@@ -78,6 +82,8 @@ abstract class BaseRules
 
     /**
      * If the field has an empty value, the validation passes.
+     *
+     * @since 2.2
      *
      * @return static
      */

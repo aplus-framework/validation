@@ -460,6 +460,8 @@ class Validation
      * @param array<string,array<mixed>> $rules
      * @param array<string,mixed> $data
      *
+     * @since 2.2 Added "blank", "null" and "empty" rules
+     *
      * @return bool
      */
     protected function validateField(string $field, array $rules, array $data) : bool

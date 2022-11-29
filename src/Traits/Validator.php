@@ -411,6 +411,8 @@ trait Validator
     /**
      * Validates array.
      *
+     * @since 2.2
+     *
      * @return static
      */
     public function array() : static
@@ -421,6 +423,8 @@ trait Validator
 
     /**
      * Validates boolean.
+     *
+     * @since 2.2
      *
      * @return static
      */
@@ -433,6 +437,8 @@ trait Validator
     /**
      * Validates float.
      *
+     * @since 2.2
+     *
      * @return static
      */
     public function float() : static
@@ -443,6 +449,8 @@ trait Validator
 
     /**
      * Validates integer.
+     *
+     * @since 2.2
      *
      * @return static
      */
@@ -455,6 +463,8 @@ trait Validator
     /**
      * Validates object.
      *
+     * @since 2.2
+     *
      * @return static
      */
     public function object() : static
@@ -465,6 +475,8 @@ trait Validator
 
     /**
      * Validates string.
+     *
+     * @since 2.2
      *
      * @return static
      */
