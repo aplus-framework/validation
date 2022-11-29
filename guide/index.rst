@@ -264,7 +264,7 @@ alpha
 
 The field requires only alphabetic characters.
 
-.. code-block:: php
+.. code-block::
 
     alpha
 
@@ -273,7 +273,7 @@ alphaNumber
 
 The field requires only alphabetic and numeric characters.
 
-.. code-block:: php
+.. code-block::
 
     alphaNumber
 
@@ -282,7 +282,7 @@ array
 
 The field requires an array.
 
-.. code-block:: php
+.. code-block::
 
     array
 
@@ -291,7 +291,7 @@ base64
 
 The field requires a valid base64 string.
 
-.. code-block:: php
+.. code-block::
 
     base64
 
@@ -315,7 +315,7 @@ blank
 
 If the field has a blank string, the validation passes.
 
-.. code-block:: php
+.. code-block::
 
     blank
 
@@ -324,7 +324,7 @@ bool
 
 The field requires a boolean value.
 
-.. code-block:: php
+.. code-block::
 
     bool
 
@@ -364,7 +364,7 @@ email
 
 The field requires a valid email address.
 
-.. code-block:: php
+.. code-block::
 
     email
 
@@ -374,7 +374,7 @@ empty
 If the field is defined and has an `empty <https://www.php.net/empty>`_ value,
 the validation passes.
 
-.. code-block:: php
+.. code-block::
 
     empty
 
@@ -409,7 +409,7 @@ float
 
 The field requires a floating point number.
 
-.. code-block:: php
+.. code-block::
 
     float
 
@@ -444,7 +444,7 @@ hex
 
 The field requires a valid hexadecimal string.
 
-.. code-block:: php
+.. code-block::
 
     hex
 
@@ -453,7 +453,7 @@ hexColor
 
 The field requires a valid hexadecimal color.
 
-.. code-block:: php
+.. code-block::
 
     hexColor
 
@@ -462,7 +462,7 @@ image
 
 The field requires an image.
 
-.. code-block:: php
+.. code-block::
 
     image
 
@@ -486,7 +486,7 @@ int
 
 The field requires an integer.
 
-.. code-block:: php
+.. code-block::
 
     int
 
@@ -509,7 +509,7 @@ isset
 
 The field must be sent.
 
-.. code-block:: php
+.. code-block::
 
     isset
 
@@ -518,7 +518,7 @@ json
 
 The field requires a valid JSON string.
 
-.. code-block:: php
+.. code-block::
 
     json
 
@@ -527,7 +527,7 @@ latin
 
 The field requires only latin characters.
 
-.. code-block:: php
+.. code-block::
 
     latin
 
@@ -616,7 +616,7 @@ md5
 
 The field requires a valid MD5 hash.
 
-.. code-block:: php
+.. code-block::
 
     md5
 
@@ -722,7 +722,7 @@ null
 
 If the field value is null, the validation passes.
 
-.. code-block:: php
+.. code-block::
 
     null
 
@@ -731,7 +731,7 @@ number
 
 The field requires only numeric characters.
 
-.. code-block:: php
+.. code-block::
 
     number
 
@@ -740,7 +740,7 @@ object
 
 The field requires an object.
 
-.. code-block:: php
+.. code-block::
 
     object
 
@@ -749,7 +749,7 @@ optional
 
 The field is optional. If undefined, validation passes.
 
-.. code-block:: php
+.. code-block::
 
     optional
 
@@ -771,7 +771,7 @@ required
 
 The field is required.
 
-.. code-block:: php
+.. code-block::
 
     required
 
@@ -799,7 +799,7 @@ string
 
 The field requires a string.
 
-.. code-block:: php
+.. code-block::
 
     string
 
@@ -808,7 +808,7 @@ timezone
 
 The field requires a valid timezone.
 
-.. code-block:: php
+.. code-block::
 
     timezone
 
@@ -817,7 +817,7 @@ uploaded
 
 The field requires a file to be uploaded.
 
-.. code-block:: php
+.. code-block::
 
     uploaded
 
@@ -826,7 +826,7 @@ url
 
 The field requires a valid URL address.
 
-.. code-block:: php
+.. code-block::
 
     url
 
@@ -835,7 +835,7 @@ uuid
 
 The field requires a valid UUID.
 
-.. code-block:: php
+.. code-block::
 
     uuid
 
