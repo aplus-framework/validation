@@ -10,7 +10,6 @@
 namespace Framework\Validation;
 
 use Error;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * Class BaseRules.
@@ -25,6 +24,10 @@ abstract class BaseRules
      * @var array<int,string>
      */
     protected array $rules = [];
+
+    final public function __construct()
+    {
+    }
 
     public function __toString() : string
     {
@@ -111,9 +114,8 @@ abstract class BaseRules
         return \implode(',', $values);
     }
 
-    #[Pure]
     public static function create() : static
     {
-        return new static(); // @phpstan-ignore-line
+        return new static();
     }
 }
