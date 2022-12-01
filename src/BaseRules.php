@@ -10,6 +10,7 @@
 namespace Framework\Validation;
 
 use Error;
+use Stringable;
 
 /**
  * Class BaseRules.
@@ -18,7 +19,7 @@ use Error;
  *
  * @package validation
  */
-abstract class BaseRules
+abstract class BaseRules implements Stringable
 {
     /**
      * @var array<int,string>
