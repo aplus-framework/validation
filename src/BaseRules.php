@@ -26,6 +26,9 @@ abstract class BaseRules implements Stringable
      */
     protected array $rules = [];
 
+    /**
+     * @since 2.3
+     */
     final public function __construct()
     {
     }
