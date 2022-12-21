@@ -176,6 +176,9 @@ final class ValidatorTest extends TestCase
         self::assertTrue(Validator::datetime('year', $this->array, 'Y'));
         self::assertFalse(Validator::datetime('alpha', $this->array));
         self::assertFalse(Validator::datetime('unknown', $this->array));
+        self::assertFalse(Validator::datetime('foo', [
+            'foo' => '2022-02-29 25:10:10',
+        ]));
     }
 
     public function testEquals() : void

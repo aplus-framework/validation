@@ -408,8 +408,10 @@ class Validator
             return false;
         }
         $lastErrors = \DateTime::getLastErrors();
-        return $lastErrors
-            && $lastErrors['warning_count'] === 0
+        if ($lastErrors === false) {
+            return true;
+        }
+        return $lastErrors['warning_count'] === 0
             && $lastErrors['error_count'] === 0;
     }
 
