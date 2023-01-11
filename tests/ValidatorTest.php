@@ -185,6 +185,9 @@ final class ValidatorTest extends TestCase
         self::assertFalse(Validator::datetime('foo', [
             'foo' => '2022-02-29 25:10:10',
         ]));
+        self::assertFalse(Validator::datetime('foo', [
+            'foo' => '023-01-10',
+        ], 'Y-m-d'));
     }
 
     public function testEquals() : void
