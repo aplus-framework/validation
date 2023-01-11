@@ -403,8 +403,11 @@ class Validator
         if ($data === null) {
             return false;
         }
-        $data = \DateTime::createFromFormat($format, $data);
-        if ($data === false) {
+        $datetime = \DateTime::createFromFormat($format, $data);
+        if ($datetime === false) {
+            return false;
+        }
+        if ($datetime->format($format) !== $data) {
             return false;
         }
         $lastErrors = \DateTime::getLastErrors();
