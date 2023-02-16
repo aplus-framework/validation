@@ -138,7 +138,7 @@ class FilesValidator
      *
      * @return bool
      */
-    public static function image(string $field, array $data = [])
+    public static function image(string $field, array $data = []) : bool
     {
         $uploaded = static::uploaded($field);
         if ( ! $uploaded) {
@@ -159,7 +159,7 @@ class FilesValidator
      *
      * @return bool
      */
-    public static function maxDim(string $field, array $data, int $width, int $height)
+    public static function maxDim(string $field, array $data, int $width, int $height) : bool
     {
         $isImage = static::image($field);
         if ( ! $isImage) {
@@ -180,7 +180,7 @@ class FilesValidator
      *
      * @return bool
      */
-    public static function minDim(string $field, array $data, int $width, int $height)
+    public static function minDim(string $field, array $data, int $width, int $height) : bool
     {
         $isImage = static::image($field);
         if ( ! $isImage) {
@@ -201,7 +201,7 @@ class FilesValidator
      *
      * @return bool
      */
-    public static function dim(string $field, array $data, int $width, int $height)
+    public static function dim(string $field, array $data, int $width, int $height) : bool
     {
         $isImage = static::image($field);
         if ( ! $isImage) {
