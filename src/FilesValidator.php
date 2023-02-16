@@ -30,10 +30,7 @@ class FilesValidator
      */
     protected static function getOrganizedFiles() : array
     {
-        if (isset(static::$files)) {
-            return static::$files;
-        }
-        return static::$files = ArraySimple::files();
+        return static::$files ?? (static::$files = ArraySimple::files());
     }
 
     /**
