@@ -59,7 +59,7 @@ class Validator
     public static function number(string $field, array $data) : bool
     {
         $data = static::getData($field, $data);
-        return $data !== null && \is_numeric($data);
+        return \is_numeric($data);
     }
 
     /**
@@ -239,11 +239,11 @@ class Validator
     public static function equals(string $field, array $data, string $equalsField) : bool
     {
         $field = ArraySimple::value($field, $data);
-        if ($field === null || ! \is_scalar($field)) {
+        if ( ! \is_scalar($field)) {
             return false;
         }
         $equalsField = ArraySimple::value($equalsField, $data);
-        if ($equalsField === null || ! \is_scalar($equalsField)) {
+        if ( ! \is_scalar($equalsField)) {
             return false;
         }
         return (string) $field === (string) $equalsField;
