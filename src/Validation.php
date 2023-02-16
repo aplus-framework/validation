@@ -367,7 +367,7 @@ class Validation
      *
      * @return static
      */
-    protected function setError(string $field, string $rule, array $args) : static
+    public function setError(string $field, string $rule, array $args) : static
     {
         // @phpstan-ignore-next-line
         $this->errors[$field] = [
