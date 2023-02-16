@@ -433,8 +433,7 @@ class Validator
             return false;
         }
         if (\preg_match('#\A([^@]+)@(.+)\z#', $data, $matches)) {
-            $data = $matches[1] . '@' .
-                \idn_to_ascii($matches[2], 0, \INTL_IDNA_VARIANT_UTS46);
+            $data = $matches[1] . '@' . \idn_to_ascii($matches[2]);
         }
         return (bool) \filter_var($data, \FILTER_VALIDATE_EMAIL);
     }
