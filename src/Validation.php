@@ -231,7 +231,6 @@ class Validation
      *
      * @return array<string,array<int,string>|string>
      */
-    #[Pure]
     protected function parseRule(string $rule) : array
     {
         $args = [];
