@@ -29,7 +29,7 @@ class Validation
      */
     protected array $labels = [];
     /**
-     * The Validators rules.
+     * The Validator rules.
      *
      * @var array<string,array<int,array<string,array<int,string>|string>>> The
      * field names as keys and the rules and arguments as values

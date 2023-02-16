@@ -24,7 +24,7 @@ class FilesValidator
     protected static array $files;
 
     /**
-     * Get $_FILES in an re-organized way.
+     * Get $_FILES in a re-organized way.
      *
      * @return array<string,mixed>
      */
