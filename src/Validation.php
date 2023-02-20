@@ -665,4 +665,9 @@ class Validation
         $this->debugCollector->setValidation($this);
         return $this;
     }
+
+    public function getDebugCollector() : ValidationCollector | null
+    {
+        return $this->debugCollector ?? null;
+    }
 }
