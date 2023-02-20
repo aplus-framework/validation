@@ -47,6 +47,20 @@ class ValidationCollector extends Collector
         return $activities;
     }
 
+    public function setErrorInDebugData(string $field, string $error, int $index = -1) : static
+    {
+        $data = $this->getData();
+        if ($index === -1) {
+            $index = \array_key_last($data);
+            if ($index === null) {
+                return $this;
+            }
+        }
+        $data[$index]['errors'][$field] = $error;
+        $this->data = $data;
+        return $this;
+    }
+
     public function getContents() : string
     {
         if ( ! isset($this->validation)) {
