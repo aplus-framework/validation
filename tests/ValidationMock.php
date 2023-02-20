@@ -30,9 +30,4 @@ class ValidationMock extends Validation
     {
         return parent::replaceArgs($args, $data);
     }
-
-    public function setError(string $field, string $rule, array $params) : static
-    {
-        return parent::setError($field, $rule, $params);
-    }
 }

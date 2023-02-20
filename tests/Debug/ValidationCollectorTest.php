@@ -155,4 +155,39 @@ final class ValidationCollectorTest extends TestCase
             \array_keys($this->collector->getActivities()[0]) // @phpstan-ignore-line
         );
     }
+
+    public function testValidationCollectorInstance() : void
+    {
+        $validation = new Validation();
+        self::assertNull($validation->getDebugCollector());
+        $validation->setDebugCollector($this->collector);
+        self::assertInstanceOf(
+            ValidationCollector::class,
+            $validation->getDebugCollector()
+        );
+    }
+
+    public function testSetErrorInDebugData() : void
+    {
+        $data = $this->collector->getData();
+        self::assertEmpty($data);
+        $this->collector->setErrorInDebugData('email', 'Email error.');
+        $data = $this->collector->getData();
+        self::assertCount(0, $data);
+        $this->collector->addData([
+            'start' => 1676932480,
+            'end' => 1676932490,
+            'validated' => false,
+            'errors' => ['foo' => 'Foo error.'],
+            'type' => 'all',
+        ]);
+        $data = $this->collector->getData();
+        self::assertCount(1, $data[0]['errors']);
+        $this->collector->setErrorInDebugData('email', 'Email error.');
+        $data = $this->collector->getData();
+        self::assertCount(2, $data[0]['errors']);
+        $this->collector->setErrorInDebugData('bar', 'Bar error.', 1);
+        $data = $this->collector->getData();
+        self::assertCount(1, $data[1]['errors']);
+    }
 }
