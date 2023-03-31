@@ -36,9 +36,9 @@ Validation logic typically occurs as follows:
     use Framework\Validation\Validation;
 
     $validation = new Validation();
-    $validation->setRule('email', 'required|email');
+    $validation->setRule('email', 'required|email'); // static
 
-    $validated = $validation->validate($_POST);
+    $validated = $validation->validate($_POST); // bool
 
     if ($validated) {
         echo 'Validated!';
@@ -64,12 +64,12 @@ an array of rules as values.
 
 .. code-block:: php
 
-    $validation->setRule('email', 'required|email');
-    $validation->setRule('firstname', ['required', 'minLength:2']);
+    $validation->setRule('email', 'required|email'); // static
+    $validation->setRule('firstname', ['required', 'minLength:2']); // static
 
     $validation->setRules([
         'lastname' => 'required|minLength:2|maxLength:32'
-    ]);
+    ]); // static
 
 Setting Labels
 --------------
@@ -81,13 +81,13 @@ Labels can be defined individually or by an array.:
 
 .. code-block:: php
 
-    $validation->setLabel('email', 'E-mail');
-    $validation->setLabel('firstname', 'First Name');
+    $validation->setLabel('email', 'E-mail'); // static
+    $validation->setLabel('firstname', 'First Name'); // static
     // or
     $validation->setLabels([
         'email' => 'E-mail',
         'firstname' => 'First Name',
-    ]);
+    ]); // static
 
 Getting Errors
 --------------
@@ -97,10 +97,10 @@ Errors can be obtained individually or all at once, as per the example below:
 .. code-block:: php
 
     // Email field error message, or null
-    $error = $validation->getError('email');
+    $error = $validation->getError('email'); // string or null
 
     // All errors
-    $errors = $validation->getErrors();
+    $errors = $validation->getErrors(); // array
 
 Validating
 ----------
@@ -114,10 +114,10 @@ method. Useful for updating only a few fields in the database.
 .. code-block:: php
 
     // Validates all fields
-    $validated = $validation->validate($data);
+    $validated = $validation->validate($data); // bool
 
     // Validates only received fields
-    $validated = $validation->validateOnly($data);
+    $validated = $validation->validateOnly($data); // bool
 
 Validator Check
 ###############
@@ -128,7 +128,7 @@ To validate only one field is possible to use only the Validator:
 
     use Framework\Validation\Validator;
 
-    $validated = Validator::alpha('name', $data);
+    $validated = Validator::alpha('name', $data); // bool
 
 Working with Arrays
 -------------------
@@ -141,8 +141,8 @@ class to extract fields and get the correct data value.
     use Framework\Validation\Validation;
     
     $validation = new Validation();
-    $validation->setLabel('user[pass]', 'Password')
-               ->setRule('user[pass]', 'required');
+    $validation->setLabel('user[pass]', 'Password') // static
+               ->setRule('user[pass]', 'required'); // static
 
     $data = [
         'user' => [
@@ -196,11 +196,11 @@ So, let the Validation know about your customizations:
 
     $validation = new Validation([CustomValidator::class], $language);
     
-    $validation->setRule('telephone', 'required|phone');
+    $validation->setRule('telephone', 'required|phone'); // static
 
-    $validated = $validation->validate($_POST);
+    $validated = $validation->validate($_POST); // bool
 
-    $errors = $validation->getErrors();
+    $errors = $validation->getErrors(); // array
 
 Available Rules
 ---------------
