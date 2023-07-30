@@ -18,9 +18,9 @@
     "homepage": "https://aplus-framework.com/packages/validation",
     "support": {
         "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/validation/issues",
+        "issues": "https://github.com/aplus-framework/validation/issues",
         "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/validation",
+        "source": "https://github.com/aplus-framework/validation",
         "docs": "https://docs.aplus-framework.com/guides/libraries/validation/"
     },
     "funding": [
