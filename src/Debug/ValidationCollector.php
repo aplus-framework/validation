@@ -63,7 +63,7 @@ class ValidationCollector extends Collector
 
     public function getContents() : string
     {
-        if ( ! isset($this->validation)) {
+        if (!isset($this->validation)) {
             return '<p>A Validation instance has not been set in this collector.</p>';
         }
         \ob_start(); ?>
@@ -79,7 +79,7 @@ class ValidationCollector extends Collector
 
     protected function renderValidations() : string
     {
-        if ( ! $this->hasData()) {
+        if (!$this->hasData()) {
             return '<p>Validation did not run.</p>';
         }
         $count = \count($this->getData());
@@ -130,7 +130,7 @@ class ValidationCollector extends Collector
 
     protected function renderRuleset() : string
     {
-        if ( ! $this->validation->getRules()) {
+        if (!$this->validation->getRules()) {
             return '<p>No rules have been set.</p>';
         }
         \ob_start(); ?>

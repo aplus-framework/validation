@@ -96,7 +96,7 @@ class Validation
 
     public function getLanguage() : Language
     {
-        if ( ! isset($this->language)) {
+        if (!isset($this->language)) {
             $this->setLanguage();
         }
         return $this->language;
@@ -471,7 +471,7 @@ class Validation
             // Field is optional. If the field is undefined, validation passes.
             if ($rule['rule'] === 'optional') {
                 $removeKeys[] = $key;
-                if ( ! $fieldExists) {
+                if (!$fieldExists) {
                     return true;
                 }
             }
@@ -563,7 +563,7 @@ class Validation
         $result = true;
         foreach ($fieldRules as $field => $rules) {
             $status = $this->validateField($field, $rules, $data);
-            if ( ! $status) {
+            if (!$status) {
                 $result = false;
             }
         }

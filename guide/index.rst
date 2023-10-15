@@ -133,7 +133,7 @@ To validate only one field is possible to use only the Validator:
 Working with Arrays
 -------------------
 
-Validator uses the `ArraySimple <https://gitlab.com/aplus-framework/libraries/helpers>`_
+Validator uses the `ArraySimple <https://github.com/aplus-framework/helpers>`_
 class to extract fields and get the correct data value.
 
 .. code-block:: php
@@ -849,5 +849,5 @@ The more you use it, the more you will learn.
 .. note::
     Did you find something wrong? 
     Be sure to let us know about it with an
-    `issue <https://gitlab.com/aplus-framework/libraries/validation/issues>`_. 
+    `issue <https://github.com/aplus-framework/validation/issues>`_. 
     Thank you!

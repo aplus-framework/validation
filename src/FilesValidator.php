@@ -73,7 +73,7 @@ class FilesValidator
     public static function maxSize(string $field, array $data, int $kilobytes) : bool
     {
         $uploaded = static::uploaded($field);
-        if ( ! $uploaded) {
+        if (!$uploaded) {
             return false;
         }
         $file = static::getFile($field);
@@ -92,7 +92,7 @@ class FilesValidator
     public static function mimes(string $field, array $data, string ...$allowedTypes) : bool
     {
         $uploaded = static::uploaded($field);
-        if ( ! $uploaded) {
+        if (!$uploaded) {
             return false;
         }
         $file = static::getFile($field);
@@ -115,7 +115,7 @@ class FilesValidator
     public static function ext(string $field, array $data, string ...$allowedExtensions) : bool
     {
         $uploaded = static::uploaded($field);
-        if ( ! $uploaded) {
+        if (!$uploaded) {
             return false;
         }
         $file = static::getFile($field);
@@ -138,7 +138,7 @@ class FilesValidator
     public static function image(string $field, array $data = []) : bool
     {
         $uploaded = static::uploaded($field);
-        if ( ! $uploaded) {
+        if (!$uploaded) {
             return false;
         }
         $file = static::getFile($field);
@@ -159,12 +159,12 @@ class FilesValidator
     public static function maxDim(string $field, array $data, int $width, int $height) : bool
     {
         $isImage = static::image($field);
-        if ( ! $isImage) {
+        if (!$isImage) {
             return false;
         }
         $file = static::getFile($field);
         $sizes = \getimagesize($file['tmp_name']);
-        return ! ($sizes === false || $sizes[0] > $width || $sizes[1] > $height);
+        return !($sizes === false || $sizes[0] > $width || $sizes[1] > $height);
     }
 
     /**
@@ -180,12 +180,12 @@ class FilesValidator
     public static function minDim(string $field, array $data, int $width, int $height) : bool
     {
         $isImage = static::image($field);
-        if ( ! $isImage) {
+        if (!$isImage) {
             return false;
         }
         $file = static::getFile($field);
         $sizes = \getimagesize($file['tmp_name']);
-        return ! ($sizes === false || $sizes[0] < $width || $sizes[1] < $height);
+        return !($sizes === false || $sizes[0] < $width || $sizes[1] < $height);
     }
 
     /**
@@ -201,11 +201,11 @@ class FilesValidator
     public static function dim(string $field, array $data, int $width, int $height) : bool
     {
         $isImage = static::image($field);
-        if ( ! $isImage) {
+        if (!$isImage) {
             return false;
         }
         $file = static::getFile($field);
         $sizes = \getimagesize($file['tmp_name']);
-        return ! ($sizes === false || $sizes[0] !== $width || $sizes[1] !== $height);
+        return !($sizes === false || $sizes[0] !== $width || $sizes[1] !== $height);
     }
 }

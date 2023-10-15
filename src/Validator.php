@@ -204,7 +204,8 @@ class Validator
     public static function regex(
         string $field,
         array $data,
-        #[Language('RegExp')] string $pattern
+        #[Language('RegExp')]
+        string $pattern
     ) : bool {
         $data = static::getData($field, $data);
         return $data !== null && \preg_match($pattern, $data) === 1;
@@ -222,9 +223,10 @@ class Validator
     public static function notRegex(
         string $field,
         array $data,
-        #[Language('RegExp')] string $pattern
+        #[Language('RegExp')]
+        string $pattern
     ) : bool {
-        return ! static::regex($field, $data, $pattern);
+        return !static::regex($field, $data, $pattern);
     }
 
     /**
@@ -239,11 +241,11 @@ class Validator
     public static function equals(string $field, array $data, string $equalsField) : bool
     {
         $field = ArraySimple::value($field, $data);
-        if ( ! \is_scalar($field)) {
+        if (!\is_scalar($field)) {
             return false;
         }
         $equalsField = ArraySimple::value($equalsField, $data);
-        if ( ! \is_scalar($equalsField)) {
+        if (!\is_scalar($equalsField)) {
             return false;
         }
         return (string) $field === (string) $equalsField;
@@ -260,7 +262,7 @@ class Validator
      */
     public static function notEquals(string $field, array $data, string $diffField) : bool
     {
-        return ! static::equals($field, $data, $diffField);
+        return !static::equals($field, $data, $diffField);
     }
 
     /**
@@ -299,7 +301,7 @@ class Validator
         int | string $min,
         int | string $max
     ) : bool {
-        return ! static::between($field, $data, $min, $max);
+        return !static::between($field, $data, $min, $max);
     }
 
     /**
@@ -330,7 +332,7 @@ class Validator
      */
     public static function notIn(string $field, array $data, string $notIn, string ...$others) : bool
     {
-        return ! static::in($field, $data, $notIn, ...$others);
+        return !static::in($field, $data, $notIn, ...$others);
     }
 
     /**
@@ -376,7 +378,7 @@ class Validator
             return false;
         }
         if (\preg_match('/^(?:([^:]*)\:)?\/\/(.+)$/', $data, $matches)) {
-            if ( ! \in_array($matches[1], ['http', 'https'], true)) {
+            if (!\in_array($matches[1], ['http', 'https'], true)) {
                 return false;
             }
             $data = $matches[2];
