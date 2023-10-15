@@ -96,7 +96,7 @@ class Validation
 
     public function getLanguage() : Language
     {
-        if ( ! isset($this->language)) {
+        if (!isset($this->language)) {
             $this->setLanguage();
         }
         return $this->language;
@@ -468,7 +468,7 @@ class Validation
         foreach ($rules as $key => $rule) {
             if ($rule['rule'] === 'optional') {
                 $removeKeys[] = $key;
-                if ( ! \array_key_exists($field, $data)) {
+                if (!\array_key_exists($field, $data)) {
                     return true;
                 }
             }
@@ -539,7 +539,7 @@ class Validation
         $result = true;
         foreach ($fieldRules as $field => $rules) {
             $status = $this->validateField($field, $rules, $data);
-            if ( ! $status) {
+            if (!$status) {
                 $result = false;
             }
         }
