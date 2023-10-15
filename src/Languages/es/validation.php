@@ -59,4 +59,5 @@ return [
     'int' => 'El campo {field} requiere un número entero.',
     'object' => 'El campo {field} requiere un objeto.',
     'string' => 'El campo {field} requiere un texto.',
+    'slug' => 'El campo {field} requiere una slug válida.',
 ];

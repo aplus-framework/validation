@@ -372,6 +372,29 @@ final class ValidatorTest extends TestCase
         self::assertTrue(Validator::string('string', $this->array));
     }
 
+    public function testSlug() : void
+    {
+        $data = [
+            'a' => 'abc-123',
+            'b' => '123-abc',
+            'c' => '--__',
+            'd' => ' ',
+            'e' => 'coração',
+            'f' => 'foo@bar',
+            'g' => 'a 1',
+            'h' => '',
+        ];
+        self::assertTrue(Validator::slug('a', $data));
+        self::assertTrue(Validator::slug('b', $data));
+        self::assertTrue(Validator::slug('c', $data));
+        self::assertFalse(Validator::slug('d', $data));
+        self::assertFalse(Validator::slug('e', $data));
+        self::assertFalse(Validator::slug('f', $data));
+        self::assertFalse(Validator::slug('g', $data));
+        self::assertFalse(Validator::slug('h', $data));
+        self::assertFalse(Validator::slug('undefined', $data));
+    }
+
     public function testSpecialChar() : void
     {
         $data = [

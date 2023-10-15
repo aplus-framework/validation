@@ -689,6 +689,22 @@ class Validator
     }
 
     /**
+     * Validates slug.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @since 2.6
+     *
+     * @return bool
+     */
+    public static function slug(string $field, array $data) : bool
+    {
+        $data = static::getData($field, $data);
+        return $data !== null && \preg_match('/^([a-z0-9_-]+)$/', $data) === 1;
+    }
+
+    /**
      * Validates special characters.
      *
      * @see https://owasp.org/www-community/password-special-characters

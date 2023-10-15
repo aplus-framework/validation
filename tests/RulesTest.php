@@ -351,6 +351,11 @@ final class RulesTest extends TestCase
         self::assertRule('string', $this->rules->string());
     }
 
+    public function testRuleSlug() : void
+    {
+        self::assertRule('slug', $this->rules->slug());
+    }
+
     protected static function assertRule(string $rule, Rules $rules) : void
     {
         self::assertSame($rule, (string) $rules);

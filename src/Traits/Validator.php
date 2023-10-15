@@ -487,6 +487,19 @@ trait Validator
     }
 
     /**
+     * Validates slug.
+     *
+     * @since 2.6
+     *
+     * @return static
+     */
+    public function slug() : static
+    {
+        $this->rules[] = 'slug';
+        return $this;
+    }
+
+    /**
      * Validates special characters.
      *
      * @see https://owasp.org/www-community/password-special-characters

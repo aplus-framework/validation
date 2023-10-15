@@ -252,6 +252,7 @@ The available rules are:
 - `optional`_
 - `regex`_
 - `required`_
+- `slug`_
 - `specialChar`_
 - `string`_
 - `timezone`_
@@ -774,6 +775,15 @@ The field is required.
 .. code-block::
 
     required
+
+slug
+####
+
+The field requires a valid slug.
+
+.. code-block::
+
+    slug
 
 specialChar
 ###########

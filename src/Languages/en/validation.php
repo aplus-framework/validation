@@ -59,4 +59,5 @@ return [
     'int' => 'The {field} field requires an integer.',
     'object' => 'The {field} field requires an object.',
     'string' => 'The {field} field requires a string.',
+    'slug' => 'The {field} field requires a valid slug.',
 ];
