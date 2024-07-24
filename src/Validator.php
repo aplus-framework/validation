@@ -412,12 +412,7 @@ class Validator
         if ($datetime->format($format) !== $data) {
             return false;
         }
-        $lastErrors = \DateTime::getLastErrors();
-        if ($lastErrors === false) {
-            return true;
-        }
-        return $lastErrors['warning_count'] === 0
-            && $lastErrors['error_count'] === 0;
+        return \DateTime::getLastErrors() === false;
     }
 
     /**
