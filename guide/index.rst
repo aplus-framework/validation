@@ -51,7 +51,7 @@ Validation logic typically occurs as follows:
         echo '</ul>';
     }
 
-First load the Validation class. Then the rules are drafted and finally validated.
+First load the Validation class. Then the rules are set and finally validated.
 Then a response is shown if the validation was valid or not.
 
 Setting Rules
@@ -798,7 +798,7 @@ The field requires special characters.
 
 The rule can take two parameters:: ``$quantity`` and ``$characters``.
 
-``$quantity`` x is the number and special characters the field value must have.
+``$quantity`` is the number of special characters the field value must have.
 By default the value is ``1``.
 
 ``$characters`` are the characters considered special. By default they are these:
