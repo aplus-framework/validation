@@ -377,6 +377,16 @@ class Validation
     }
 
     /**
+     * @param string $field
+     *
+     * @return bool
+     */
+    public function hasError(string $field) : bool
+    {
+        return isset($this->errors[$field]);
+    }
+
+    /**
      * Set a custom error message for a field rule.
      *
      * @param string $field The field name

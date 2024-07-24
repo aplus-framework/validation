@@ -381,6 +381,14 @@ final class ValidationTest extends TestCase
         );
     }
 
+    public function testHasError() : void
+    {
+        self::assertSame([], $this->validation->getErrors());
+        self::assertFalse($this->validation->hasError('foo'));
+        $this->validation->setError('foo', 'required');
+        self::assertTrue($this->validation->hasError('foo'));
+    }
+
     public function testReplaceArgs() : void
     {
         $args = ['foo', 'bar', '{id}', '{x}', 'baz', '{email}'];
