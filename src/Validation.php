@@ -52,7 +52,7 @@ class Validation
     /**
      * The current Validators.
      *
-     * @var array<int,string|Validator> Values are the Validators FQCN or
+     * @var array<int,Validator|string> Values are the Validators FQCN or
      * instances
      */
     protected array $validators = [];
@@ -67,10 +67,10 @@ class Validation
     /**
      * Validation constructor.
      *
-     * @param array<int,string|Validator>|null $validators
+     * @param array<int,Validator|string>|null $validators
      * @param Language|null $language
      */
-    public function __construct(array $validators = null, Language $language = null)
+    public function __construct(?array $validators = null, ?Language $language = null)
     {
         $defaultValidators = [
             Validator::class,
@@ -84,7 +84,7 @@ class Validation
         }
     }
 
-    public function setLanguage(Language $language = null) : static
+    public function setLanguage(?Language $language = null) : static
     {
         if ($language === null) {
             $language = new Language();
@@ -103,7 +103,7 @@ class Validation
     }
 
     /**
-     * @return array<int,string|Validator>
+     * @return array<int,Validator|string>
      */
     public function getValidators() : array
     {
@@ -676,7 +676,7 @@ class Validation
         return $this;
     }
 
-    public function getDebugCollector() : ValidationCollector | null
+    public function getDebugCollector() : ?ValidationCollector
     {
         return $this->debugCollector ?? null;
     }

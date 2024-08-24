@@ -101,7 +101,7 @@ final class ValidationCollectorTest extends TestCase
                 string $field,
                 array $data,
                 string $str = 'foo',
-                string $null = null
+                ?string $null = null
             ) : bool {
                 return false;
             }

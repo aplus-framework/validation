@@ -38,7 +38,7 @@ class FilesValidator
      *
      * @return array<string,mixed>|null
      */
-    protected static function getFile(string $field) : array | null
+    protected static function getFile(string $field) : ?array
     {
         $files = static::getOrganizedFiles();
         return ArraySimple::value($field, $files);
