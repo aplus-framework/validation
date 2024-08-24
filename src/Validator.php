@@ -18,22 +18,8 @@ use JetBrains\PhpStorm\Language;
  *
  * @package validation
  */
-class Validator
+class Validator extends BaseValidator
 {
-    /**
-     * Get field value from data.
-     *
-     * @param string $field
-     * @param array<string,mixed> $data
-     *
-     * @return string|null
-     */
-    protected static function getData(string $field, array $data) : ?string
-    {
-        $data = ArraySimple::value($field, $data);
-        return \is_scalar($data) ? (string) $data : null;
-    }
-
     /**
      * Validates alphabetic characters.
      *
