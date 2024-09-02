@@ -174,8 +174,7 @@ class Validator extends BaseValidator
         if ($data === null) {
             return false;
         }
-        \json_decode($data);
-        return \json_last_error() === \JSON_ERROR_NONE;
+        return \json_validate($data);
     }
 
     /**
