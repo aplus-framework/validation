@@ -10,6 +10,7 @@
 namespace Framework\Validation\Debug;
 
 use Framework\Debug\Collector;
+use Framework\Debug\Debugger;
 use Framework\Validation\Validation;
 use ReflectionMethod;
 
@@ -94,7 +95,7 @@ class ValidationCollector extends Collector
                 <th>Errors Count</th>
                 <th>Error Field</th>
                 <th>Error Message</th>
-                <th title="Seconds">Time</th>
+                <th title="Milliseconds">Time</th>
             </tr>
             </thead>
             <tbody>
@@ -114,7 +115,7 @@ class ValidationCollector extends Collector
                     <td rowspan="<?= $count ?>"><?= $count ?></td>
                     <td><?= $errors[0]['field'] ?? '' ?></td>
                     <td><?= $errors[0]['error'] ?? '' ?></td>
-                    <td rowspan="<?= $count ?>"><?= \round($item['end'] - $item['start'], 6) ?></td>
+                    <td rowspan="<?= $count ?>"><?= Debugger::roundSecondsToMilliseconds($item['end'] - $item['start']) ?></td>
                 </tr>
                 <?php for ($i = 1; $i < $count; $i++): ?>
                     <tr>
