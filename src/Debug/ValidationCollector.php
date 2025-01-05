@@ -113,14 +113,14 @@ class ValidationCollector extends Collector
                     <td rowspan="<?= $count ?>"><?= $index + 1 ?></td>
                     <td rowspan="<?= $count ?>"><?= $item['type'] ?></td>
                     <td rowspan="<?= $count ?>"><?= $count ?></td>
-                    <td><?= $errors[0]['field'] ?? '' ?></td>
-                    <td><?= $errors[0]['error'] ?? '' ?></td>
+                    <td><?= \htmlentities($errors[0]['field'] ?? '') ?></td>
+                    <td><?= \htmlentities($errors[0]['error'] ?? '') ?></td>
                     <td rowspan="<?= $count ?>"><?= Debugger::roundSecondsToMilliseconds($item['end'] - $item['start']) ?></td>
                 </tr>
                 <?php for ($i = 1; $i < $count; $i++): ?>
                     <tr>
-                        <td><?= $errors[$i]['field'] ?></td>
-                        <td><?= $errors[$i]['error'] ?></td>
+                        <td><?= \htmlentities($errors[$i]['field']) ?></td>
+                        <td><?= \htmlentities($errors[$i]['error']) ?></td>
                     </tr>
                 <?php endfor;
             endforeach; ?>
