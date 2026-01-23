@@ -30,7 +30,7 @@
         }
     ],
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.5",
         "ext-fileinfo": "*",
         "ext-intl": "*",
         "ext-json": "*",
