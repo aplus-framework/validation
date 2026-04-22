@@ -83,7 +83,8 @@ final class ValidationCollectorTest extends TestCase
 
     public function testCustomValidatorsRules() : void
     {
-        $validator = new class() extends Validator {
+        $validator = new class() extends Validator
+        {
             // @phpstan-ignore-next-line
             public static function foo(
                 string $field,
