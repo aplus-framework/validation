@@ -9,6 +9,7 @@
  */
 namespace Tests\Validation\Debug;
 
+use Framework\Debug\Debugger;
 use Framework\Validation\Debug\ValidationCollector;
 use Framework\Validation\Validation;
 use Framework\Validation\Validator;
@@ -135,7 +136,7 @@ final class ValidationCollectorTest extends TestCase
             $contents
         );
         self::assertStringContainsString(
-            \htmlentities('$str = \'foo\', $null = null'),
+            Debugger::esc('$str = \'foo\', $null = null'),
             $contents
         );
     }

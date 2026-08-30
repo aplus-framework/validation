@@ -10,7 +10,7 @@
 namespace Framework\Validation\Debug;
 
 use Framework\Debug\Collector;
-use Framework\Debug\Debugger;
+use Framework\Debug\Debugger as D;
 use Framework\Validation\Validation;
 use ReflectionMethod;
 
@@ -113,14 +113,14 @@ class ValidationCollector extends Collector
                     <td rowspan="<?= $count ?>"><?= $index + 1 ?></td>
                     <td rowspan="<?= $count ?>"><?= $item['type'] ?></td>
                     <td rowspan="<?= $count ?>"><?= $count ?></td>
-                    <td><?= \htmlentities($errors[0]['field'] ?? '') ?></td>
-                    <td><?= \htmlentities($errors[0]['error'] ?? '') ?></td>
-                    <td rowspan="<?= $count ?>"><?= Debugger::roundSecondsToMilliseconds($item['end'] - $item['start']) ?></td>
+                    <td><?= D::esc($errors[0]['field'] ?? '') ?></td>
+                    <td><?= D::esc($errors[0]['error'] ?? '') ?></td>
+                    <td rowspan="<?= $count ?>"><?= D::roundSecondsToMilliseconds($item['end'] - $item['start']) ?></td>
                 </tr>
                 <?php for ($i = 1; $i < $count; $i++): ?>
                     <tr>
-                        <td><?= \htmlentities($errors[$i]['field']) ?></td>
-                        <td><?= \htmlentities($errors[$i]['error']) ?></td>
+                        <td><?= D::esc($errors[$i]['field']) ?></td>
+                        <td><?= D::esc($errors[$i]['error']) ?></td>
                     </tr>
                 <?php endfor;
             endforeach; ?>
@@ -151,15 +151,15 @@ class ValidationCollector extends Collector
                 <?php $count = \count($set['rules']); ?>
                 <tr>
                     <td rowspan="<?= $count ?>"><?= $index + 1 ?></td>
-                    <td rowspan="<?= $count ?>"><?= \htmlentities($set['field']) ?></td>
-                    <td rowspan="<?= $count ?>"><?= \htmlentities((string) $set['label']) ?></td>
+                    <td rowspan="<?= $count ?>"><?= D::esc($set['field']) ?></td>
+                    <td rowspan="<?= $count ?>"><?= D::esc((string) $set['label']) ?></td>
                     <td><?= $this->sRule($set['rules'][0]['rule'], $this->validatorsRules) ?></td>
-                    <td><?= \htmlentities($set['rules'][0]['message']) ?></td>
+                    <td><?= D::esc($set['rules'][0]['message']) ?></td>
                 </tr>
                 <?php for ($i = 1; $i < $count; $i++): ?>
                     <tr>
                         <td><?= $this->sRule($set['rules'][$i]['rule'], $this->validatorsRules) ?></td>
-                        <td><?= \htmlentities($set['rules'][$i]['message']) ?></td>
+                        <td><?= D::esc($set['rules'][$i]['message']) ?></td>
                     </tr>
                 <?php endfor ?>
             <?php endforeach ?>
@@ -185,19 +185,19 @@ class ValidationCollector extends Collector
             <tbody>
             <?php foreach ($this->validatorsRules as $rule => $data) : ?>
                 <tr>
-                    <td><?= \htmlentities($rule) ?></td>
+                    <td><?= D::esc($rule) ?></td>
                     <td>
                         <?php if ($data['params']): ?>
-                            <pre><code class="language-php"><?= \htmlentities($data['params']) ?></code></pre>
+                            <pre><code class="language-php"><?= D::esc($data['params']) ?></code></pre>
                         <?php endif ?>
                     </td>
                     <td>
                         <pre><code class="language-icu-message-format"><?=
-                                \htmlentities(
+                                D::esc(
                                     $this->validation->getLanguage()->render('validation', $rule)
                                 ) ?></code></pre>
                     </td>
-                    <td><?= \htmlentities($data['validator']) ?></td>
+                    <td><?= D::esc($data['validator']) ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
@@ -280,8 +280,8 @@ class ValidationCollector extends Collector
         if ($rule === 'optional'
             || \array_key_exists(\explode(':', $rule)[0], $validatorsRules)
         ) {
-            return \htmlentities($rule);
+            return D::esc($rule);
         }
-        return '<s title="Rule not available">' . \htmlentities($rule) . '</s>';
+        return '<s title="Rule not available">' . D::esc($rule) . '</s>';
     }
 }
