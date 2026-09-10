@@ -28,6 +28,8 @@ final class ValidatorTest extends TestCase
             'alphaNumber' => 'abc123',
             'timezone' => 'America/Sao_Paulo',
             'base64' => 'YQ==', // a
+            'base64zero' => 'MA==', // 0
+            'base64invalid' => 'foo',
             'md5' => '0cc175b9c0f1b6a831c399e269772661', // a
             'hex' => '61', // a
             'json' => '{"a":1}',
@@ -86,6 +88,8 @@ final class ValidatorTest extends TestCase
     public function testBase64() : void
     {
         self::assertTrue(Validator::base64('base64', $this->array));
+        self::assertTrue(Validator::base64('base64zero', $this->array));
+        self::assertFalse(Validator::base64('base64invalid', $this->array));
         self::assertFalse(Validator::base64('alpha', $this->array));
         self::assertFalse(Validator::base64('unknown', $this->array));
     }

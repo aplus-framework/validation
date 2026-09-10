@@ -113,7 +113,7 @@ class Validator extends BaseValidator
             return false;
         }
         $decoded = \base64_decode($data);
-        return $decoded && \base64_encode($decoded) === $data;
+        return $decoded !== false && \base64_encode($decoded) === $data; // @phpstan-ignore-line
     }
 
     /**
