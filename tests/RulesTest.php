@@ -46,9 +46,6 @@ final class RulesTest extends TestCase
         self::assertSame(['alpha'], $this->rules->alpha()->rules);
         self::assertSame(['alpha', 'less:3'], $this->rules->less(3)->rules);
         self::assertSame(['alpha', 'less:3', 'less:3'], $this->rules->less(3)->rules);
-        $this->expectException(\Error::class);
-        $this->expectExceptionMessage('Cannot access property ' . $this->rules::class . '::$foo');
-        $this->rules->foo; // @phpstan-ignore-line
     }
 
     public function testMethodsCompatibility() : void

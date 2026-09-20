@@ -9,13 +9,10 @@
  */
 namespace Framework\Validation;
 
-use Error;
 use Stringable;
 
 /**
  * Class BaseRules.
- *
- * @property-read array<int,string> $rules
  *
  * @package validation
  */
@@ -24,7 +21,7 @@ abstract class BaseRules implements Stringable
     /**
      * @var array<int,string>
      */
-    protected array $rules = [];
+    public protected(set) array $rules = [];
 
     /**
      * @since 2.3
@@ -36,16 +33,6 @@ abstract class BaseRules implements Stringable
     public function __toString() : string
     {
         return \implode('|', $this->rules);
-    }
-
-    public function __get(string $property) : mixed
-    {
-        if ($property === 'rules') {
-            return $this->rules;
-        }
-        throw new Error(
-            'Cannot access property ' . static::class . '::$' . $property
-        );
     }
 
     /**
