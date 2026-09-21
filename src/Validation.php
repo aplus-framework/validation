@@ -13,7 +13,6 @@ use Framework\Helpers\ArraySimple;
 use Framework\Language\Language;
 use Framework\Validation\Debug\ValidationCollector;
 use InvalidArgumentException;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * Class Validation.
@@ -145,7 +144,6 @@ class Validation
      *
      * @return string|null
      */
-    #[Pure]
     public function getLabel(string $field) : ?string
     {
         return $this->labels[$field] ?? null;
@@ -156,7 +154,6 @@ class Validation
      *
      * @return array<string,string>
      */
-    #[Pure]
     public function getLabels() : array
     {
         return $this->labels;
@@ -249,7 +246,6 @@ class Validation
      *
      * @return array<int,array<string,array<int,string>|string>>
      */
-    #[Pure]
     protected function extractRules(string $rules) : array
     {
         $result = [];
@@ -282,7 +278,6 @@ class Validation
      *
      * @return array<string,array<int,array<string,array<int,string>|string>>>
      */
-    #[Pure]
     public function getRules() : array
     {
         return $this->rules;
@@ -552,7 +547,6 @@ class Validation
      *
      * @return array<string,mixed>
      */
-    #[Pure]
     protected function setEqualsField(array $rule) : array
     {
         if ($rule['rule'] === 'equals' || $rule['rule'] === 'notEquals') {
