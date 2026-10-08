@@ -62,6 +62,10 @@ class Validation
      */
     protected Language $language;
     protected ValidationCollector $debugCollector;
+    /**
+     * @var array<string,mixed>
+     */
+    protected array $validated = [];
 
     /**
      * Validation constructor.
@@ -120,6 +124,7 @@ class Validation
         $this->rules = [];
         $this->errors = [];
         $this->messages = [];
+        $this->validated = [];
         return $this;
     }
 
@@ -484,6 +489,7 @@ class Validation
             if ($rule['rule'] === 'blank') {
                 $removeKeys[] = $key;
                 if ($fieldExists && $data[$field] === '') {
+                    $this->setValidatedField($field, $data);
                     return true;
                 }
             }
@@ -491,6 +497,7 @@ class Validation
             if ($rule['rule'] === 'null') {
                 $removeKeys[] = $key;
                 if ($fieldExists && $data[$field] === null) {
+                    $this->setValidatedField($field, $data);
                     return true;
                 }
             }
@@ -498,6 +505,7 @@ class Validation
             if ($rule['rule'] === 'empty') {
                 $removeKeys[] = $key;
                 if ($fieldExists && empty($data[$field])) {
+                    $this->setValidatedField($field, $data);
                     return true;
                 }
             }
@@ -515,7 +523,48 @@ class Validation
                 break;
             }
         }
+        if ($status) {
+            $this->setValidatedField($field, $data);
+        }
         return $status;
+    }
+
+    /**
+     * @param string $field
+     * @param array<string,mixed> $data
+     *
+     * @return static
+     */
+    protected function setValidatedField(string $field, array $data) : static
+    {
+        $data = ArraySimple::convert($data);
+        $this->validated[$field] = $data[$field];
+        return $this;
+    }
+
+    /**
+     * Get validated data in an associative array with keys in "array simple"
+     * format.
+     *
+     * @see Framework\Helpers\ArraySimple::convert()
+     *
+     * @return array<string,mixed>
+     */
+    public function getValidated() : array
+    {
+        return $this->validated;
+    }
+
+    /**
+     * Get validated data in an array, possibly multi-dimensional.
+     *
+     * @see Framework\Helpers\ArraySimple::revert()
+     *
+     * @return array<string,mixed>
+     */
+    public function getValidatedReverted() : array
+    {
+        return ArraySimple::revert($this->getValidated());
     }
 
     /**

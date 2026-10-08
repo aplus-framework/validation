@@ -11,6 +11,7 @@ namespace Tests\Validation;
 
 use Framework\Language\Language;
 use Framework\Validation\FilesValidator;
+use Framework\Validation\Validation;
 use Framework\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
@@ -730,5 +731,54 @@ final class ValidationTest extends TestCase
         self::assertTrue($this->validation->isRuleAvailable('blank'));
         self::assertTrue($this->validation->isRuleAvailable('null'));
         self::assertTrue($this->validation->isRuleAvailable('empty'));
+    }
+
+    public function testValidated() : void
+    {
+        $validation = new Validation();
+        $validation->setRule('user[name]', ['minLength:5', 'maxLength:32']);
+        $validation->setRule('user[birthday][day]', ['datetime:d']);
+        $validation->setRule('city', ['minLength:2', 'maxLength:64', 'blank']);
+        $validation->setRule('country', ['length:2', 'null']);
+        $validation->setRule('street', ['minLength:2', 'empty']);
+        $validation->setRule('gender', ['in:male,female', 'optional']);
+        $data = [
+            'foo' => '',
+            'user' => [
+                'name' => 'John Doe',
+                'birthday' => [
+                    'year' => 1990,
+                    'month' => 12,
+                    'day' => 24,
+                ],
+                'height' => 1.81,
+            ],
+            'city' => '',
+            'country' => null,
+            'street' => '0',
+            'bar' => [
+                'baz' => true,
+            ],
+        ];
+        $status = $validation->validate($data);
+        self::assertTrue($status);
+        self::assertSame([
+            'user[name]' => 'John Doe',
+            'user[birthday][day]' => 24,
+            'city' => '',
+            'country' => null,
+            'street' => '0',
+        ], $validation->getValidated());
+        self::assertSame([
+            'user' => [
+                'name' => 'John Doe',
+                'birthday' => [
+                    'day' => 24,
+                ],
+            ],
+            'city' => '',
+            'country' => null,
+            'street' => '0',
+        ], $validation->getValidatedReverted());
     }
 }
