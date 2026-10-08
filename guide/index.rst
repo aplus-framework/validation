@@ -114,10 +114,20 @@ method. Useful for updating only a few fields in the database.
 .. code-block:: php
 
     // Validates all fields
-    $validated = $validation->validate($data); // bool
+    $status = $validation->validate($data); // bool
 
     // Validates only received fields
-    $validated = $validation->validateOnly($data); // bool
+    $status = $validation->validateOnly($data); // bool
+
+Validated Data
+##############
+
+It is possible to retrieve only the validated data using the ``getValidated``
+method:
+
+.. code-block:: php
+
+    $validated = $validation->getValidated(); // array
 
 Validator Check
 ###############
