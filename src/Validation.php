@@ -475,6 +475,7 @@ class Validation
      */
     protected function validateField(string $field, array $rules, array $data) : bool
     {
+        $data = ArraySimple::convert($data);
         $removeKeys = [];
         foreach ($rules as $key => $rule) {
             $fieldExists = \array_key_exists($field, $data);
@@ -537,7 +538,6 @@ class Validation
      */
     protected function setValidatedField(string $field, array $data) : static
     {
-        $data = ArraySimple::convert($data);
         $this->validated[$field] = $data[$field];
         return $this;
     }

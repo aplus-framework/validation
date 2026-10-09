@@ -737,15 +737,18 @@ final class ValidationTest extends TestCase
     {
         $validation = new Validation();
         $validation->setRule('user[name]', ['minLength:5', 'maxLength:32']);
+        $validation->setRule('user[blank]', ['minLength:3', 'blank']);
         $validation->setRule('user[birthday][day]', ['datetime:d']);
         $validation->setRule('city', ['minLength:2', 'maxLength:64', 'blank']);
         $validation->setRule('country', ['length:2', 'null']);
         $validation->setRule('street', ['minLength:2', 'empty']);
         $validation->setRule('gender', ['in:male,female', 'optional']);
+        $validation->setRule('other[foo][bar]', ['length:2', 'null']);
         $data = [
             'foo' => '',
             'user' => [
                 'name' => 'John Doe',
+                'blank' => '',
                 'birthday' => [
                     'year' => 1990,
                     'month' => 12,
@@ -759,19 +762,29 @@ final class ValidationTest extends TestCase
             'bar' => [
                 'baz' => true,
             ],
+            'other' => [
+                'foo' => [
+                    'bar' => null,
+                    'baz' => 0,
+                ],
+                'bar' => 123,
+            ],
         ];
         $status = $validation->validate($data);
         self::assertTrue($status);
         self::assertSame([
             'user[name]' => 'John Doe',
+            'user[blank]' => '',
             'user[birthday][day]' => 24,
             'city' => '',
             'country' => null,
             'street' => '0',
+            'other[foo][bar]' => null,
         ], $validation->getValidated());
         self::assertSame([
             'user' => [
                 'name' => 'John Doe',
+                'blank' => '',
                 'birthday' => [
                     'day' => 24,
                 ],
@@ -779,6 +792,11 @@ final class ValidationTest extends TestCase
             'city' => '',
             'country' => null,
             'street' => '0',
+            'other' => [
+                'foo' => [
+                    'bar' => null,
+                ],
+            ],
         ], $validation->getValidatedReverted());
     }
 }
