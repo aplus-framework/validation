@@ -471,33 +471,33 @@ class Validation
     protected function validateField(string $field, array $rules, array $data) : bool
     {
         $removeKeys = [];
+        $fieldExists = ArraySimple::hasKey($field, $data);
         foreach ($rules as $key => $rule) {
-            $fieldExists = \array_key_exists($field, $data);
             // Field is optional. If the field is undefined, validation passes.
             if ($rule['rule'] === 'optional') {
                 $removeKeys[] = $key;
-                if (!$fieldExists) {
+                if ($fieldExists === false) {
                     return true;
                 }
             }
             // Field must be defined and can have a blank string.
             if ($rule['rule'] === 'blank') {
                 $removeKeys[] = $key;
-                if ($fieldExists && $data[$field] === '') {
+                if ($fieldExists && ArraySimple::value($field, $data) === '') {
                     return true;
                 }
             }
             // Field must be defined and can have a null value.
             if ($rule['rule'] === 'null') {
                 $removeKeys[] = $key;
-                if ($fieldExists && $data[$field] === null) {
+                if ($fieldExists && ArraySimple::value($field, $data) === null) {
                     return true;
                 }
             }
             // Field must be defined and can have an empty value
             if ($rule['rule'] === 'empty') {
                 $removeKeys[] = $key;
-                if ($fieldExists && empty($data[$field])) {
+                if ($fieldExists && empty(ArraySimple::value($field, $data))) {
                     return true;
                 }
             }
@@ -509,7 +509,7 @@ class Validation
         foreach ($rules as $rule) {
             $rule['args'] = $this->replaceArgs($rule['args'], $data);
             $status = $this->validateRule($rule['rule'], $field, $rule['args'], $data);
-            if ($status !== true) {
+            if ($status === false) {
                 $rule = $this->setEqualsField($rule);
                 $this->setError($field, $rule['rule'], $rule['args']);
                 break;
