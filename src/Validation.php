@@ -236,8 +236,10 @@ class Validation
             $args = (array) \preg_split('#(?<!\\\)\,#', $args);
             foreach ($args as &$arg) {
                 $arg = \strtr((string) $arg, ['\,' => ',']);
+                $arg = \trim($arg);
             }
         }
+        $rule = \trim($rule);
         return ['rule' => $rule, 'args' => $args]; // @phpstan-ignore-line
     }
 

@@ -48,6 +48,13 @@ final class ValidationTest extends TestCase
         self::assertSame(
             [
                 'rule' => 'foo',
+                'args' => [],
+            ],
+            $this->validation->parseRule('   foo   ')
+        );
+        self::assertSame(
+            [
+                'rule' => 'foo',
                 'args' => ['bar:baz'],
             ],
             $this->validation->parseRule('foo:bar:baz')
@@ -76,7 +83,7 @@ final class ValidationTest extends TestCase
         self::assertSame(
             [
                 'rule' => 'foo',
-                'args' => ['  param', ' param2 '],
+                'args' => ['param', 'param2'],
             ],
             $this->validation->parseRule('foo:  param, param2 ')
         );
@@ -93,6 +100,20 @@ final class ValidationTest extends TestCase
                 'args' => ['param', 'param2,param3'],
             ],
             $this->validation->parseRule('foo:param,param2\,param3')
+        );
+        self::assertSame(
+            [
+                'rule' => 'foo',
+                'args' => ['param', 'param2 ,  param3'],
+            ],
+            $this->validation->parseRule(' foo: param  ,   param2 \,  param3  ')
+        );
+        self::assertSame(
+            [
+                'rule' => 'foo',
+                'args' => ['param', 'param2 ,  param3'],
+            ],
+            $this->validation->parseRule('  foo  : param  ,   param2 \,  param3  ')
         );
         self::assertSame(
             [
@@ -126,6 +147,19 @@ final class ValidationTest extends TestCase
                 ],
             ],
             $this->validation->extractRules('foo|bar')
+        );
+        self::assertSame(
+            [
+                [
+                    'rule' => 'foo',
+                    'args' => [],
+                ],
+                [
+                    'rule' => 'bar',
+                    'args' => [],
+                ],
+            ],
+            $this->validation->extractRules(' foo   |  bar  ')
         );
         self::assertSame(
             [
