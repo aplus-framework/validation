@@ -9,6 +9,7 @@
  */
 namespace Tests\Validation\Debug;
 
+use Framework\Debug\Activity;
 use Framework\Debug\Debugger;
 use Framework\Validation\Debug\ValidationCollector;
 use Framework\Validation\Validation;
@@ -146,15 +147,9 @@ final class ValidationCollectorTest extends TestCase
         $validation = $this->makeValidation();
         self::assertEmpty($this->collector->getActivities());
         $validation->validate([]);
-        self::assertSame(
-            [
-                'collector',
-                'class',
-                'description',
-                'start',
-                'end',
-            ],
-            \array_keys($this->collector->getActivities()[0]) // @phpstan-ignore-line
+        self::assertInstanceOf(
+            Activity::class,
+            $this->collector->getActivities()[0] // @phpstan-ignore-line
         );
     }
 

@@ -9,6 +9,7 @@
  */
 namespace Framework\Validation\Debug;
 
+use Framework\Debug\Activity;
 use Framework\Debug\Collector;
 use Framework\Debug\Debugger as D;
 use Framework\Validation\Validation;
@@ -37,13 +38,13 @@ class ValidationCollector extends Collector
     {
         $activities = [];
         foreach ($this->getData() as $index => $data) {
-            $activities[] = [
-                'collector' => $this->getName(),
-                'class' => static::class,
-                'description' => 'Run validation ' . ($index + 1),
-                'start' => $data['start'],
-                'end' => $data['end'],
-            ];
+            $activities[] = new Activity(
+                collector: $this->getName(),
+                class: static::class,
+                description: 'Run validation ' . ($index + 1),
+                start: $data['start'],
+                end: $data['end'],
+            );
         }
         return $activities;
     }
