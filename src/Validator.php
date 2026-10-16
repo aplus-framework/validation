@@ -267,7 +267,7 @@ class Validator extends BaseValidator
         int | string $max
     ) : bool {
         $data = static::getData($field, $data);
-        return $data !== null && $data >= $min && $data <= $max;
+        return $data !== null && $data >= (string) $min && $data <= (string) $max;
     }
 
     /**
@@ -299,10 +299,10 @@ class Validator extends BaseValidator
      *
      * @return bool
      */
-    public static function in(string $field, array $data, string $in, string ...$others) : bool
+    public static function in(string $field, array $data, int | string $in, int | string ...$others) : bool
     {
         $data = static::getData($field, $data);
-        return $data !== null && \in_array($data, [$in, ...$others], true);
+        return $data !== null && \in_array($data, [$in, ...$others]);
     }
 
     /**
@@ -315,7 +315,7 @@ class Validator extends BaseValidator
      *
      * @return bool
      */
-    public static function notIn(string $field, array $data, string $notIn, string ...$others) : bool
+    public static function notIn(string $field, array $data, int | string $notIn, int | string ...$others) : bool
     {
         return !static::in($field, $data, $notIn, ...$others);
     }
@@ -435,7 +435,7 @@ class Validator extends BaseValidator
         int | string $greaterThan
     ) : bool {
         $data = static::getData($field, $data);
-        return $data !== null && $data > $greaterThan;
+        return $data !== null && $data > (string) $greaterThan;
     }
 
     /**
@@ -453,7 +453,7 @@ class Validator extends BaseValidator
         int | string $greaterThanOrEqualTo
     ) : bool {
         $data = static::getData($field, $data);
-        return $data !== null && $data >= $greaterThanOrEqualTo;
+        return $data !== null && $data >= (string) $greaterThanOrEqualTo;
     }
 
     /**
@@ -471,7 +471,7 @@ class Validator extends BaseValidator
         int | string $lessThan
     ) : bool {
         $data = static::getData($field, $data);
-        return $data !== null && $data < $lessThan;
+        return $data !== null && $data < (string) $lessThan;
     }
 
     /**
@@ -489,7 +489,7 @@ class Validator extends BaseValidator
         int | string $lessThanOrEqualTo
     ) : bool {
         $data = static::getData($field, $data);
-        return $data !== null && $data <= $lessThanOrEqualTo;
+        return $data !== null && $data <= (string) $lessThanOrEqualTo;
     }
 
     /**

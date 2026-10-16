@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of Aplus Framework Validation Library.
  *
@@ -136,24 +136,30 @@ final class ValidatorTest extends TestCase
     public function testMaxLength() : void
     {
         self::assertTrue(Validator::maxLength('alpha', $this->array, 3));
+        self::assertTrue(Validator::maxLength('alpha', $this->array, '3'));
         self::assertTrue(Validator::maxLength('number', $this->array, 3));
         self::assertFalse(Validator::maxLength('alphaNumber', $this->array, 3));
+        self::assertFalse(Validator::maxLength('alphaNumber', $this->array, '3'));
         self::assertFalse(Validator::maxLength('unknown', $this->array, 3));
     }
 
     public function testMinLength() : void
     {
         self::assertTrue(Validator::minLength('alpha', $this->array, 3));
+        self::assertTrue(Validator::minLength('alpha', $this->array, '3'));
         self::assertTrue(Validator::minLength('number', $this->array, 3));
         self::assertFalse(Validator::minLength('alpha', $this->array, 4));
+        self::assertFalse(Validator::minLength('alpha', $this->array, '4'));
         self::assertFalse(Validator::minLength('unknown', $this->array, 3));
     }
 
     public function testLength() : void
     {
         self::assertTrue(Validator::length('alpha', $this->array, 3));
+        self::assertTrue(Validator::length('alpha', $this->array, '3'));
         self::assertTrue(Validator::length('number', $this->array, 3));
         self::assertFalse(Validator::length('alpha', $this->array, 4));
+        self::assertFalse(Validator::length('alpha', $this->array, '4'));
         self::assertFalse(Validator::length('unknown', $this->array, 3));
     }
 
@@ -216,36 +222,40 @@ final class ValidatorTest extends TestCase
     {
         self::assertTrue(Validator::between('alpha', $this->array, 'a', 'b'));
         self::assertTrue(Validator::between('number', $this->array, 120, 123));
+        self::assertTrue(Validator::between('number', $this->array, '120', '123'));
         self::assertFalse(Validator::between('alpha', $this->array, 'b', 'c'));
         self::assertFalse(Validator::between('unknown', $this->array, 1, 2));
+        self::assertFalse(Validator::between('unknown', $this->array, '1', '2'));
     }
 
     public function testNotBetween() : void
     {
         self::assertFalse(Validator::notBetween('alpha', $this->array, 'a', 'b'));
         self::assertFalse(Validator::notBetween('number', $this->array, 120, 123));
+        self::assertFalse(Validator::notBetween('number', $this->array, '120', '123'));
         self::assertTrue(Validator::notBetween('alpha', $this->array, 'b', 'c'));
         self::assertTrue(Validator::notBetween('unknown', $this->array, 1, 2));
+        self::assertTrue(Validator::notBetween('unknown', $this->array, '1', '2'));
     }
 
     public function testIn() : void
     {
         self::assertTrue(Validator::in('alpha', $this->array, 'a', 'abc', 'def'));
-        // @phpstan-ignore-next-line
         self::assertTrue(Validator::in('number', $this->array, 120, 123, 456));
+        self::assertTrue(Validator::in('number', $this->array, '120', '123', '456'));
         self::assertFalse(Validator::in('alpha', $this->array, 'b', 'c', 'd'));
-        // @phpstan-ignore-next-line
         self::assertFalse(Validator::in('unknown', $this->array, 1, 2, 3));
+        self::assertFalse(Validator::in('unknown', $this->array, '1', '2', '3'));
     }
 
     public function testNotIn() : void
     {
         self::assertFalse(Validator::notIn('alpha', $this->array, 'a', 'abc', 'def'));
-        // @phpstan-ignore-next-line
         self::assertFalse(Validator::notIn('number', $this->array, 120, 123, 456));
+        self::assertFalse(Validator::notIn('number', $this->array, '120', '123', '456'));
         self::assertTrue(Validator::notIn('alpha', $this->array, 'b', 'c', 'd'));
-        // @phpstan-ignore-next-line
         self::assertTrue(Validator::notIn('unknown', $this->array, 1, 2, 3));
+        self::assertTrue(Validator::notIn('unknown', $this->array, '1', '2', '3'));
     }
 
     public function testLatin() : void
@@ -262,8 +272,10 @@ final class ValidatorTest extends TestCase
         self::assertTrue(Validator::ip('ipv4', $this->array));
         self::assertTrue(Validator::ip('ipv6', $this->array));
         self::assertTrue(Validator::ip('ipv4', $this->array, 4));
+        self::assertTrue(Validator::ip('ipv4', $this->array, '4'));
         self::assertTrue(Validator::ip('ipv6', $this->array, 6));
         self::assertFalse(Validator::ip('ipv4', $this->array, 6));
+        self::assertFalse(Validator::ip('ipv4', $this->array, '6'));
         self::assertFalse(Validator::ip('ipv6', $this->array, 4));
         self::assertFalse(Validator::ip('unknown', $this->array));
         $this->expectException(\InvalidArgumentException::class);

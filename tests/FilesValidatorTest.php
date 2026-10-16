@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of Aplus Framework Validation Library.
  *
@@ -104,7 +104,9 @@ final class FilesValidatorTest extends TestCase
     public function testMaxSize() : void
     {
         self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], 10));
+        self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], '10'));
         self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 40));
+        self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], '40'));
         self::assertFalse(FilesValidator::maxSize('foo[a]', [], 40));
     }
 
@@ -135,21 +137,27 @@ final class FilesValidatorTest extends TestCase
     public function testMaxDimensions() : void
     {
         self::assertFalse(FilesValidatorMock::maxDim('foo[a]', [], 200, 200));
+        self::assertFalse(FilesValidatorMock::maxDim('foo[a]', [], '200', '200'));
         self::assertTrue(FilesValidatorMock::maxDim('foo[a]', [], 400, 500));
+        self::assertTrue(FilesValidatorMock::maxDim('foo[a]', [], '400', '500'));
         self::assertFalse(FilesValidator::maxDim('foo[a]', [], 400, 500));
     }
 
     public function testMinDimensions() : void
     {
         self::assertFalse(FilesValidatorMock::minDim('foo[a]', [], 500, 500));
+        self::assertFalse(FilesValidatorMock::minDim('foo[a]', [], '500', '500'));
         self::assertTrue(FilesValidatorMock::minDim('foo[a]', [], 300, 400));
+        self::assertTrue(FilesValidatorMock::minDim('foo[a]', [], '300', '400'));
         self::assertFalse(FilesValidator::minDim('foo[a]', [], 300, 500));
     }
 
     public function testDimensions() : void
     {
         self::assertFalse(FilesValidatorMock::dim('foo[a]', [], 500, 500));
+        self::assertFalse(FilesValidatorMock::dim('foo[a]', [], '500', '500'));
         self::assertTrue(FilesValidatorMock::dim('foo[a]', [], 400, 400));
+        self::assertTrue(FilesValidatorMock::dim('foo[a]', [], '400', '400'));
         self::assertFalse(FilesValidator::dim('foo[a]', [], 300, 500));
     }
 }
