@@ -602,15 +602,19 @@ The rule can take one parameter: ``$maxLength``.
 maxSize
 #######
 
-The field requires a file that does not exceed the maximum size of ``{0}`` kilobytes.
+The field requires a file that does not exceed the maximum size of ``{0}``,
+using ``{1}`` as the unit of measurement.
 
 .. code-block:: php
 
-    maxSize:$kilobytes
+    maxSize:$size,$unit
 
-The rule can take one parameter: ``$kilobytes``.
+The rule can take two parameters: ``$size`` and ``$unit``.
 
-``$kilobytes`` is the maximum number of kilobytes that the field file can receive.
+``$size`` is the maximum number of ``$unit`` that the field file can receive.
+
+``$unit`` can be ``B`` (bytes), ``KB`` (kilobytes), ``MB`` (megabytes), ``GB``
+(gigabytes) or ``TB`` (terabytes).
 
 md5
 ###

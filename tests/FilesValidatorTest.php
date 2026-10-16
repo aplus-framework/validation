@@ -103,11 +103,15 @@ final class FilesValidatorTest extends TestCase
 
     public function testMaxSize() : void
     {
-        self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], 10));
-        self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], '10'));
-        self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 40));
-        self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], '40'));
-        self::assertFalse(FilesValidator::maxSize('foo[a]', [], 40));
+        self::assertFalse(FilesValidator::maxSize('foo[a]', [], 10, 'b'));
+        self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], 10, 'b'));
+        self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], 10, 'kb'));
+        self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 10, 'mb'));
+        self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 10, 'gb'));
+        self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 10, 'tb'));
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid unit of measurement: foo');
+        FilesValidatorMock::maxSize('foo[a]', [], 10, 'foo');
     }
 
     public function testMimeTypes() : void

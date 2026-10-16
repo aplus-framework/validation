@@ -41,7 +41,7 @@ return [
     'isset' => 'O campo {field} deve ser enviado.',
     'latin' => 'O campo {field} requer apenas caracteres latinos.',
     'uploaded' => 'O campo {field} requer que um arquivo seja carregado.',
-    'maxSize' => 'O campo {field} requer um arquivo que não exceda o tamanho máximo de {0} kilobytes.',
+    'maxSize' => 'O campo {field} requer um arquivo que não exceda o tamanho máximo de {0} {1, select, b{B} kb{KB} mb{MB} gb{GB} tb{TB} other{{1}}}.',
     'ext' => 'O campo {field} requer um arquivo com uma extensão aceita: {args}.',
     'mimes' => 'O campo {field} requer um arquivo com um tipo MIME aceito: {args}.',
     'image' => 'O campo {field} requer uma imagem.',

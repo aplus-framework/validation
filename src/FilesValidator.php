@@ -10,6 +10,7 @@
 namespace Framework\Validation;
 
 use Framework\Helpers\ArraySimple;
+use InvalidArgumentException;
 
 /**
  * Class FilesValidator.
@@ -66,19 +67,28 @@ class FilesValidator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param int $kilobytes
+     * @param int|string $size
+     * @param string $unit
      *
      * @return bool
      */
-    public static function maxSize(string $field, array $data, int | string $kilobytes) : bool
+    public static function maxSize(string $field, array $data, int | string $size, string $unit) : bool
     {
         $uploaded = static::uploaded($field);
         if (!$uploaded) {
             return false;
         }
         $file = static::getFile($field);
-        $kilobytes = (int) $kilobytes;
-        return $file['size'] <= ($kilobytes * 1024);
+        $size = (int) $size;
+        $size = match(\strtolower($unit)) {
+            'b', 'byte', 'bytes' => $size,
+            'kb', 'kilobyte', 'kilobytes' => $size * 1024,
+            'mb', 'megabyte', 'megabytes' => $size * 1024 * 1024,
+            'gb', 'gigabyte', 'gigabytes' => $size * 1024 * 1024 * 1024,
+            'tb', 'terabyte', 'terabytes' => $size * 1024 * 1024 * 1024 * 1024,
+            default => throw new InvalidArgumentException('Invalid unit of measurement: ' . $unit)
+        };
+        return $file['size'] <= $size;
     }
 
     /**

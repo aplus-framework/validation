@@ -30,13 +30,14 @@ trait FilesValidator
     /**
      * Validates file size.
      *
-     * @param int $kilobytes
+     * @param int $size
+     * @param string $unit
      *
      * @return static
      */
-    public function maxSize(int $kilobytes) : static
+    public function maxSize(int $size, string $unit) : static
     {
-        $this->rules[] = 'maxSize:' . $kilobytes;
+        $this->rules[] = 'maxSize:' . $size . ',' . $unit;
         return $this;
     }
 

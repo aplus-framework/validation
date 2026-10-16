@@ -262,7 +262,7 @@ final class RulesTest extends TestCase
 
     public function testRuleMaxSize() : void
     {
-        self::assertRule('maxSize:10', $this->rules->maxSize(10));
+        self::assertRule('maxSize:10,kb', $this->rules->maxSize(10, 'kb'));
     }
 
     public function testRuleMimes() : void
