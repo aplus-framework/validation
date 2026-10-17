@@ -9,6 +9,7 @@
  */
 namespace Tests\Validation;
 
+use Framework\Helpers\ArraySimple;
 use Framework\Validation\FilesValidator;
 use PHPUnit\Framework\TestCase;
 
@@ -114,6 +115,13 @@ final class FilesValidatorTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid unit of measurement: foo');
         FilesValidatorMock::maxSize('foo[a]', [], 10, 'foo');
+    }
+
+    public function testMaxSizeWithFloat() : void
+    {
+        self::assertSame(18688, ArraySimple::files()['foo']['a']['size']); // 18,25 KB
+        self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], '18.2', 'kb'));
+        self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], '18.3', 'kb'));
     }
 
     public function testMaxSizeUploadedFail() : void

@@ -67,19 +67,19 @@ class FilesValidator
      *
      * @param string $field
      * @param array<string,mixed> $data
-     * @param int|string $size
+     * @param float|int|string $size
      * @param string $unit
      *
      * @return bool
      */
-    public static function maxSize(string $field, array $data, int | string $size, string $unit) : bool
+    public static function maxSize(string $field, array $data, float | int | string $size, string $unit) : bool
     {
         $uploaded = static::uploaded($field);
         if (!$uploaded) {
             return false;
         }
         $file = static::getFile($field);
-        $size = (int) $size;
+        $size = (float) $size;
         $size = match(\strtolower($unit)) {
             'b', 'byte', 'bytes' => $size,
             'kb', 'kilobyte', 'kilobytes' => $size * 1024,
