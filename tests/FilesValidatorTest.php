@@ -99,11 +99,13 @@ final class FilesValidatorTest extends TestCase
         self::assertFalse(FilesValidator::uploaded('foo[a]'));
         self::assertFalse(FilesValidator::uploaded('bar'));
         self::assertFalse(FilesValidator::uploaded('unknown'));
+        self::assertTrue(FilesValidatorMock::uploaded('foo[a]'));
+        self::assertTrue(FilesValidatorMock::uploaded('bar'));
+        self::assertFalse(FilesValidatorMock::uploaded('unknown'));
     }
 
     public function testMaxSize() : void
     {
-        self::assertFalse(FilesValidator::maxSize('foo[a]', [], 10, 'b'));
         self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], 10, 'b'));
         self::assertFalse(FilesValidatorMock::maxSize('foo[a]', [], 10, 'kb'));
         self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 10, 'mb'));
@@ -114,12 +116,21 @@ final class FilesValidatorTest extends TestCase
         FilesValidatorMock::maxSize('foo[a]', [], 10, 'foo');
     }
 
+    public function testMaxSizeUploadedFail() : void
+    {
+        self::assertFalse(FilesValidator::maxSize('foo[a]', [], 10, 'b'));
+    }
+
     public function testMimeTypes() : void
     {
         self::assertFalse(FilesValidatorMock::mimes('foo[a]', [], 'application/json'));
         self::assertTrue(
             FilesValidatorMock::mimes('foo[a]', [], 'application/json', 'image/png')
         );
+    }
+
+    public function testMimeTypesUploadedFail() : void
+    {
         self::assertFalse(
             FilesValidator::mimes('foo[a]', [], 'application/json', 'image/png')
         );
@@ -129,12 +140,20 @@ final class FilesValidatorTest extends TestCase
     {
         self::assertFalse(FilesValidatorMock::ext('foo[a]', [], 'pdf', 'svg'));
         self::assertTrue(FilesValidatorMock::ext('foo[a]', [], 'pdf', 'png'));
+    }
+
+    public function testExtensionsUploadedFail() : void
+    {
         self::assertFalse(FilesValidator::ext('foo[a]', [], 'pdf', 'png'));
     }
 
     public function testImage() : void
     {
         self::assertTrue(FilesValidatorMock::image('foo[a]'));
+    }
+
+    public function testImageUploadedFail() : void
+    {
         self::assertFalse(FilesValidator::image('foo[a]'));
     }
 
@@ -144,6 +163,10 @@ final class FilesValidatorTest extends TestCase
         self::assertFalse(FilesValidatorMock::maxDim('foo[a]', [], '200', '200'));
         self::assertTrue(FilesValidatorMock::maxDim('foo[a]', [], 400, 500));
         self::assertTrue(FilesValidatorMock::maxDim('foo[a]', [], '400', '500'));
+    }
+
+    public function testMaxDimensionsUploadedFail() : void
+    {
         self::assertFalse(FilesValidator::maxDim('foo[a]', [], 400, 500));
     }
 
@@ -153,6 +176,10 @@ final class FilesValidatorTest extends TestCase
         self::assertFalse(FilesValidatorMock::minDim('foo[a]', [], '500', '500'));
         self::assertTrue(FilesValidatorMock::minDim('foo[a]', [], 300, 400));
         self::assertTrue(FilesValidatorMock::minDim('foo[a]', [], '300', '400'));
+    }
+
+    public function testMinDimensionsUploadedFail() : void
+    {
         self::assertFalse(FilesValidator::minDim('foo[a]', [], 300, 500));
     }
 
@@ -162,6 +189,10 @@ final class FilesValidatorTest extends TestCase
         self::assertFalse(FilesValidatorMock::dim('foo[a]', [], '500', '500'));
         self::assertTrue(FilesValidatorMock::dim('foo[a]', [], 400, 400));
         self::assertTrue(FilesValidatorMock::dim('foo[a]', [], '400', '400'));
+    }
+
+    public function testDimensionsUploadedFail() : void
+    {
         self::assertFalse(FilesValidator::dim('foo[a]', [], 300, 500));
     }
 }
