@@ -305,11 +305,11 @@ The field must be between ``{0}`` and ``{1}``.
 
     between:$min,$max
 
-The rule must take two parameters: ``$min`` and ``$max``.
+The **between** rule requires two parameters: ``$min`` and ``$max``.
 
-``$min`` is the minimum value.
+- ``$min`` is the minimum value.
 
-``$max`` is the maximum value.
+- ``$max`` is the maximum value.
 
 blank
 #####
@@ -339,9 +339,9 @@ The field must match a required datetime format.
     datetime
     datetime:$format
 
-The rule can take one parameter: ``$format``.
+The **datetime** rule accepts one parameter: ``$format``.
 
-``$format`` is the date format. 
+- ``$format`` is the date format. 
 
 By default the format is ``Y-m-d H:i:s``.
 
@@ -354,11 +354,11 @@ The field requires an image with the exact dimensions of ``{0}`` in width and ``
 
     dim:$width,$height
 
-The rule must take two parameters: ``$width`` and ``$height``.
+The **dim** rule requires two parameters: ``$width`` and ``$height``.
 
-``$width`` is the exact width of the image.
+- ``$width`` is the exact width of the image.
 
-``$height`` is the exact height of the image.
+- ``$height`` is the exact height of the image.
 
 email
 #####
@@ -388,9 +388,9 @@ The field must be equals the ``{0}`` field.
 
     equals:$equalsField
 
-The rule must take one parameter: ``$equalsField``.
+The **equals** rule requires one parameter: ``$equalsField``.
 
-``$equalsField`` is the name of the field which must be equal to this one.
+- ``$equalsField`` is the name of the field which must be equal to this one.
 
 ext
 ###
@@ -401,9 +401,9 @@ The field requires a file with an accepted extension: ``{args}``.
 
     ext:...$allowedExtensions
 
-The rule can take several parameters: ``...$allowedExtensions``.
+The **ext** rule accepts several parameters: ``...$allowedExtensions``.
 
-``...$allowedExtensions`` is a comma-separated list of file extensions.
+- ``...$allowedExtensions`` is a comma-separated list of file extensions.
 
 float
 #####
@@ -423,9 +423,9 @@ The field must be greater than ``{0}``.
 
     greater:$greaterThan
 
-The rule must take one parameter: ``$greaterThan``.
+The **greater** rule requires one parameter: ``$greaterThan``.
 
-``$greaterThan`` is the value the field must be greater than this. 
+- ``$greaterThan`` is the value the field must be greater than this. 
 
 greaterOrEqual
 ##############
@@ -436,9 +436,9 @@ The field must be greater than or equal to ``{0}``.
 
     greaterOrEqual:$greaterThanOrEqualTo
 
-The rule must take one parameter: ``$greaterThanOrEqualTo``.
+The **greaterOrEqual** rule requires one parameter: ``$greaterThanOrEqualTo``.
 
-``$greaterThanOrEqualTo`` is the value that the field has greater than or equal to this. 
+- ``$greaterThanOrEqualTo`` is the value that the field has greater than or equal to this. 
 
 hex
 ###
@@ -476,11 +476,11 @@ The field must have one of the listed values.
 
     in:$in,...$others
 
-The rule must take one parameter: ``$in``. And also ``...$others``.
+The **in** rule requires one parameter: ``$in``. And also ``...$others``.
 
-``$in`` is a value required to be in.
+- ``$in`` is a value required to be in.
 
-``...$others`` are other valid values to be in.
+- ``...$others`` are other valid values to be in.
 
 int
 ###
@@ -501,9 +501,9 @@ The field requires a valid IP address.
     ip
     ip:$version
 
-The rule can take one parameter: ``$version``.
+The **ip** rule accepts one parameter: ``$version``.
 
-``$version`` can be ``0`` for IPv4 and IPv6. ``4`` for IPv4 or ``6`` for IPv6. 
+- ``$version`` can be ``0`` for IPv4 and IPv6. ``4`` for IPv4 or ``6`` for IPv6. 
 
 isset
 #####
@@ -541,9 +541,9 @@ The field requires exactly ``{0}`` characters in length.
 
     length:$length
 
-The rule can take one parameter: ``$length``.
+The **length** rule requires one parameter: ``$length``.
 
-``$length`` is the exact number of characters the field must receive.
+- ``$length`` is the exact number of characters the field must receive.
 
 less
 ####
@@ -554,9 +554,9 @@ The field must be less than ``{0}``.
 
     less:$lessThan
 
-The rule can take one parameter: ``$lessThan``.
+The **less** rule requires one parameter: ``$lessThan``.
 
-``$lessThan`` is the value that the field has less than this.
+- ``$lessThan`` is the value that the field has less than this.
 
 lessOrEqual
 ###########
@@ -567,9 +567,9 @@ The field must be less than or equal to ``{0}``.
 
     lessOrEqual:$lessThanOrEqualTo
 
-The rule can take one parameter: ``$lessThanOrEqualTo``.
+The **lessOrEqual** rule requires one parameter: ``$lessThanOrEqualTo``.
 
-``$lessThanOrEqualTo`` is the value that the field has less than or equal to this. 
+- ``$lessThanOrEqualTo`` is the value that the field has less than or equal to this. 
 
 maxDim
 ######
@@ -580,11 +580,11 @@ The field requires an image that does not exceed the maximum dimensions of ``{0}
 
     maxDim:$width,$height
 
-The rule can take two parameters: ``$width`` and ``$height``.
+The **maxDim** rule requires two parameters: ``$width`` and ``$height``.
 
-``$width`` is the maximum width the image can be.
+- ``$width`` is the maximum width the image can be.
 
-``$height`` is the maximum height the image can be.
+- ``$height`` is the maximum height the image can be.
 
 maxLength
 #########
@@ -595,9 +595,9 @@ The field requires ``{0}`` or less characters in length.
 
     maxLength:$maxLength
 
-The rule can take one parameter: ``$maxLength``.
+The **maxLength** rule requires one parameter: ``$maxLength``.
 
-``$maxLength`` is the maximum amount of characters that the field must receive.
+- ``$maxLength`` is the maximum amount of characters that the field must receive.
 
 maxSize
 #######
@@ -609,12 +609,11 @@ using ``{1}`` as the unit of measurement.
 
     maxSize:$size,$unit
 
-The rule can take two parameters: ``$size`` and ``$unit``.
+The **maxSize** rule requires two parameters: ``$size`` and ``$unit``.
 
-``$size`` is the maximum number of ``$unit`` that the field file can receive.
+- ``$size`` is the maximum number of ``$unit`` that the field file can receive.
 
-``$unit`` can be ``B`` (bytes), ``KB`` (kilobytes), ``MB`` (megabytes), ``GB``
-(gigabytes) or ``TB`` (terabytes).
+- ``$unit`` can be ``B`` (bytes), ``KB`` (kilobytes), ``MB`` (megabytes), ``GB`` (gigabytes) or ``TB`` (terabytes).
 
 md5
 ###
@@ -634,9 +633,9 @@ The field requires a file with an accepted MIME type: ``{args}``.
 
     mimes:...$allowedTypes
 
-The rule can take many parameters: ``...$allowedTypes``.
+The **mimes** rule accepts several parameters: ``...$allowedTypes``.
 
-``...$allowedTypes`` are the MIME types of files the field can receive.
+- ``...$allowedTypes`` are the MIME types of files the field can receive.
 
 minDim
 ######
@@ -647,11 +646,11 @@ The field requires an image having the minimum dimensions of ``{0}`` in width an
 
     minDim:$width,$height
 
-The rule can take two parameters: ``$width`` and ``$height``.
+The **minDim** rule requires two parameters: ``$width`` and ``$height``.
 
-``$width`` is the minimum width the image can be.
+- ``$width`` is the minimum width the image can be.
 
-``$height`` is the minimum height the image can be.
+- ``$height`` is the minimum height the image can be.
 
 minLength
 #########
@@ -662,9 +661,9 @@ The field requires ``{0}`` or more characters in length.
 
     minLength:$minLength
 
-The rule can take one parameter: ``$minLength``.
+The **minLength** rule requires one parameter: ``$minLength``.
 
-``$minLength`` is the minimum number of characters the field must receive.
+- ``$minLength`` is the minimum number of characters the field must receive.
 
 notBetween
 ##########
@@ -675,11 +674,11 @@ The field can not be between ``{0}`` and ``{1}``.
 
     notBetween:$min,$max
 
-The rule can take two parameters: ``$min`` and ``$max``.
+The **notBetween** rule requires two parameters: ``$min`` and ``$max``.
 
-``$min`` is the minimum value that the field value must not have.
+- ``$min`` is the minimum value that the field value must not have.
 
-``$max`` is the maximum value the field value must not have.
+- ``$max`` is the maximum value the field value must not have.
 
 notEquals
 #########
@@ -690,9 +689,9 @@ The field can not be equals the ``{0}`` field.
 
     notEquals:$diffField
 
-The rule can take one parameter: ``$diffField``.
+The **notEquals** rule requires one parameter: ``$diffField``.
 
-``$diffField`` is the name of the field that must have a value different from this one.
+- ``$diffField`` is the name of the field that must have a value different from this one.
 
 notIn
 #####
@@ -703,11 +702,11 @@ The field must have a value other than those listed.
 
     notIn:$notIn,...$others
 
-The rule can take one parameter: ``$notIn``. And also ``...$others``.
+The **notIn** rule requires one parameter: ``$notIn``. And also ``...$others``.
 
-``$notIn`` is the value required not to be in.
+- ``$notIn`` is the value required not to be in.
 
-``...$others`` are other values to not be in.
+- ``...$others`` are other values to not be in.
 
 notRegex
 ########
@@ -718,9 +717,9 @@ The field matches a invalid pattern.
 
     notRegex:$pattern
 
-The rule can take one parameter: ``$pattern``.
+The **notRegex** rule requires one parameter: ``$pattern``.
 
-``$pattern`` is the regular expression that the field value must not match.
+- ``$pattern`` is the regular expression that the field value must not match.
 
 null
 ####
@@ -767,9 +766,9 @@ The field must match the required pattern.
 
     regex:$pattern
 
-The rule can take one parameter: ``$pattern``.
+The **regex** rule requires one parameter: ``$pattern``.
 
-``$pattern`` is the regular expression that the value of the field must match.
+- ``$pattern`` is the regular expression that the value of the field must match.
 
 required
 ########
@@ -800,13 +799,11 @@ The field requires special characters.
     specialChar:$quantity
     specialChar:$quantity,$characters
 
-The rule can take two parameters:: ``$quantity`` and ``$characters``.
+The **specialChar** rule accepts two parameters: ``$quantity`` and ``$characters``.
 
-``$quantity`` is the number of special characters the field value must have.
-By default the value is ``1``.
+- ``$quantity`` is the number of special characters the field value must have. By default the value is ``1``.
 
-``$characters`` are the characters considered special. By default they are these:
-``!"#$%&\'()*+,-./:;=<>?@[\]^_`{|}~``. 
+- ``$characters`` are the characters considered special. By default they are these: ``!"#$%&\'()*+,-./:;=<>?@[\]^_`{|}~``. 
 
 string
 ######
