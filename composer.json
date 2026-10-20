@@ -51,7 +51,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Framework\\Validation\\": "src/"
+            "Aplus\\Validation\\": "src/"
         }
     },
     "autoload-dev": {
