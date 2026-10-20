@@ -9,9 +9,9 @@
  */
 namespace Tests\Validation;
 
-use Framework\Validation\FilesValidator;
-use Framework\Validation\Rules;
-use Framework\Validation\Validator;
+use Aplus\Validation\FilesValidator;
+use Aplus\Validation\Rules;
+use Aplus\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
 final class RulesTest extends TestCase

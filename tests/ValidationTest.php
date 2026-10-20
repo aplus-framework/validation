@@ -9,9 +9,9 @@
  */
 namespace Tests\Validation;
 
-use Framework\Language\Language;
-use Framework\Validation\FilesValidator;
-use Framework\Validation\Validator;
+use Aplus\Language\Language;
+use Aplus\Validation\FilesValidator;
+use Aplus\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
 final class ValidationTest extends TestCase

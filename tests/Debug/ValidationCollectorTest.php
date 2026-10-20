@@ -9,11 +9,11 @@
  */
 namespace Tests\Validation\Debug;
 
-use Framework\Debug\Activity;
-use Framework\Debug\Debugger;
-use Framework\Validation\Debug\ValidationCollector;
-use Framework\Validation\Validation;
-use Framework\Validation\Validator;
+use Aplus\Debug\Activity;
+use Aplus\Debug\Debugger;
+use Aplus\Validation\Debug\ValidationCollector;
+use Aplus\Validation\Validation;
+use Aplus\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
 final class ValidationCollectorTest extends TestCase

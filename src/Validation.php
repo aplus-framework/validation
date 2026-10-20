@@ -7,11 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Validation;
+namespace Aplus\Validation;
 
-use Framework\Helpers\ArraySimple;
-use Framework\Language\Language;
-use Framework\Validation\Debug\ValidationCollector;
+use Aplus\Helpers\ArraySimple;
+use Aplus\Language\Language;
+use Aplus\Validation\Debug\ValidationCollector;
 use InvalidArgumentException;
 
 /**

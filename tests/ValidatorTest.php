@@ -9,7 +9,7 @@
  */
 namespace Tests\Validation;
 
-use Framework\Validation\Validator;
+use Aplus\Validation\Validator;
 use PHPUnit\Framework\TestCase;
 
 final class ValidatorTest extends TestCase

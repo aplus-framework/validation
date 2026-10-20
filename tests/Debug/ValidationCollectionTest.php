@@ -9,7 +9,7 @@
  */
 namespace Tests\Validation\Debug;
 
-use Framework\Validation\Debug\ValidationCollection;
+use Aplus\Validation\Debug\ValidationCollection;
 use PHPUnit\Framework\TestCase;
 
 final class ValidationCollectionTest extends TestCase

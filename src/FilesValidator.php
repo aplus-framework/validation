@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Validation;
+namespace Aplus\Validation;
 
-use Framework\Helpers\ArraySimple;
+use Aplus\Helpers\ArraySimple;
 use InvalidArgumentException;
 
 /**

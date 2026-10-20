@@ -9,8 +9,8 @@
  */
 namespace Tests\Validation;
 
-use Framework\Helpers\ArraySimple;
-use Framework\Validation\FilesValidator;
+use Aplus\Helpers\ArraySimple;
+use Aplus\Validation\FilesValidator;
 use PHPUnit\Framework\TestCase;
 
 final class FilesValidatorTest extends TestCase

@@ -9,7 +9,7 @@
  */
 namespace Tests\Validation;
 
-use Framework\Validation\FilesValidator;
+use Aplus\Validation\FilesValidator;
 
 class FilesValidatorMock extends FilesValidator
 {

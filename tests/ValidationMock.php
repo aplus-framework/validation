@@ -9,7 +9,7 @@
  */
 namespace Tests\Validation;
 
-use Framework\Validation\Validation;
+use Aplus\Validation\Validation;
 use JetBrains\PhpStorm\Pure;
 
 class ValidationMock extends Validation
