@@ -35,7 +35,7 @@
         "ext-intl": "*",
         "ext-json": "*",
         "aplus/debug": "^5.0",
-        "aplus/helpers": "^5.0",
+        "aplus/helpers": "^6.0",
         "aplus/language": "^5.0"
     },
     "require-dev": {
