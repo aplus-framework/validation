@@ -108,7 +108,7 @@ Validating
 After defining the rules and labels, the validation of the received data occurs
 through the ``validate`` method.
 
-If you only need to validate the received fields, you can use the ``validateOnly``
+If you only need to validate the received fields, you can use the ``validateOnlySet``
 method. Useful for updating only a few fields in the database.
 
 .. code-block:: php
@@ -117,7 +117,7 @@ method. Useful for updating only a few fields in the database.
     $validated = $validation->validate($data); // bool
 
     // Validates only received fields
-    $validated = $validation->validateOnly($data); // bool
+    $validated = $validation->validateOnlySet($data); // bool
 
 Validator Check
 ###############

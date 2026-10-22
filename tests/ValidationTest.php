@@ -466,17 +466,17 @@ final class ValidationTest extends TestCase
         $this->validation->validate([]);
     }
 
-    public function testValidateOnly() : void
+    public function testValidateOnlySet() : void
     {
-        self::assertTrue($this->validation->validateOnly([]));
+        self::assertTrue($this->validation->validateOnlySet([]));
         self::assertSame([], $this->validation->getErrors());
         $this->validation->setRules([
             'name' => 'minLength:5',
             'email' => 'email',
         ]);
-        self::assertTrue($this->validation->validateOnly([]));
+        self::assertTrue($this->validation->validateOnlySet([]));
         self::assertSame([], $this->validation->getErrors());
-        self::assertFalse($this->validation->validateOnly([
+        self::assertFalse($this->validation->validateOnlySet([
             'name' => 'foo',
             'email' => 'email',
         ]));

@@ -71,7 +71,7 @@ final class ValidationCollectorTest extends TestCase
             'Validation ran 1 time',
             $this->collector->getContents()
         );
-        $validation->setRule('name', 'minLength:5')->validateOnly([]);
+        $validation->setRule('name', 'minLength:5')->validateOnlySet([]);
         self::assertStringContainsString(
             'Validation ran 2 times',
             $this->collector->getContents()

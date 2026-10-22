@@ -608,11 +608,11 @@ class Validation
      *
      * @return bool
      */
-    public function validateOnly(array $data) : bool
+    public function validateOnlySet(array $data) : bool
     {
         if (isset($this->debugCollector)) {
             $start = \microtime(true);
-            $validated = $this->validateOnlySet($data);
+            $validated = $this->validateOnlySetData($data);
             $end = \microtime(true);
             $this->debugCollector->addData([
                 'start' => $start,
@@ -623,7 +623,7 @@ class Validation
             ]);
             return $validated;
         }
-        return $this->validateOnlySet($data);
+        return $this->validateOnlySetData($data);
     }
 
     /**
@@ -631,7 +631,7 @@ class Validation
      *
      * @return bool
      */
-    protected function validateOnlySet(array $data) : bool
+    protected function validateOnlySetData(array $data) : bool
     {
         $fieldRules = \array_intersect_key(
             $this->getRules(),
