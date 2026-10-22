@@ -33,7 +33,7 @@ Validation logic typically occurs as follows:
 
 .. code-block:: php
 
-    use Framework\Validation\Validation;
+    use Aplus\Validation\Validation;
 
     $validation = new Validation();
     $validation->setRule('email', 'required|email'); // static
@@ -126,7 +126,7 @@ To validate only one field is possible to use only the Validator:
 
 .. code-block:: php
 
-    use Framework\Validation\Validator;
+    use Aplus\Validation\Validator;
 
     $validated = Validator::alpha('name', $data); // bool
 
@@ -138,7 +138,7 @@ class to extract fields and get the correct data value.
 
 .. code-block:: php
 
-    use Framework\Validation\Validation;
+    use Aplus\Validation\Validation;
     
     $validation = new Validation();
     $validation->setLabel('user[pass]', 'Password') // static
@@ -159,7 +159,7 @@ It is possible to create a validator with your custom rules.
 
 .. code-block:: php
 
-    use Framework\Validation\Validator;
+    use Aplus\Validation\Validator;
     
     class CustomValidator extends Validator
     {
@@ -187,9 +187,9 @@ So, let the Validation know about your customizations:
 
 .. code-block:: php
 
+    use Aplus\Language\Language;
+    use Aplus\Validation\Validation;
     use CustomValidator;
-    use Framework\Language\Language;
-    use Framework\Validation\Validation;
     
     $language = new Language();
     $language->addDirectory(__DIR__ . '/Languages');
