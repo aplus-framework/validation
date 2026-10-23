@@ -64,22 +64,22 @@ registerArgumentsSet(
     'uuid',
 );
 expectedArguments(
-    \Framework\Validation\Validation::getMessage(),
+    \Aplus\Validation\Validation::getMessage(),
     1,
     argumentsSet('rules')
 );
 expectedArguments(
-    \Framework\Validation\Validation::isRuleAvailable(),
+    \Aplus\Validation\Validation::isRuleAvailable(),
     0,
     argumentsSet('rules')
 );
 expectedArguments(
-    \Framework\Validation\Validation::setMessage(),
+    \Aplus\Validation\Validation::setMessage(),
     1,
     argumentsSet('rules')
 );
 expectedArguments(
-    \Framework\Validation\Validation::setRule(),
+    \Aplus\Validation\Validation::setRule(),
     1,
     argumentsSet('rules')
 );
