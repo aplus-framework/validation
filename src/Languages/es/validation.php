@@ -48,6 +48,7 @@ return [
     'maxDim' => 'El campo {field} requiere una imagen que no exceda las dimensiones máximas de {0} de ancho y {1} de alto. ',
     'minDim' => 'El campo {field} requiere una imagen que tenga las dimensiones mínimas de {0} de ancho y {1} de alto.',
     'dim' => 'El campo {field} requiere una imagen con las dimensiones exactas de {0} de ancho y {1} de alto.',
+    'ratio' => 'El campo {field} requiere una imagen con una proporción de {0}.',
     'specialChar' => 'El campo {field} requiere caracteres especiales.',
     'optional' => 'El campo {field} es opcional. Si no se establece, la validación pasa.',
     'blank' => 'El campo {field} puede tener un texto en blanco para pasar.',

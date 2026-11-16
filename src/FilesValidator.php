@@ -219,4 +219,42 @@ class FilesValidator
         $sizes = \getimagesize($file['tmp_name']);
         return !($sizes === false || $sizes[0] !== (int) $width || $sizes[1] !== (int) $height);
     }
+
+    /**
+     * Validates image aspect ratio.
+     *
+     * @param string $field
+     * @param array<string,mixed> $data
+     * @param string $ratio
+     *
+     * @return bool
+     */
+    public static function ratio(string $field, array $data, string $ratio) : bool
+    {
+        $isImage = static::image($field);
+        if (!$isImage) {
+            return false;
+        }
+        $file = static::getFile($field);
+        $sizes = \getimagesize($file['tmp_name']);
+        if ($sizes === false) {
+            return false;
+        }
+        $ratio = \strtolower($ratio);
+        $ratio = \explode('x', $ratio, 3);
+        if (\count($ratio) !== 2) {
+            return false;
+        }
+        if (!\is_numeric($ratio[0]) || !\is_numeric($ratio[1])) {
+            return false;
+        }
+        $ratio[0] = (int) $ratio[0];
+        $ratio[1] = (int) $ratio[1];
+        $part = $sizes[0] / $ratio[0];
+        $calcHeight = $part * $ratio[1];
+        if ($calcHeight !== $sizes[1]) {
+            return false;
+        }
+        return true;
+    }
 }

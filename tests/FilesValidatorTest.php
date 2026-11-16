@@ -59,6 +59,13 @@ final class FilesValidatorTest extends TestCase
                     ],
                 ],
             ],
+            'ratio' => [
+                'name' => 'post.png',
+                'type' => 'image/png',
+                'tmp_name' => __DIR__ . '/files/post.png',
+                'error' => 0,
+                'size' => 397,
+            ],
         ];
     }
 
@@ -91,6 +98,13 @@ final class FilesValidatorTest extends TestCase
                         'size' => 18688,
                     ],
                 ],
+            ],
+            'ratio' => [
+                'name' => 'post.png',
+                'type' => 'image/png',
+                'tmp_name' => __DIR__ . '/files/post.png',
+                'error' => 0,
+                'size' => 397,
             ],
         ], FilesValidatorMock::getOrganizedFiles());
     }
@@ -202,5 +216,15 @@ final class FilesValidatorTest extends TestCase
     public function testDimensionsUploadedFail() : void
     {
         self::assertFalse(FilesValidator::dim('foo[a]', [], 300, 500));
+    }
+
+    public function testRatio() : void
+    {
+        self::assertFalse(FilesValidatorMock::ratio('zzz', [], '16x9'));
+        self::assertFalse(FilesValidatorMock::ratio('foo[a]', [], '16x9x2'));
+        self::assertFalse(FilesValidatorMock::ratio('foo[a]', [], 'ax9'));
+        self::assertFalse(FilesValidatorMock::ratio('foo[a]', [], '16x9'));
+        self::assertTrue(FilesValidatorMock::ratio('foo[a]', [], '1x1'));
+        self::assertTrue(FilesValidatorMock::ratio('ratio', [], '16x9'));
     }
 }

@@ -48,6 +48,7 @@ return [
     'maxDim' => 'The {field} field requires an image that does not exceed the maximum dimensions of {0} in width and {1} in height.',
     'minDim' => 'The {field} field requires an image having the minimum dimensions of {0} in width and {1} in height.',
     'dim' => 'The {field} field requires an image with the exact dimensions of {0} in width and {1} in height.',
+    'ratio' => 'The {field} field requires an image with a {0} aspect ratio.',
     'specialChar' => 'The {field} field requires special characters.',
     'optional' => 'The {field} field is optional. If undefined, validation passes.',
     'blank' => 'The {field} field can have a blank string to pass.',

@@ -122,4 +122,17 @@ trait FilesValidator
         $this->rules[] = 'dim:' . $width . ',' . $height;
         return $this;
     }
+
+    /**
+     * Validates image aspect ratio.
+     *
+     * @param string $ratio
+     *
+     * @return static
+     */
+    public function ratio(string $ratio) : static
+    {
+        $this->rules[] = 'ratio:' . $ratio;
+        return $this;
+    }
 }

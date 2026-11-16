@@ -298,6 +298,11 @@ final class RulesTest extends TestCase
         self::assertRule('dim:100,120', $this->rules->dim(100, 120));
     }
 
+    public function testRuleRatio() : void
+    {
+        self::assertRule('ratio:16x9', $this->rules->ratio('16x9'));
+    }
+
     public function testRuleOptional() : void
     {
         self::assertRule('optional', $this->rules->optional());

@@ -250,6 +250,7 @@ The available rules are:
 - `number`_
 - `object`_
 - `optional`_
+- `ratio`_
 - `regex`_
 - `required`_
 - `slug`_
@@ -756,6 +757,19 @@ The field is optional. If undefined, validation passes.
 .. code-block::
 
     optional
+
+ratio
+#####
+
+The field requires an image with the aspect ratio of ``{0}``.
+
+.. code-block:: php
+
+    ratio:$ratio
+
+The **ratio** rule requires one parameter: ``$ratio``.
+
+- ``$ratio`` is the aspect ratio of the image. For example: 16x9.
 
 regex
 #####
