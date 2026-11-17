@@ -11,6 +11,7 @@ namespace Tests\Validation;
 
 use Aplus\Helpers\ArraySimple;
 use Aplus\Validation\FilesValidator;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 final class FilesValidatorTest extends TestCase
@@ -126,7 +127,7 @@ final class FilesValidatorTest extends TestCase
         self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 10, 'mb'));
         self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 10, 'gb'));
         self::assertTrue(FilesValidatorMock::maxSize('foo[a]', [], 10, 'tb'));
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid unit of measurement: foo');
         FilesValidatorMock::maxSize('foo[a]', [], 10, 'foo');
     }
@@ -221,10 +222,22 @@ final class FilesValidatorTest extends TestCase
     public function testRatio() : void
     {
         self::assertFalse(FilesValidatorMock::ratio('zzz', [], '16x9'));
-        self::assertFalse(FilesValidatorMock::ratio('foo[a]', [], '16x9x2'));
-        self::assertFalse(FilesValidatorMock::ratio('foo[a]', [], 'ax9'));
         self::assertFalse(FilesValidatorMock::ratio('foo[a]', [], '16x9'));
         self::assertTrue(FilesValidatorMock::ratio('foo[a]', [], '1x1'));
         self::assertTrue(FilesValidatorMock::ratio('ratio', [], '16x9'));
+    }
+
+    public function testRatioWithInvalidCount() : void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid aspect ratio: 16x9x2');
+        FilesValidatorMock::ratio('foo[a]', [], '16x9x2');
+    }
+
+    public function testRatioWithInvalidFormat() : void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid aspect ratio: ax9');
+        FilesValidatorMock::ratio('foo[a]', [], 'ax9');
     }
 }

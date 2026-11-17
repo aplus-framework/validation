@@ -240,18 +240,18 @@ class FilesValidator
         if ($sizes === false) {
             return false;
         }
-        $ratio = \strtolower($ratio);
-        $ratio = \explode('x', $ratio, 3);
-        if (\count($ratio) !== 2) {
-            return false;
+        $nRatio = \strtolower($ratio);
+        $nRatio = \explode('x', $nRatio, 3);
+        if (\count($nRatio) !== 2) {
+            throw new InvalidArgumentException('Invalid aspect ratio: ' . $ratio);
         }
-        if (!\is_numeric($ratio[0]) || !\is_numeric($ratio[1])) {
-            return false;
+        if (!\is_numeric($nRatio[0]) || !\is_numeric($nRatio[1])) {
+            throw new InvalidArgumentException('Invalid aspect ratio: ' . $ratio);
         }
-        $ratio[0] = (int) $ratio[0];
-        $ratio[1] = (int) $ratio[1];
-        $part = $sizes[0] / $ratio[0];
-        $calcHeight = $part * $ratio[1];
+        $nRatio[0] = (int) $nRatio[0];
+        $nRatio[1] = (int) $nRatio[1];
+        $part = $sizes[0] / $nRatio[0];
+        $calcHeight = $part * $nRatio[1];
         if ($calcHeight !== $sizes[1]) {
             return false;
         }
